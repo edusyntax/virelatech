@@ -1,0 +1,4 @@
+project_id = "nolrvizcdqgakkphfdfe"
+
+[functions.publish-scheduled]
+verify_jwt = false
