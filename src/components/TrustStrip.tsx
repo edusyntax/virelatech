@@ -47,8 +47,8 @@ const TrustStrip = () => {
       {/* Title */}
       <div className="site-container">
         <ScrollReveal>
-          <p className="text-center text-muted-foreground text-[0.7rem] md:text-xs font-grotesk font-semibold uppercase tracking-[0.3em] mb-8">
-            Trusted by industry leaders
+          <p className="text-center text-foreground text-[0.7rem] md:text-xs font-grotesk font-semibold uppercase tracking-[0.3em] mb-8">
+            Trusted by <span className="text-orange-500">industry leaders</span>
           </p>
         </ScrollReveal>
       </div>

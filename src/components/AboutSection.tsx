@@ -140,22 +140,19 @@ const AboutSection = () => {
                     <motion.button
                       onMouseEnter={() => !isMobile && setActiveIndex(i)}
                       onClick={() => handleActivate(i)}
-                      className={`w-full text-left rounded-2xl border px-5 py-4 transition-all duration-300 ${
-                        isActive
-                          ? "border-accent/40 bg-accent/[0.06]"
-                          : "border-white/15 bg-white/[0.02] hover:border-white/30"
-                      }`}
+                      className={`w-full text-left rounded-2xl border px-5 py-4 transition-all duration-300 ${isActive
+                          ? "border-orange-500/40 bg-orange-500/[0.06]"
+                          : "border-white/15 bg-white/[0.02] hover:border-orange-500/40"
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <div
-                          className={`w-2 h-2 rounded-full ${
-                            isActive ? "bg-accent" : "bg-muted-foreground/30"
-                          }`}
+                          className={`w-2 h-2 rounded-full ${isActive ? "bg-orange-500" : "bg-muted-foreground/30"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-semibold ${
-                            isActive ? "text-accent" : "text-muted-foreground"
-                          }`}
+                          className={`text-lg font-semibold ${isActive ? "text-accent" : "text-muted-foreground"
+                            }`}
                         >
                           {c.label}
                         </span>
@@ -190,21 +187,19 @@ const AboutSection = () => {
                   <motion.button
                     key={c.id}
                     onClick={() => handleActivate(i)}
-                    className={`w-full text-left rounded-xl px-4 py-3 ${
-                      isActive
+                    className={`w-full text-left rounded-xl px-4 py-3 ${isActive
                         ? "border-accent/50 bg-accent/[0.06]"
                         : "border-white/[0.9] bg-white/[0.02]"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between">
 
                       <div className="flex items-center gap-2">
                         <div
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            isActive
+                          className={`w-1.5 h-1.5 rounded-full ${isActive
                               ? "bg-accent"
                               : "bg-muted-foreground/30"
-                          }`}
+                            }`}
                         />
                         <span className="text-sm">{c.label}</span>
                       </div>

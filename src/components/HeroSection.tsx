@@ -159,12 +159,18 @@ const handleChatClick = () => {
             </MagneticButton>
 
 <MagneticButton
-  className="glass rounded-full text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center"
+  className="
+    glass rounded-full text-base font-medium px-8 h-[54px]
+    w-full sm:w-auto flex items-center justify-center
+    border border-orange-500
+    transition-all duration-300
+   bg-orange-500 hover:text-white hover:border-orange-500
+  "
   onClick={handleChatClick}
 >
   Chat with us
 </MagneticButton>
-
+    
           </div>
 
         </motion.div>
@@ -177,7 +183,7 @@ const handleChatClick = () => {
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
-        <span className="text-white/60 text-xs uppercase tracking-[0.2em]">
+        <span className="text-orange-500 font-semibold text-xs uppercase tracking-[0.2em]">
           Scroll
         </span>
 

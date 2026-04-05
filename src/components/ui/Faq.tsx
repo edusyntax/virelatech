@@ -103,15 +103,15 @@ const HoverFlexSection = () => {
                   }
                 }}
                 className="relative border rounded-xl cursor-pointer overflow-hidden bg-card"
-                animate={{
-                  backgroundColor: isActive
-                    ? "hsl(var(--accent) / 0.08)"
-                    : "hsl(var(--card))",
-                  scale: isActive ? 1.02 : 1,
-                  borderColor: isActive
-                    ? "hsl(var(--accent))"
-                    : "hsl(var(--border))",
-                }}
+ animate={{
+  backgroundColor: isActive
+    ? "rgba(249,115,22,0.08)"
+    : "hsl(var(--card))",
+  scale: isActive ? 1.02 : 1,
+  borderColor: isActive
+    ? "#f97316"                // 🟠 active → orange
+    : "hsl(var(--border))",   // ⚪ default → normal border
+}}
                 transition={{ duration: 0.25 }}
               >
                 <div className="flex items-start md:items-center justify-between py-5 px-4 md:py-8 md:px-10 gap-3 md:gap-4">

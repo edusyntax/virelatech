@@ -7,22 +7,22 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const milestones = [
   {
-    image: "/src/assets/services/design.jpeg",
+    image: "./src/assets/services/design.jpeg",
     title: "Understand",
     caption: "We analyze your business, audience, and current gaps to uncover what truly matters.",
   },
   {
-    image: "/src/assets/services/plan.jpeg",
+    image: "./src/assets/services/plan.jpeg",
     title: "Plan",
     caption: "A tailored strategy built around your goals—focused, practical, and growth-driven.",
   },
   {
-    image: "/src/assets/services/excute.jpeg",
+    image: "./src/assets/services/excute.jpeg",
     title: "Execute",
     caption: "We launch campaigns and systems with clear, structured execution and full visibility.",
   },
   {
-    image: "/src/assets/services/roi.jpeg",
+    image: "./src/assets/services/roi.jpeg",
     title: "Optimize",
     caption: "We continuously refine based on data to improve performance and scale results over time.",
   },
@@ -138,7 +138,7 @@ const PolaroidTimeline = () => {
                 {/* CARD */}
                 <div>
                   <motion.div
-                    className="w-full max-w-[16rem] min-h-[18rem] rounded-md border border-white/10 shadow-xl cursor-pointer relative mx-auto bg-background/40 backdrop-blur-sm overflow-hidden"
+                    className="w-full max-w-[16rem] min-h-[18rem] rounded-md border border-orange-300 shadow-xl cursor-pointer relative mx-auto bg-background/40 backdrop-blur-sm overflow-hidden"
                     style={{ rotate: tilt }}
                     whileHover={{
                       scale: 1.05,

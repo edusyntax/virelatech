@@ -130,7 +130,7 @@ const CapabilitiesSection = () => {
               onClick={() => navigate(svc.href)}
               onMouseMove={handleMouseMove}
               onMouseLeave={() => setPos({ x: 0, y: 0 })}
-              className="relative h-[360px] rounded-2xl overflow-hidden cursor-pointer group"
+              className="relative h-[360px] rounded-2xl overflow-hidden cursor-pointer group border border-orange-400"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.08 }}
