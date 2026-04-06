@@ -85,7 +85,7 @@ export function HeroSection({ data }: Props) {
           <h1 className="text-4xl md:text-6xl font-semibold leading-[1.1] tracking-tight">
             {data.title}
             {data.highlight && (
-              <span className="block text-primary">
+              <span className="block text-orange-500 italic font-serif mt-2">
                 {data.highlight}
               </span>
             )}

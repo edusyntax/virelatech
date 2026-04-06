@@ -1,6 +1,6 @@
 type HighlightProps = {
   text: string;
-variant?: "bg" | "underline" | "accent" | "bg-orange/50";
+variant?: "bg" | "underline" | "accent" | "bg-orange/50" |"orange";
   className?: string;
 };
 

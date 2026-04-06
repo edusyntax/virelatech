@@ -38,7 +38,7 @@ const GoogleAds = () => {
 
       {/* FLOW: Conversion-focused narrative */}
       <HeroSection data={heroData} />
-      <ProblemSection data={problemData} />
+      <ProblemSection data={problemData}  service="googleAds"/>
       <ServiceBreakdown data={serviceData} />
 
       {/* Mid CTA (important for ads traffic) */}

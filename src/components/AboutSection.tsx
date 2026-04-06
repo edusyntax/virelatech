@@ -110,7 +110,7 @@ const AboutSection = () => {
                     >
                       <motion.path
                         d={arrowPaths[i]}
-                        stroke="hsl(var(--accent))"
+                        stroke="#f97316"
                         strokeWidth={2}
                         strokeLinecap="round"
                         initial={{ pathLength: 0, opacity: 0 }}
@@ -126,7 +126,7 @@ const AboutSection = () => {
                         cx={i === 0 ? 120 : i === 1 ? 140 : 130}
                         cy={i === 0 ? 10 : i === 1 ? 5 : 20}
                         r={3}
-                        fill="hsl(var(--accent))"
+                        fill="#f97316"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={
                           isActive

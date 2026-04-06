@@ -7,7 +7,6 @@ import TiltCard from "@/components/TiltCard";
 import UrgencyCTA from "@/components/UrgencyCTA";
 import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
 
-
 const services = [
   {
     title: "Web Development",
@@ -82,8 +81,12 @@ const ServicesPage = () => {
       <SEOHead
         title="Digital Marketing Services"
         description="Explore our full suite of digital marketing services including website design, SEO, lead generation, social media, PPC, and AI automation."
-        jsonLd={serviceJsonLd("Digital Marketing Services", "Full-service digital marketing agency offering website design, SEO, lead generation, social media, PPC, and AI automation.")}
+        jsonLd={serviceJsonLd(
+          "Digital Marketing Services",
+          "Full-service digital marketing agency offering website design, SEO, lead generation, social media, PPC, and AI automation."
+        )}
       />
+
       <PageHero
         overline="Our Services"
         title="Services built for"
@@ -92,32 +95,70 @@ const ServicesPage = () => {
       />
 
       <SectionTransition>
-        <section className="py-20 site-container">
+        <section className="py-12 site-container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
             {services.map((svc, i) => (
               <ScrollReveal key={svc.title} delay={i * 0.08}>
                 <TiltCard className="h-full">
+
                   <div
-                    className="glass rounded-2xl p-5 md:p-6 h-[300px] md:h-[310px] flex flex-col group border border-foreground/[0.12] relative overflow-hidden cursor-pointer"
+                    className="glass rounded-2xl p-5 md:p-6 h-[300px] md:h-[310px] flex flex-col group 
+                    border border-orange-500 bg-white/[0.06] dark:bg-white/[0.04]
+                    relative overflow-hidden cursor-pointer 
+                    transition-all duration-300 
+                    hover:bg-white/[0.08] hover:-translate-y-1 
+                    hover:shadow-[0_10px_40px_rgba(255,106,61,0.15)]"
                     onClick={() => navigate(svc.slug)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.04] via-transparent to-transparent pointer-events-none rounded-2xl" />
-                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-accent/0 group-hover:bg-accent/30 blur-lg transition-all duration-500 pointer-events-none" />
+
+                    {/* subtle highlight (no blur) */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] pointer-events-none rounded-2xl" />
+
+                    {/* bottom accent (no blur) */}
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-accent/0 group-hover:bg-accent/30 transition-all duration-500 pointer-events-none" />
+
                     <div className="relative z-10 flex flex-col h-full">
-                      <p className="text-accent text-xs font-grotesk uppercase tracking-widest mb-2">{svc.micro}</p>
-                      <h3 className="text-foreground text-lg md:text-xl font-grotesk font-bold mb-3">{svc.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{svc.description}</p>
+
+                      {/* micro */}
+                      <p className="text-accent text-xs font-grotesk uppercase tracking-widest mb-2">
+                        {svc.micro}
+                      </p>
+
+                      {/* title */}
+                      <h3 className="text-foreground font-semibold text-lg md:text-xl font-grotesk mb-3">
+                        {svc.title}
+                      </h3>
+
+                      {/* description */}
+                      <p className="text-foreground/80 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
+                        {svc.description}
+                      </p>
+
+                      {/* tags */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {svc.tags.map((tag) => (
-                          <span key={tag} className="glass text-xs text-muted-foreground px-3 py-1 rounded-full border border-foreground/[0.08]">{tag}</span>
+                          <span
+                            key={tag}
+                            className="glass text-xs text-foreground px-3 py-1 rounded-full border border-white/10 bg-white/[0.08] dark:bg-white/[0.05]"
+                          >
+                            {tag}
+                          </span>
                         ))}
                       </div>
-                      <span className="text-accent text-xs font-grotesk uppercase tracking-wider group-hover:tracking-[0.2em] transition-all duration-300">Learn More →</span>
+
+                      {/* CTA */}
+                      <span className="text-accent font-medium text-xs font-grotesk uppercase tracking-wider group-hover:tracking-[0.2em] transition-all duration-300">
+                        Learn More →
+                      </span>
+
                     </div>
                   </div>
+
                 </TiltCard>
               </ScrollReveal>
             ))}
+
           </div>
         </section>
       </SectionTransition>
@@ -132,6 +173,7 @@ const ServicesPage = () => {
           sourcePage="Services Page"
         />
       </SectionTransition>
+
     </PageLayout>
   );
 };

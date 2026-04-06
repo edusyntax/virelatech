@@ -23,7 +23,7 @@ export function ProblemSection({ data, service }: { data: ProblemData, service: 
   <span className="text-muted-foreground font-medium">
     {data.title.normal}
   </span>{" "}
-  <span className="text-orange-400 font-semibold">
+  <span className="text-orange-400 font-semibold italic font-serif">
     {data.title.highlight}
   </span>
 </h2>

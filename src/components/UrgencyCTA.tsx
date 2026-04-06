@@ -36,11 +36,11 @@ const UrgencyCTA = ({
   };
 
   const handleChatClick = () => {
-  window.open(
-    "https://wa.me/919753456333?text=Hi%20I%20want%20to%20know%20more%20about%20your%20services",
-    "_blank"
-  );
-};
+    window.open(
+      "https://wa.me/919753456333?text=Hi%20I%20want%20to%20know%20more%20about%20your%20services",
+      "_blank"
+    );
+  };
 
   if (variant === "inline") {
     return (
@@ -50,17 +50,22 @@ const UrgencyCTA = ({
             <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-transparent pointer-events-none rounded-2xl" />
             <div className="relative z-10">
               <ScrollReveal>
-                <p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-4 flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+
+                {/* ORANGE URGENCY */}
+                <p className="text-[#FF6A3D] font-grotesk text-xs uppercase tracking-[0.3em] mb-4 flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A3D] animate-pulse" />
                   {urgencyNote}
                 </p>
+
                 <h3 className="editorial-heading text-[clamp(1.5rem,3vw,2.5rem)] text-foreground mb-4">
                   {headline}{" "}
                   <span className="font-serif italic text-gradient-accent">{headlineAccent}</span>
                 </h3>
+
                 <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto mb-8">
                   {description}
                 </p>
+
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <MagneticButton
                     className="bg-accent text-accent-foreground rounded-full text-sm font-medium glow h-[48px] md:h-[52px] px-7 min-w-[180px] flex items-center justify-center"
@@ -69,10 +74,12 @@ const UrgencyCTA = ({
                     {primaryCTA}
                   </MagneticButton>
                 </div>
+
               </ScrollReveal>
             </div>
           </div>
         </div>
+
         <LeadCaptureModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}
@@ -91,14 +98,17 @@ const UrgencyCTA = ({
 
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <ScrollReveal>
+
+            {/* ORANGE URGENCY */}
             <motion.p
-              className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-6 flex items-center justify-center gap-2"
+              className="text-[#FF6A3D] font-grotesk text-xs uppercase tracking-[0.3em] mb-6 flex items-center justify-center gap-2"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A3D] animate-pulse" />
               {urgencyNote}
             </motion.p>
+
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
@@ -116,18 +126,21 @@ const UrgencyCTA = ({
 
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
+
               <MagneticButton
                 className="bg-accent text-accent-foreground rounded-full text-sm sm:text-base font-medium glow w-full sm:w-auto h-[48px] md:h-[52px] px-7 min-w-[180px] flex items-center justify-center"
                 onClick={() => openModal(primaryCTA)}
               >
                 {primaryCTA}
               </MagneticButton>
+
               <MagneticButton
-  className="glass rounded-full text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center"
-  onClick={handleChatClick}
->
-  Chat with us
-</MagneticButton>
+                className="glass rounded-full hover:bg-orange-500  text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center"
+                onClick={handleChatClick}
+              >
+                Chat with us
+              </MagneticButton>
+
             </div>
           </ScrollReveal>
 

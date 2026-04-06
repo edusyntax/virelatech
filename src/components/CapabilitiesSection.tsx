@@ -71,7 +71,7 @@ const services = [
   },
 
    {
-    title: "Ai Automation  ",
+    title: "AI Automation  ",
     description:
       "Custom AI integrations and workflow automation that scale marketing operations.",
     image: ai,
@@ -166,7 +166,7 @@ const CapabilitiesSection = () => {
               {/* Content */}
               <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
 
-                <h3 className="text-white text-center text-2xl font-bold mb-2">
+                <h3 className="text-accent text-center text-2xl font-bold mb-2">
                   {svc.title}
                 </h3>
 
@@ -179,7 +179,7 @@ const CapabilitiesSection = () => {
 
                   {/* Explore Button */}
                   <button
-                    className="flex items-center gap-2 text-white text-sm font-medium px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20  hover:border-accent transition"
+                    className="flex items-center gap-2 text-white text-sm font-medium px-4 py-2 rounded-full bg-[#FF6A3D] backdrop-blur-md border border-white/20  hover:border-accent transition"
                   >
                     Explore
                     <motion.span

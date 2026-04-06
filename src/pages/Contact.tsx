@@ -81,14 +81,14 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <ScrollReveal>
-                <h2 className="text-foreground text-2xl md:text-3xl font-grotesk font-bold mb-6">Get in Touch</h2>
+                <h2 className="text-orange-600 text-2xl md:text-3xl font-grotesk font-bold mb-6">Get in Touch</h2>
                 <p className="text-muted-foreground text-base leading-relaxed mb-8">We partner with visionary brands to create digital experiences that define categories. Tell us about your project and we'll respond within 24 hours.</p>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
                 <div className="space-y-6 mb-10">
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Email</p><p className="text-foreground text-sm">hello@VirelaTech.com</p></div>
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Phone</p><p className="text-foreground text-sm">+1 (555) 000-0000</p></div>
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm">San Francisco, CA</p><p className="text-muted-foreground text-xs mt-1">Remote-first with offices in SF, NY, and London</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Email</p><p className="text-foreground text-sm">connect@virelatech.com</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Phone</p><p className="text-foreground text-sm">+919753456333</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm">Parsippany, NJ-07054, USA and Hyderabad, india</p></div>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
@@ -101,7 +101,7 @@ const ContactPage = () => {
             </div>
 
             <ScrollReveal delay={0.15}>
-              <div className="glass rounded-2xl p-6 md:p-8 border border-foreground/[0.1] relative overflow-hidden">
+              <div className="glass rounded-2xl p-6 md:p-8 border border-orange-500 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.04] via-transparent to-transparent pointer-events-none rounded-2xl" />
                 {submitted ? (
                   <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="relative z-10 flex flex-col items-center justify-center min-h-[400px] text-center gap-4">
@@ -120,7 +120,7 @@ const ContactPage = () => {
                       <p className="text-[10px] text-muted-foreground/60 uppercase tracking-wider mb-2 ml-1">Service Interest</p>
                       <div className="flex flex-wrap gap-2">
                         {serviceOptions.map((svc) => (
-                          <button key={svc} type="button" onClick={() => handleChange("service", svc)} className={`text-xs py-2 px-3 rounded-lg border transition-all duration-300 ${formData.service === svc ? "border-accent/50 bg-accent/10 text-accent" : "border-foreground/[0.08] bg-foreground/[0.03] text-muted-foreground/70 hover:border-foreground/[0.15]"}`}>{svc}</button>
+                          <button key={svc} type="button" onClick={() => handleChange("service", svc)} className={`text-xs py-2 px-3 rounded-lg border   transition-all duration-300 ${formData.service === svc ? "border-orange-500/50 bg-orange-500/10 text-foreground" : "border-orange-500/10 bg-orange-500/10 text-foreground/70 hover:border-foreground/[0.15]"}`}>{svc}</button>
                         ))}
                       </div>
                     </div>

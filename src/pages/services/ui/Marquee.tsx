@@ -19,7 +19,7 @@ export function Marquee({ items, className = "" }: MarqueeProps) {
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-6">
             {item}
-            <span className="text-primary">*</span>
+            <span className="text-orange-600">*</span>
           </span>
         ))}
 
@@ -27,7 +27,7 @@ export function Marquee({ items, className = "" }: MarqueeProps) {
         {items.map((item, i) => (
           <span key={`dup-${i}`} className="flex items-center gap-6">
             {item}
-            <span className="text-primary">*</span>
+            <span className="text-orange-600">*</span>
           </span>
         ))}
 

@@ -162,9 +162,9 @@ const handleChatClick = () => {
   className="
     glass rounded-full text-base font-medium px-8 h-[54px]
     w-full sm:w-auto flex items-center justify-center
-    border border-orange-500
+    
     transition-all duration-300
-   bg-orange-500 hover:text-white hover:border-orange-500
+   hover:text-white  hover:bg-accent
   "
   onClick={handleChatClick}
 >

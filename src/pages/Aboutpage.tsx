@@ -66,34 +66,30 @@ const AboutSection = () => {
         description="Discover VirelaTech's system-driven approach to scaling brands through digital infrastructure."
       />
 
-<section className="relative pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-24 md:pb-32 overflow-hidden">
+<section className="relative pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-24 md:pb-2 overflow-hidden">
 
   {/* Background Glow */}
   <div className="absolute top-0 right-0 w-[20rem] sm:w-[30rem] md:w-[40rem] h-[20rem] sm:h-[30rem] md:h-[40rem] bg-accent/10 blur-[100px] md:blur-[140px] rounded-full" />
 
   <div className="site-container relative mx-auto text-center px-4 sm:px-6">
 
-    {/* EYEBROW */}
+    {/* EYEBROW (premium gradient — keep this) */}
     <p className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase 
-      bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 
-      bg-clip-text text-transparent mb-4 sm:mb-6">
+      bg-gradient-to-r from-[#FF6A3D] via-orange-500 to-orange-600 
+      bg-clip-text text-transparent mb-4 sm:mb-6 font-bold">
       About VirelaTech
     </p>
 
     {/* HEADING */}
-    <h1 className="font-semibold leading-[1.1] tracking-tight
-      text-[clamp(3rem,5vw,4.4rem)]">
+    <h1 className="editorial-heading font-semibold leading-[1.1] tracking-tight text-[clamp(3rem,6vw,4.4rem)]">
 
-      We Build Systems That{" "}
+  We Build Systems That{" "}
 
-      <span className="relative inline-block">
-        <span className="relative z-10 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-lg">
-          Scale Businesses
-        </span>
-        <span className="absolute inset-0 bg-orange-500 rounded-lg -rotate-1" />
-      </span>
+  <span className="font-serif italic text-gradient-accent">
+    Scale Businesses
+  </span>
 
-    </h1>
+</h1>
 
     {/* DESCRIPTION */}
     <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed">
@@ -104,15 +100,22 @@ const AboutSection = () => {
     {/* CTA */}
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-10 justify-center items-center">
 
-      <button className="w-full sm:w-auto bg-orange-500 text-white 
+      {/* Primary (premium solid) */}
+      <button className="w-full sm:w-auto bg-[#FF6A3D] text-white 
         px-6 py-3 rounded-xl font-medium 
-        hover:opacity-90 transition text-sm sm:text-base">
+        shadow-[0_8px_30px_rgba(255,106,61,0.25)]
+        hover:shadow-[0_10px_40px_rgba(255,106,61,0.35)]
+        hover:scale-[1.02]
+        transition-all duration-300 text-sm sm:text-base">
         Work With Us
       </button>
 
-      <button className="w-full sm:w-auto border border-orange-500 
+      {/* Secondary (glass + accent border) */}
+      <button className="w-full sm:w-auto border border-[#FF6A3D]/60 
         px-6 py-3 rounded-xl font-medium 
-        hover:bg-orange-500/10 transition text-sm sm:text-base">
+        hover:bg-[#FF6A3D]/10 
+        hover:border-[#FF6A3D]
+        transition-all duration-300 text-sm sm:text-base">
         See Our Systems
       </button>
 
@@ -121,7 +124,7 @@ const AboutSection = () => {
   </div>
 </section>
 
-      <section ref={sectionRef} className="relative py-16 site-container">
+      <section ref={sectionRef} className="relative py-2 site-container">
 
         {/* Background Glow */}
         <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
@@ -168,7 +171,7 @@ const AboutSection = () => {
                       >
                         <motion.path
                           d={arrowPaths[i]}
-                          stroke="hsl(var(--accent))"
+                          stroke="#f97316"
                           strokeWidth={2}
                           strokeLinecap="round"
                           initial={{ pathLength: 0, opacity: 0 }}
@@ -179,23 +182,41 @@ const AboutSection = () => {
                           }
                           transition={{ duration: 0.8 }}
                         />
+                         <motion.circle
+                                                cx={i === 0 ? 120 : i === 1 ? 140 : 130}
+                                                cy={i === 0 ? 10 : i === 1 ? 5 : 20}
+                                                r={3}
+                                                fill="#f97316"
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={
+                                                  isActive
+                                                    ? { opacity: 1, scale: 1 }
+                                                    : { opacity: 0, scale: 0 }
+                                                }
+                                                transition={{ duration: 0.3, delay: 0.4 }}
+                                              />
                       </svg>
 
                       <motion.button
                         onMouseEnter={() => !isMobile && setActiveIndex(i)}
                         onClick={() => handleActivate(i)}
-                        className={`group w-full  text-left rounded-2xl border  px-5 py-4 transition-all duration-500 ${
-                          isActive
-                            ? "border-accent/50 bg-accent/[0.08]"
-                            : "border-white/10 bg-white/[0.03]"
+                        className={`w-full text-left rounded-2xl border px-5 py-4 transition-all duration-300 ${isActive
+                          ? "border-orange-500/40 bg-orange-500/[0.06]"
+                          : "border-white/15 bg-white/[0.02] hover:border-orange-500/40"
                         }`}
                       >
-                        <div className="flex items-center gap-3 font-bold">
-                          <div className={`w-2 h-2 rounded-full ${isActive ? "bg-accent" : "bg-muted-foreground/30"}`} />
-                          <span className={`${isActive ? "text-accent" : "text-muted-foreground"}`}>
-                            {c.label}
-                          </span>
-                        </div>
+                       <div className="flex items-center gap-3">
+                        <div
+                          className={`w-2 h-2 rounded-full ${isActive ? "bg-orange-500" : "bg-muted-foreground/30"
+                            }`}
+                        />
+                        <span
+                          className={`text-lg font-semibold ${isActive ? "text-accent" : "text-muted-foreground"
+                            }`}
+                        >
+                          {c.label}
+                        </span>
+                      </div>
 
                         <AnimatePresence>
                           {isActive && (

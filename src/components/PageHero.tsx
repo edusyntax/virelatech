@@ -16,7 +16,7 @@ const PageHero = ({ overline, title, titleAccent, description }: PageHeroProps) 
 
       <div className="relative z-10 max-w-4xl">
         <ScrollReveal>
-          <p className="text-accent font-grotesk text-xs sm:text-sm uppercase tracking-[0.3em] mb-6">
+          <p className="text-orange-500 font-grotesk text-xs sm:text-sm uppercase tracking-[0.3em] mb-6">
             {overline}
           </p>
         </ScrollReveal>

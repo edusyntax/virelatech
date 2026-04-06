@@ -66,24 +66,20 @@ const BlogPage = () => {
   <div className="site-container relative mx-auto text-center px-4 sm:px-6">
 
     {/* Overline */}
-    <p className="mt-2 sm:mt-0 text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-accent mb-4 sm:mb-6">
+    <p className="mt-2 sm:mt-0 text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-orange-500 mb-4 sm:mb-6">
       Insights
     </p>
 
     {/* Heading */}
-    <h1 className="font-semibold leading-[1.1] tracking-tight
-      text-[clamp(3rem,5vw,4.4rem)]">
+    <h1 className="editorial-heading font-semibold leading-[1.1] tracking-tight text-[clamp(3rem,5vw,4.4rem)]">
 
-      The Systems Behind High-Performance{" "}
+  The Systems Behind High-Performance{" "}
 
-      <span className="relative inline-block">
-        <span className="relative z-10 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-lg">
-          Client Work
-        </span>
-        <span className="absolute inset-0 bg-orange-500 rounded-lg -rotate-1" />
-      </span>
+  <span className="font-serif italic text-gradient-accent">
+    Client Work
+  </span>
 
-    </h1>
+</h1>
 
     {/* Description */}
     <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed">
@@ -95,7 +91,7 @@ const BlogPage = () => {
 
       {/* Call Button */}
       <a href="tel:+919753456333" className="w-full sm:w-auto">
-        <button className="w-full sm:w-auto bg-background border border-foreground text-foreground 
+        <button className="w-full sm:w-auto bg-accent border border-accent text-white 
           px-5 sm:px-6 py-3 rounded-xl font-medium 
           hover:opacity-90 transition text-sm sm:text-base">
           Unlock Your Growth
@@ -109,9 +105,9 @@ const BlogPage = () => {
         rel="noopener noreferrer"
         className="w-full sm:w-auto"
       >
-        <button className="w-full sm:w-auto border border-orange-500 
+        <button className="w-full sm:w-auto border border-foreground/30 text-foreground
           px-5 sm:px-6 py-3 rounded-xl font-medium 
-          hover:bg-background/20 transition text-sm sm:text-base">
+          hover:bg-accent transition text-sm sm:text-base">
           Create With Us
         </button>
       </a>
@@ -125,7 +121,7 @@ const BlogPage = () => {
       <section className="site-container  mx-auto ">
         <motion.div
           whileHover={{ scale: 1.01 }}
-          className="rounded-3xl overflow-hidden border border-foreground/20"
+          className="rounded-3xl overflow-hidden border border-orange-400"
         >
           <div className="grid md:grid-cols-2">
 
@@ -155,7 +151,7 @@ const BlogPage = () => {
       >
         <button className="w-full sm:w-auto border border-foreground/30 text-foreground
           px-5 sm:px-6 py-3 rounded-xl font-medium 
-          hover:bg-background/20 transition text-sm sm:text-base">
+          hover:bg-accent  transition text-sm sm:text-base">
           Read more 
         </button>
       </a>
@@ -190,7 +186,7 @@ const BlogPage = () => {
           <motion.div
             key={i}
             whileHover={{ y: -6 }}
-            className="rounded-2xl overflow-hidden border border-foreground/20 bg-white/[0.02]"
+            className="rounded-2xl overflow-hidden border border-orange-400 bg-white/[0.02]"
           >
             <img
               src={post.image}
@@ -210,7 +206,7 @@ const BlogPage = () => {
                 {post.excerpt}
               </p>
 
-              <button className="mt-4 text-accent text-sm">
+              <button className="mt-4 text-accent  text-sm">
                 Read →
               </button>
             </div>
@@ -219,7 +215,7 @@ const BlogPage = () => {
       </section>
 
     
-         <CTASection data={blogctaData} />
+         {/* <CTASection data={blogctaData} /> */}
      
 
     </PageLayout>
