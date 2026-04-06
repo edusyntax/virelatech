@@ -101,10 +101,10 @@ const handleChatClick = () => {
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.2, duration: 0.8 }}
-  className="flex items-center gap-2 text-accent font-semibold text-sm uppercase tracking-[0.35em] mb-5 whitespace-nowrap"
+  className="flex items-center gap-2 text-accent font-semibold text-[20px] text-sm uppercase tracking-[0.35em] mb-5 whitespace-nowrap"
 >
   <Medal className="text-accent w-4 h-4 shrink-0" />
-  Digital Growth Partner
+  Digital <span className="text-orange-500">Growth Partner</span>
 </motion.p>
           {/* Headline */}
           <motion.h1

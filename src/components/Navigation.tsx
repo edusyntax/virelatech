@@ -133,7 +133,7 @@ const Navigation = () => {
       rounded-md
       px-1 py-[2px]
     "
-  />
+  /><span className="ml-2 hidden sm:inline text-gradient-to-r from-accent/30 to-orange">VirelaTech</span>  
 </a>
             </a>
 
@@ -195,7 +195,7 @@ const Navigation = () => {
                                   className="flex flex-col gap-0.5 px-3 py-2.5 rounded-lg hover:bg-accent/10 transition-colors duration-200 group/item"
                                   data-hover
                                 >
-                                  <span className="text-popover-foreground text-xs font-grotesk font-semibold group-hover/item:text-accent transition-colors duration-200">
+                                  <span className="text-popover-foreground text-[15px] font-grotesk font-semibold group-hover/item:text-accent transition-colors duration-200">
                                     {item.label}
                                   </span>
                                   <span className="text-muted-foreground text-[10px]">
@@ -228,7 +228,7 @@ const Navigation = () => {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative text-[11px] font-medium tracking-wider uppercase transition-colors duration-300 group whitespace-nowrap ${
+                    className={`relative text-[15px] font-medium tracking-wider  uppercase transition-colors duration-300 group whitespace-nowrap ${
                       active ? "text-orange-500" : "text-foreground hover:text-orange-500"
                     }`}
                     data-hover

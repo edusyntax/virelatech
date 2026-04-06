@@ -95,8 +95,8 @@ const CapabilitiesSection = () => {
     <section id="services" className="py-6 md:py-4 site-container">
 
     <ScrollReveal>
-        <p className="text-accent font-grotesk text-sm uppercase tracking-[0.3em] mb-4">
-          What<span className="bg-[#FF6A3D] text-white px-2 py-1 rounded-md">We Do</span> 
+        <p className="text-accent font-grotesk text-sm uppercase tracking-[0.3em] text-[18px] font-extrabold mb-4">
+          What<span className="bg-[#FF6A3D] text-white px-2 py-1  rounded-md">We Do</span> 
         </p>
         <h2 className="editorial-heading text-[clamp(2rem,5vw,4.5rem)] text-foreground mb-12 md:mb-16 max-w-3xl">
           Services built for{" "}

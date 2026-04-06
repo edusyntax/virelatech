@@ -20,7 +20,7 @@ export function ApproachSection({ data }: { data: ApproachData }) {
   {data.eyebrow}
 </p>
 
-          <h2 className="text-4xl md:text-5xl font-semibold leading-tight whitespace-pre-line">
+          <h2 className="text-4xl md:text-5xl font-semibold  leading-tight whitespace-pre-line">
             {data.title}
           </h2>
 

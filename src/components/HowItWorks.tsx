@@ -161,7 +161,7 @@ const PolaroidTimeline = () => {
 
                     {/* CONTENT */}
                     <div className="p-4">
-                      <h3 className="font-semibold text-accent">
+                      <h3 className="font-semibold text-accent text-center">
                         {item.title}
                       </h3>
 

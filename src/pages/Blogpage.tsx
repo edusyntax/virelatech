@@ -66,7 +66,7 @@ const BlogPage = () => {
   <div className="site-container relative mx-auto text-center px-4 sm:px-6">
 
     {/* Overline */}
-    <p className="mt-2 sm:mt-0 text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-orange-500 mb-4 sm:mb-6">
+    <p className="mt-2 sm:mt-0  font-bold text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-orange-500 mb-4 sm:mb-6">
       Insights
     </p>
 

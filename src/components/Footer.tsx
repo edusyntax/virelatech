@@ -9,8 +9,8 @@ const serviceLinks = [
   { label: "Google Ads", href: "/services/google-ads" },
   { label: "Lead Generation", href: "/services/lead-generation-campaigns" },
   { label: "Social Media Marketing", href: "/services/social-media-marketing" },
-  { label: "content marketing", href: "/services/content-marketing" },
-  { label: "email marketing", href: "/services/email-marketing" },
+  { label: "Content marketing", href: "/services/content-marketing" },
+  { label: "Email marketing", href: "/services/email-marketing" },
   { label: "Meta Ads", href: "/services/meta-ads" },
   { label: "AI Automation", href: "/services/ai-automation" },
 ];
@@ -55,13 +55,13 @@ const Footer = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
       {/* Glass container */}
-      <div className="relative glass rounded-2xl p-8 md:p-12 lg:p-16 overflow-hidden">
+      <div className="relative glass rounded-2xl p-8 md:p-12 lg:p-16 overflow-hidden border border-accent">
 
         {/* Background Image */}
         <div
           className="absolute inset-0 -z-10"
           style={{
-            backgroundImage: "url('/src/assets/footer_bg.jpg')",
+            backgroundImage: "url('/src/assets/ft_we.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -72,24 +72,24 @@ const Footer = () => {
         <div className="absolute inset-0 -z-10 bg-white/30 dark:bg-transparent" />
 
         {/* Dark mode matte */}
-        <div className="absolute inset-0 -z-10 bg-black/30 dark:bg-black/50" />
+        <div className="absolute inset-0 -z-10 bg-black/40 dark:bg-black/70" />
 
         {/* Subtle grain */}
         <div className="absolute inset-0 -z-10 opacity-[0.03] mix-blend-overlay bg-[url('/noise.png')]" />
 
         {/* CONTENT */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-white dark:text-foreground">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-white dark:text-foreground ">
 
           {/* Column 1 */}
           <ScrollReveal>
             <div>
-              <h3 className="text-accent font-grotesk font-bold text-xl tracking-tight mb-4">
+              <h3 className="text-orange-500 font-grotesk font-bold text-xl tracking-tight mb-4">
                 VirelaTech
               </h3>
               <p className="text-white dark:text-foreground text-sm leading-relaxed mb-6">
                 Engineering digital authority for visionary brands.
               </p>
-              <p className="text-white/60 dark:text-foreground/50 text-xs font-bold font-grotesk">
+              <p className="text-white/80 dark:text-foreground/50 text-xs font-bold font-grotesk">
                 © {new Date().getFullYear()} VirelaTech. All rights reserved.
               </p>
             </div>
@@ -98,7 +98,7 @@ const Footer = () => {
           {/* Column 2 */}
           <ScrollReveal delay={0.1}>
             <div>
-              <h4 className="text-accent font-grotesk font-semibold text-sm uppercase tracking-widest mb-5">
+              <h4 className="text-orange-500 font-grotesk font-bold text-md uppercase tracking-widest mb-5">
                 Services
               </h4>
               <ul className="space-y-3">
@@ -121,7 +121,7 @@ const Footer = () => {
           {/* Column 3 */}
           <ScrollReveal delay={0.2}>
             <div>
-              <h4 className="text-accent font-grotesk font-semibold text-sm uppercase tracking-widest mb-5">
+              <h4 className="text-orange-500 font-grotesk font-bold text-md uppercase tracking-widest mb-5">
                 Company
               </h4>
               <ul className="space-y-3">
@@ -144,7 +144,7 @@ const Footer = () => {
           {/* Column 4 */}
           <ScrollReveal delay={0.3}>
             <div>
-              <h4 className="text-accent font-grotesk font-semibold text-sm uppercase tracking-widest mb-5">
+              <h4 className="text-orange-500 font-grotesk font-bold text-md uppercase tracking-widest mb-5">
                 Connect
               </h4>
 

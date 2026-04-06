@@ -88,7 +88,7 @@ const ContactPage = () => {
                 <div className="space-y-6 mb-10">
                   <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Email</p><p className="text-foreground text-sm">connect@virelatech.com</p></div>
                   <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Phone</p><p className="text-foreground text-sm">+919753456333</p></div>
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm">Parsippany, NJ-07054, USA and Hyderabad, india</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm">Parsippany, NJ-07054, USA & <br /> Madhapur Hyderabad, India.</p></div>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
