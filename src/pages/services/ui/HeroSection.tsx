@@ -37,12 +37,12 @@ export function HeroSection({ data }: Props) {
       {/* CONTENT */}
       <div className="site-container relative z-10">
         <div
-          className={`grid grid-cols-1 gap-10 md:gap-16 ${
-            hasImage ? "md:grid-cols-2" : ""
+          className={`grid grid-cols-1 gap-0 ${
+            hasImage ? "md:grid-cols-2 md:gap-16" : ""
           }`}
         >
-          {/* LEFT: text — pt-24 here so both columns align from the same top line */}
-          <div className="order-1 pt-24 pb-12 px-6 md:px-8 md:pr-0">
+          {/* LEFT */}
+          <div className="order-1 pt-24 pb-6 md:pb-12 md:px-6 md:pr-0">
             <p className="eyebrow-orange">
               {data.eyebrow.normal}{" "}
               <span className="eyebrow-highlight eyebrow-highlight-orange">
@@ -53,7 +53,7 @@ export function HeroSection({ data }: Props) {
             <h1 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
               {data.title}
               {data.highlight && (
-                <span className="block text-orange-500 italic font-serif  mt-2">
+                <span className="block text-orange-500 italic font-serif mt-2">
                   {data.highlight}
                 </span>
               )}
@@ -75,12 +75,10 @@ export function HeroSection({ data }: Props) {
             <ButtonGroup buttons={data.buttons} />
           </div>
 
-          {/* RIGHT: image — pt-24 matches the text column's top offset exactly */}
+          {/* RIGHT */}
           {hasImage && (
-            <div className="order-2 pt-24 pb-12 flex items-stretch
-                            max-md:px-6 max-md:pt-0">
-              <div className="w-full rounded-2xl overflow-hidden
-                              aspect-[4/3] md:aspect-auto md:min-h-0 md:flex-1">
+            <div className="order-2 pb-12 md:pt-24 flex items-stretch">
+              <div className="w-full rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:min-h-0 md:flex-1">
                 <img
                   src={data.background.image!}
                   alt=""
