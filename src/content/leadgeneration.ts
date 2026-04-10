@@ -4,7 +4,10 @@ import { HeroData,ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Lead Generation Services",
+  eyebrow: {
+  normal: "Lead Generation",
+  highlight: "Services"
+},
 
   title: "Traffic Doesn’t Grow a Business.",
   highlight: "Leads Do.",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d"
+    image: "/src/assets/services/leadgeneration.jpg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+ eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
   
 
   title: {
@@ -85,9 +91,15 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
+  eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Everything needed to turn traffic into leads",
+ title: {
+  normal: "Everything needed to turn",
+  highlight: "traffic into leads"
+},
 
   subtitle:
     "We focus on the full conversion system — not just one part of it.",
@@ -150,9 +162,14 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
-
-  title: "We don’t just generate leads.\nWe build systems that convert consistently.",
+eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
+ title: {
+  normal: "We don’t just generate leads.",
+  highlight: "We build systems that convert consistently."
+},
 
   description:
     "Every part of the funnel is designed to guide users toward action — without confusion or friction.",
@@ -187,7 +204,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How lead generation actually works",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -218,9 +238,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "More leads. Better quality. Clear system.",
+  title: {
+  normal: "More leads. ",
+  highlight: "Better quality. Clear system."
+},
 
   highlight: {
     value: "Consistent",
@@ -230,8 +256,8 @@ export const resultsData: ResultsData = {
   },
 
   metrics: [
-    { value: "↑ Leads", label: "Higher Conversion Rate" },
-    { value: "↓ Drop-offs", label: "Better User Flow" }
+    { icon: "up", value: "Leads", label: "Higher Lead Volume" },
+    { icon: "down", value: "Drop-offs", label: "Lower User Drop-offs" }
   ],
 
   proofItems: [

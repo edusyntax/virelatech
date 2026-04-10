@@ -42,10 +42,10 @@ export function ButtonGroup({
         const isPrimary = btn.variant === "primary";
 
         const variantStyle = isPrimary
-          ? "bg-primary text-primary-foreground hover:scale-105 shadow-lg"
+          ? "bg-accent text-accent-foreground rounded-full text-base font-medium glow px-6  w-full sm:w-auto flex items-center justify-center"
           : btn.variant === "ghost"
           ? "text-primary hover:underline"
-          : "border border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground";
+          : "glass border border-white/30 rounded-full text-base font-medium px-6 w-full sm:w-auto flex items-center justify-center transition-all duration-300 hover:text-white hover:bg-accent";
 
         return (
           <a

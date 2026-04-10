@@ -2,47 +2,60 @@ import { ServiceData } from "@/types/services";
 
 export function ServiceBreakdown({ data }: { data: ServiceData }) {
   return (
-    <section className="py-2 bg-background relative overflow-hidden">
-
+<section className="py-4 relative overflow-hidden">
       {/* AMBIENT */}
       <div className="absolute inset-0 bg-background-ambient opacity-30 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative">
+      <div className="site-container relative">
 
         {/* HEADER */}
-        <div className="max-w-2xl mb-16">
-       <p className="text-sm font-bold uppercase tracking-widest mb-4 
-  bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 
-  bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(251,146,60,0.4)]">
-  {data.eyebrow}
-</p>
+        <div className="max-w-2xl mb-12 md:mb-16">
+          <p className="eyebrow-orange">
+            {data.eyebrow.normal}{" "}
+            <span className="eyebrow-highlight eyebrow-highlight-orange">
+              {data.eyebrow.highlight}
+            </span>
+          </p>
 
-          <h2 className="text-3xl md:text-5xl font-semibold leading-tight">
-            {data.title}
+         <h2 className="text-[clamp(2rem,4vw,3rem)] leading-tight">
+            <span className="text-foreground font-medium">
+              {data.title.normal}
+            </span>{" "}
+            <span className="text-orange-500 font-semibold italic font-serif">
+              {data.title.highlight}
+            </span>
           </h2>
 
           {data.subtitle && (
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-muted-foreground leading-relaxed">
               {data.subtitle}
             </p>
           )}
         </div>
 
         {/* GRID */}
-<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
 
           {data.services.map((item, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-background-glass border border-border hover:border-orange-500 hover:shadow-background-secondary transition"
+              className="
+                p-6 rounded-2xl
+                bg-card
+                border border-border
+                transition-all duration-300
+                hover:border-orange-500
+                hover:bg-background-glass
+                hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)]
+              "
             >
               {/* TITLE */}
-              <h3 className="text-lg font-semibold mb-3">
+              <h3 className="text-base md:text-lg font-semibold text-foreground mb-3">
                 {item.title}
               </h3>
 
               {/* DESCRIPTION */}
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                 {item.description}
               </p>
 
@@ -50,7 +63,7 @@ export function ServiceBreakdown({ data }: { data: ServiceData }) {
               <ul className="space-y-2 text-sm">
                 {item.deliverables.map((d, j) => (
                   <li key={j} className="flex gap-2 text-muted-foreground">
-                    <span className="text-primary">•</span>
+                    <span className="text-orange-500">•</span>
                     {d}
                   </li>
                 ))}

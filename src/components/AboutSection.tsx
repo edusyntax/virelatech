@@ -1,34 +1,30 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import holographicFluid from "@/assets/aboutus.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-/* ===========================
-   DATA
-=========================== */
+import holographicFluid from "@/assets/aboutus.png";
+import aboutM2 from "@/assets/aboutm2.jpg";
+import aboutM1 from "@/assets/aboutm1.jpg";
 
 const callouts = [
   {
     id: "leverage",
     label: "Digital Leverage",
-    description:
-      "We engineer compounding digital systems — not campaigns. Every asset we create multiplies in value over time.",
-    image: "/src/assets/aboutus.png",
+    description: "We engineer compounding digital systems...",
+    image: holographicFluid,
   },
   {
     id: "architecture",
     label: "Brand Architecture",
-    description:
-      "Strategic positioning that turns attention into authority. We don't decorate — we construct perception.",
-    image: "/src/assets/aboutm2.jpg",
+    description: "Strategic positioning that turns attention into authority...",
+    image: aboutM2,
   },
   {
     id: "dominance",
     label: "Market Dominance",
-    description:
-      "Every engagement is designed as a scalable command center — built to capture, convert, and control your category.",
-    image: "/src/assets/aboutm1.jpg",
+    description: "Every engagement is designed as a scalable command center...",
+    image: aboutM1,
   },
 ];
 
@@ -70,14 +66,14 @@ const AboutSection = () => {
       <div className="relative max-w-6xl">
 
         {/* LABEL */}
-        <ScrollReveal>
-          <p className="text-xs tracking-[0.4em] uppercase text-accent mb-2">
-            About{" "}
-            <span className="bg-[#FF6A3D] text-white px-2 py-2 rounded-md">
-              VirelaTech
-            </span>
-          </p>
-        </ScrollReveal>
+<ScrollReveal>
+  <p className="section-title">
+    About{" "}
+    <span className="section-highlight">
+      VirelaTech
+    </span>
+  </p>
+</ScrollReveal>
 
         <div className="grid lg:grid-cols-12 gap-16 items-center">
 
@@ -86,7 +82,7 @@ const AboutSection = () => {
 
             <h2 className="text-[clamp(2.4rem,3vw,3.2rem)] leading-tight font-light tracking-tight text-foreground max-w-2xl">
               We don’t build campaigns. We engineer{" "}
-              <span className="font-medium text-accent">systems.</span>
+              <span className="font-medium text-accent font-serif italic">systems.</span>
             </h2>
 
             <p className="text-muted-foreground/80 text-base leading-relaxed max-w-md mt-4">

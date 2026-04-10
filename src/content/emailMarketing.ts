@@ -4,7 +4,10 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Email Marketing Services",
+ eyebrow: {
+  normal: "Email Marketing",
+  highlight: "Services"
+},
 
   title: "Staying in Touch",
   highlight: "Without Being Ignored",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216"
+    image: "/src/assets/services/emailmarketing.jpg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+ eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
 
  title: {
@@ -85,9 +91,15 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
+eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Email systems that people actually engage with",
+title: {
+  normal: "Email systems that people",
+  highlight: "actually engage with"
+},
 
   subtitle:
     "We focus on timing, relevance, and simplicity — not complexity.",
@@ -150,9 +162,15 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "How We Approach It",
-
-  title: "Not longer emails.\nBetter emails.",
+eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
+title: {
+  normal: "Not longer emails.",
+  highlight: "Better emails."
+},
+  
 
   description:
     "We keep communication simple, relevant, and timed correctly — so it actually gets attention.",
@@ -187,7 +205,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "What this helps with",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -218,9 +239,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "Better engagement. Clear communication. Real results.",
+  title: {
+  normal: "Better engagement.",
+  highlight: " Clear communication. Real results."
+},
 
   highlight: {
     value: "Higher",
@@ -229,9 +256,9 @@ export const resultsData: ResultsData = {
       "When emails feel relevant and personal, people actually read and respond."
   },
 
-  metrics: [
-    { value: "↑ Opens", label: "Better Engagement" },
-    { value: "↑ Clicks", label: "More Conversions" }
+  metrics:  [
+    { icon: "up", value: "Opens", label: "Higher Open Rate" },
+    { icon: "up", value: "Clicks", label: "Higher Click-Through Rate" }
   ],
 
   proofItems: [

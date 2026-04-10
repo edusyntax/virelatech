@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 /* TYPES */
 export type FAQItem = {
@@ -22,9 +24,29 @@ const FAQSection = ({
   categories,
   title = "Frequently Asked Questions",
 }: Props) => {
-  const [openIndex, setOpenIndex] = useState<string | null>(null);
+  const [active, setActive] = useState<number | null>(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  /* GET GENERAL */
+  /* SCREEN DETECT */
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  /* AUTO SCROLL MOBILE */
+  useEffect(() => {
+    if (isMobile && active !== null) {
+      itemRefs.current[active]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [active, isMobile]);
+
+  /* GENERAL */
   const generalFaq = data.find((item) => item.category === "General");
 
   /* FILTER */
@@ -36,95 +58,102 @@ const FAQSection = ({
       )
     : data.filter((item) => item.category !== "General");
 
-  /* MERGE GENERAL */
-  const finalData = filtered.map((section) => ({
-    ...section,
-    faqs: [...section.faqs, ...(generalFaq?.faqs || [])],
-  }));
-
-  const toggle = (key: string) => {
-    setOpenIndex(openIndex === key ? null : key);
-  };
+  /* MERGE */
+  const finalData = filtered.flatMap((section) => [
+    ...section.faqs,
+    ...(generalFaq?.faqs || []),
+  ]);
 
   return (
-    <section className="py-4 md:py-32 bg-background relative overflow-hidden">
+    <section className="relative py-6 md:py-12  overflow-hidden">
+      <div className="site-container ">
 
-      {/* AMBIENT */}
-      <div className="absolute inset-0 bg-background-ambient opacity-30 pointer-events-none" />
+        {/* HEADER (MATCHED STYLE) */}
+        <p className="eyebrow-orange">
+          Frequently{" "}
+          <span className="eyebrow-highlight">Asked</span>
+        </p>
+        {/* LIST */}
+        <div className="space-y-4 md:space-y-6">
+          {finalData.map((faq, index) => {
+            const isActive = active === index;
 
-      <div className="max-w-4xl mx-auto px-6 md:px-12 space-y-10">
+            return (
+              <motion.div
+                key={index}
+                ref={(el) => (itemRefs.current[index] = el)}
+                onMouseEnter={() => {
+                  if (!isMobile) setActive(index);
+                }}
+                onClick={() => {
+                  if (isMobile) {
+                    setActive((prev) =>
+                      prev === index ? null : index
+                    );
+                  }
+                }}
+                className="relative border rounded-xl cursor-pointer overflow-hidden bg-card"
+                animate={{
+                  backgroundColor: isActive
+                    ? "rgba(249,115,22,0.08)"
+                    : "hsl(var(--card))",
+                  scale: isActive ? 1.02 : 1,
+                  borderColor: isActive
+                    ? "#f97316"
+                    : "hsl(var(--border))",
+                }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="flex items-start md:items-center justify-between py-5 px-4 md:py-8 md:px-10 gap-3 md:gap-4">
 
-        {/* HEADER */}
-        <h2 className="text-3xl md:text-5xl font-semibold text-center text-foreground">
-          {title}
-        </h2>
+                  {/* LEFT */}
+                  <div className="flex-1 flex items-start gap-3 md:gap-6">
 
-        {/* FAQ LIST */}
-        <div className="space-y-3">
-
-          {finalData.map((section, sectionIndex) =>
-            section.faqs.map((faq, i) => {
-              const key = `${sectionIndex}-${i}`;
-              const isOpen = openIndex === key;
-
-              return (
-                <div
-                  key={key}
-                  className="
-                    rounded-xl
-                    border border-border
-                    bg-background-elevated
-                    hover:bg-background-glass
-                    transition
-                  "
-                >
-
-                  {/* QUESTION */}
-                  <button
-                    onClick={() => toggle(key)}
-                    className="
-                      w-full
-                      flex items-center justify-between
-                      px-6 py-6
-                      text-left
-                    "
-                  >
-                    <span className="text-base md:text-lg font-medium text-foreground">
-                      {faq.question}
+                    <span className="font-mono text-xl md:text-2xl font-bold flex-shrink-0 text-accent">
+                      {(index + 1).toString().padStart(2, "0")}
                     </span>
 
-                    <span
-                      className={`
-                        text-2xl
-                        transition-transform
-                        ${isOpen ? "rotate-45 text-primary" : "text-muted-foreground"}
-                      `}
-                    >
-                      +
-                    </span>
-                  </button>
+                    <div className="flex-1">
 
-                  {/* ANSWER */}
-                  <div
-                    className={`
-                      grid transition-all duration-300
-                      ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
-                    `}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 pb-6 text-muted-foreground leading-relaxed">
-                        {faq.answer}
-                      </p>
+                      <h3 className="text-lg md:text-2xl font-bold text-foreground leading-snug">
+                        {faq.question}
+                      </h3>
+
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.p
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-2 md:mt-3 text-sm md:text-base leading-relaxed text-foreground"
+                          >
+                            {faq.answer}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+
                     </div>
                   </div>
 
+                  {/* RIGHT */}
+                  <motion.div
+                    animate={{ rotate: isActive ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full border-2 ${
+                      isActive
+                        ? "border-accent/60 text-accent"
+                        : "border-border text-muted-foreground"
+                    }`}
+                  >
+                    <ArrowUpRight size={18} strokeWidth={2.5} />
+                  </motion.div>
+
                 </div>
-              );
-            })
-          )}
-
+              </motion.div>
+            );
+          })}
         </div>
-
       </div>
     </section>
   );

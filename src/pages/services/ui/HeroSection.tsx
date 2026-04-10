@@ -1,39 +1,13 @@
 import { HeroData, HeroBackground } from "@/types/services";
 import { ButtonGroup } from "@/components/ui/ButtonGroup";
 import { Marquee } from "@/pages/services/ui/Marquee";
-import { HighlightText } from "@/components/ui/HighlightText";
 
 interface Props {
   data: HeroData;
 }
 
-/* ================= BACKGROUND RENDERER ================= */
 function BackgroundRenderer({ background }: { background: HeroBackground }) {
   if (!background || background.type === "none") return null;
-
-  if (background.type === "image" && background.image) {
-    return (
-      <img
-        src={background.image}
-        className="w-full h-full object-cover scale-105"
-        alt=""
-      />
-    );
-  }
-
-  if (background.type === "video" && background.video) {
-    return (
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-full object-cover scale-105"
-      >
-        <source src={background.video} />
-      </video>
-    );
-  }
 
   if (background.type === "gradient" && background.gradient) {
     return (
@@ -44,74 +18,84 @@ function BackgroundRenderer({ background }: { background: HeroBackground }) {
   return null;
 }
 
-/* ================= HERO ================= */
 export function HeroSection({ data }: Props) {
+  const hasImage =
+    data.background.type === "image" && !!data.background.image;
+
   return (
-    <section className="pt-24  relative overflow-hidden">
+    <section className="relative overflow-hidden pt-8">
 
-      {/* ================= BACKGROUND ================= */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
-
-        {/* dynamic bg */}
-        {/* <BackgroundRenderer background={data.background} /> */}
-
-        {/* theme-safe overlay */}
+        <BackgroundRenderer background={data.background} />
         <div className="absolute inset-0 bg-background/80 dark:bg-background/60" />
-
-        {/* depth gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
-
-        {/* ambient layer */}
-        <div className="absolute inset-0 bg-background-ambient opacity-40 pointer-events-none" />
-
-        {/* optional premium tint */}
+        <div className="absolute inset-0 bg-background-ambient opacity-30 pointer-events-none" />
         <div className="absolute inset-0 bg-primary/5 mix-blend-overlay" />
-
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="max-w-7xl mx-auto  md:px-6 lg:px-20 relative z-10">
-
-        <div className="max-w-5xl backdrop-blur-sm bg-background/40 dark:bg-background/30 p-6 md:p-8 rounded-2xl">
-
-          {/* eyebrow */}
-     <p className="text-sm font-bold uppercase tracking-widest mb-4 
-  bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 
-  bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(251,146,60,0.4)]">
-  {data.eyebrow}
-</p>
-
-          {/* title */}
-          <h1 className="text-4xl md:text-6xl font-semibold leading-[1.1] tracking-tight">
-            {data.title}
-            {data.highlight && (
-              <span className="block text-orange-500 italic font-serif mt-2">
-                {data.highlight}
+      {/* CONTENT */}
+      <div className="site-container relative z-10">
+        <div
+          className={`grid grid-cols-1 gap-10 md:gap-16 ${
+            hasImage ? "md:grid-cols-2" : ""
+          }`}
+        >
+          {/* LEFT: text — pt-24 here so both columns align from the same top line */}
+          <div className="order-1 pt-24 pb-12 px-6 md:px-8 md:pr-0">
+            <p className="eyebrow-orange">
+              {data.eyebrow.normal}{" "}
+              <span className="eyebrow-highlight eyebrow-highlight-orange">
+                {data.eyebrow.highlight}
               </span>
-            )}
-          </h1>
+            </p>
 
-          {/* subtitle */}
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            {data.subtitle}
-          </p>
+            <h1 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+              {data.title}
+              {data.highlight && (
+                <span className="block text-orange-500 italic font-serif  mt-2">
+                  {data.highlight}
+                </span>
+              )}
+            </h1>
 
-          {/* bullets */}
-          <div className="mt-6 space-y-2 text-muted-foreground mb-5 text-sm md:text-base">
-            {data.bullets.map((b, i) => (
-              <p key={i}>✔ {b}</p>
-            ))}
+            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+              {data.subtitle}
+            </p>
+
+            <div className="mt-6 space-y-2 text-muted-foreground mb-5 text-sm md:text-base">
+              {data.bullets.map((b, i) => (
+                <p key={i}>
+                  <span className="text-orange-500 mr-2">✔</span>
+                  {b}
+                </p>
+              ))}
+            </div>
+
+            <ButtonGroup buttons={data.buttons} />
           </div>
 
-          {/* CTA */}
-<ButtonGroup buttons={data.buttons} />
+          {/* RIGHT: image — pt-24 matches the text column's top offset exactly */}
+          {hasImage && (
+            <div className="order-2 pt-24 pb-12 flex items-stretch
+                            max-md:px-6 max-md:pt-0">
+              <div className="w-full rounded-2xl overflow-hidden
+                              aspect-[4/3] md:aspect-auto md:min-h-0 md:flex-1">
+                <img
+                  src={data.background.image!}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          )}
 
         </div>
-    {data.marqueeItems && (
-  <Marquee items={data.marqueeItems} className="mt-10" />
-)}
-      </div>
 
+        {data.marqueeItems && (
+          <Marquee items={data.marqueeItems} className="mt-10" />
+        )}
+      </div>
     </section>
   );
 }

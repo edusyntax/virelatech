@@ -31,7 +31,7 @@ describe("Homepage (Index route)", () => {
 
     // Capabilities section heading
     expect(
-      screen.getByText(/What We Do/i)
+      screen.getByText(/what Do/i)
     ).toBeInTheDocument();
 
     // About section heading fragment

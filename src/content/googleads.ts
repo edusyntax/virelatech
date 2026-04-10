@@ -4,7 +4,10 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Google Ads Services ",
+  eyebrow: {
+  normal: "Google Ads",
+  highlight: "Services"
+},
 
   title: "Get Leads When People",
   highlight: "Are Ready to Buy",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1557838923-2985c318be48"
+    image: "/src/assets/services/googleadsser.jpeg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
  title: {
   normal: "Running ads is easy, profitability isn’t —",
@@ -85,9 +91,15 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
+ eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Everything needed to make Google Ads actually work",
+ title: {
+  normal: "Everything needed to make",
+  highlight: "Google Ads actually work"
+},
 
   subtitle:
     "From setup to scaling, every layer is built for performance.",
@@ -150,9 +162,15 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
-
-  title: "We don’t run ads.\nWe build lead generation systems.",
+ eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
+title: {
+  normal: "We don’t run ads.",
+  highlight: "We build lead generation systems."
+},
+  
 
   description:
     "Every campaign is built around clear goals, user intent, and continuous optimization.",
@@ -187,7 +205,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "Our process",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -218,9 +239,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "More clarity. Better leads. Consistent results.",
+ title: {
+  normal: "More clarity.",
+  highlight: "Better leads. Consistent results."
+},
 
   highlight: {
     value: "3X",
@@ -229,9 +256,9 @@ export const resultsData: ResultsData = {
       "By focusing on intent and optimization, campaigns become predictable and scalable."
   },
 
-  metrics: [
-    { value: "↓ CPC", label: "Lower Cost Per Click" },
-    { value: "↑ ROI", label: "Better Returns" }
+  metrics:  [
+    { icon: "down", value: "CPC", label: "Lower Cost Per Click" },
+    { icon: "up", value: "ROI", label: "Higher Return on Investment" }
   ],
 
   proofItems: [

@@ -18,8 +18,8 @@ const SERVICE_ITEMS = [
   { label: "Google Ads", description: "High-converting lead campaigns", href: "/services/google-ads" },
   { label: "Lead Generation", description: "High-converting lead campaigns", href: "/services/lead-generation-campaigns" },
   { label: "Social Media Marketing", description: "Community & brand growth", href: "/services/social-media-marketing" },
-  {label:"Content marketing", description: "Engaging content that ranks and converts", href: "/services/content-marketing"},  
-  {label:"Email marketing", description: "Nurture leads and drive repeat business", href: "/services/email-marketing"},
+  { label: "Content Marketing", description: "Engaging content that ranks and converts", href: "/services/content-marketing" },
+  { label: "Email Marketing", description: "Nurture leads and drive repeat business", href: "/services/email-marketing" },
   { label: "Meta Ads", description: "Facebook and Instagram advertising", href: "/services/meta-ads" },
   { label: "AI Automation", description: "Intelligent marketing systems", href: "/services/ai-automation" },
 ];
@@ -103,38 +103,25 @@ const Navigation = () => {
         style={{ position: "fixed", top: 24, left: 0, right: 0, zIndex: 1002 }}
       >
         <nav
-          className={`mx-auto border  border-orange-400 w-[calc(100vw-2rem)] max-w-5xl rounded-full px-5 py-3 md:px-8 md:py-4 transition-all duration-500 overflow-visible ${
+          className={`mx-auto border border-orange-400 w-[calc(100vw-2rem)] max-w-5xl rounded-full px-5 py-3 md:px-8 md:py-4 transition-all duration-500 overflow-visible ${
             scrolled ? "glass-strong" : "glass"
           }`}
         >
           {/* Mobile: simple flex row. Desktop: 3-col grid */}
           <div className="flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr] md:items-center w-full">
-            {/* Left: Logo */}
+
+            {/* Left: Logo — fixed duplicate nested <a> */}
             <a
               href="/"
               onClick={(e) => handleNavClick(e, "/")}
-              className="text-foreground font-grotesk font-bold text-sm md:text-base tracking-tight flex-shrink-0"
+              className="flex items-center flex-shrink-0"
               data-hover
             >
-              <a
-  href="/"
-  onClick={(e) => handleNavClick(e, "/")}
-  className="flex items-center flex-shrink-0"
-  data-hover
->
-  <img
-    src="/vt.png" // <-- replace with your actual logo path
-    alt="VirelaTech"
-    className="
-      h-8 sm:h-9 md:h-10 lg:h-11
-      w-auto
-      object-contain
-      
-      rounded-md
-      px-1 py-[2px]
-    "
-  /><span className="ml-2 hidden sm:inline text-gradient-to-r from-accent/30 to-orange">VirelaTech</span>  
-</a>
+              <img
+                src="/vtg.png"
+                alt="VirelaTech"
+                className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain rounded-md px-1 py-[2px]"
+              />
             </a>
 
             {/* Center: Nav links (desktop only) */}
@@ -153,7 +140,7 @@ const Navigation = () => {
                       <a
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`relative text-[11px] font-medium tracking-wider uppercase transition-colors duration-300 group whitespace-nowrap inline-flex items-center gap-1 ${
+                        className={`relative text-[15px] font-medium tracking-wider uppercase transition-colors duration-300 group whitespace-nowrap inline-flex items-center gap-1 ${
                           active ? "text-orange-500" : "text-foreground hover:text-orange-500"
                         }`}
                         data-hover
@@ -169,7 +156,7 @@ const Navigation = () => {
                           <path d="M3 5L6 8L9 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <span
-                          className={`absolute -bottom-1 left-0 h-[2px] bg-accent rounded-full transition-all duration-300 ${
+                          className={`absolute -bottom-1 left-0 h-[2px] bg-dark rounded-full transition-all duration-300 ${
                             active ? "w-full" : "w-0 group-hover:w-full"
                           }`}
                         />
@@ -204,8 +191,9 @@ const Navigation = () => {
                                 </a>
                               ))}
                               <div className="h-px bg-border my-1" />
+                              {/* Fixed: was href="/" instead of href="/services" */}
                               <a
-                                href="/"
+                                href="/services"
                                 onClick={(e) => handleNavClick(e, "/services")}
                                 className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-accent/10 transition-colors duration-200"
                                 data-hover
@@ -228,7 +216,7 @@ const Navigation = () => {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative text-[15px] font-medium tracking-wider  uppercase transition-colors duration-300 group whitespace-nowrap ${
+                    className={`relative text-[15px] font-medium tracking-wider uppercase transition-colors duration-300 group whitespace-nowrap ${
                       active ? "text-orange-500" : "text-foreground hover:text-orange-500"
                     }`}
                     data-hover
@@ -261,6 +249,7 @@ const Navigation = () => {
                   <span className="inline-block">☾</span>
                 )}
               </motion.button>
+
               <motion.div
                 className="relative group"
                 whileHover={{ scale: 1.03 }}
@@ -375,7 +364,7 @@ const Navigation = () => {
                                   key={item.href}
                                   href={item.href}
                                   onClick={(e) => handleNavClick(e, item.href)}
-                                  className="text-foreground  text-base sm:text-lg font-grotesk hover:text-accent transition-colors"
+                                  className="text-foreground text-base sm:text-lg font-grotesk hover:text-accent transition-colors"
                                   data-hover
                                 >
                                   {item.label}

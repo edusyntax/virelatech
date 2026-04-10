@@ -70,16 +70,16 @@ const HoverFlexSection = () => {
       <div className="site-container">
 
         {/* Heading */}
-        <p className="text-accent text-xs uppercase tracking-[0.25em] mb-3">
+        <p className="section-title">
           Frequently{" "}
-          <span className="bg-[#FF6A3D] text-accent-foreground px-2 py-1 rounded-md">
+          <span className="section-highlight">
             Asked
           </span>
         </p>
 
         <h2 className="text-[clamp(2.2rem,4vw,3.2rem)] font-semibold text-foreground max-w-3xl mb-10 md:mb-14">
           Clear answers.{" "}
-          <span className="font-serif text-gradient-accent">
+          <span className="font-serif italic text-gradient-accent">
             No noise.
           </span>
         </h2>

@@ -230,16 +230,16 @@ const BlogSection = () => {
       className="relative py-6 md:py-12 px-6 md:px-24 lg:px-24"
     >
       <ScrollReveal>
-<p className="text-xs tracking-[0.4em] uppercase text-accent mb-2">
+<p className="section-title">
   Strategic{" "}
-  <span className="bg-[#FF6A3D] text-white px-2 py-2 rounded-md">
+  <span className="section-highlight">
     Intelligence
   </span>
 </p>
 
 <h2 className="text-[clamp(2.4rem,4vw,3.2rem)] mb-2 leading-tight font-bold tracking-tight text-foreground max-w-2xl">
   Insights shaping digital{" "}
-  <span className="font-serif text-gradient-accent">authority</span>
+  <span className="font-serif italic text-gradient-accent">authority</span>
 </h2>
       </ScrollReveal>
 

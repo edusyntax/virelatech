@@ -1,28 +1,29 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ===========================
-   DATA
-=========================== */
+import designImg from "@/assets/services/design.jpeg";
+import planImg from "@/assets/services/plan.jpeg";
+import executeImg from "@/assets/services/excute.jpeg";
+import roiImg from "@/assets/services/roi.jpeg";
 
 const milestones = [
   {
-    image: "./src/assets/services/design.jpeg",
+    image: designImg,
     title: "Understand",
     caption: "We analyze your business, audience, and current gaps to uncover what truly matters.",
   },
   {
-    image: "./src/assets/services/plan.jpeg",
+    image: planImg,
     title: "Plan",
     caption: "A tailored strategy built around your goals—focused, practical, and growth-driven.",
   },
   {
-    image: "./src/assets/services/excute.jpeg",
+    image: executeImg,
     title: "Execute",
     caption: "We launch campaigns and systems with clear, structured execution and full visibility.",
   },
   {
-    image: "./src/assets/services/roi.jpeg",
+    image: roiImg,
     title: "Optimize",
     caption: "We continuously refine based on data to improve performance and scale results over time.",
   },
@@ -86,16 +87,16 @@ const PolaroidTimeline = () => {
       <div className="relative max-w-6xl mx-auto">
 
         {/* HEADER */}
-        <p className="text-xs tracking-[0.4em] uppercase text-accent mb-2">
+        <p className="section-title">
           Operational{" "}
-          <span className="bg-[#FF6A3D] text-white px-2 py-1 rounded-md">
+          <span className="section-highlight">
             Framework
           </span>
         </p>
 
         <h2 className="text-[clamp(2.4rem,4vw,3.2rem)] leading-tight font-bold tracking-tight text-foreground max-w-2xl">
           The system behind{" "}
-          <span className="font-serif text-gradient-accent">every</span> result
+          <span className="font-serif italic text-gradient-accent">every</span> result
         </h2>
 
         {/* ROPE */}

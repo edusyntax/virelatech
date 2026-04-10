@@ -1,91 +1,96 @@
 import { ProcessData } from "@/types/services";
+import { ButtonGroup } from "@/components/ui/ButtonGroup";
+import { heroButtons } from "@/content/button";
 
 export function ProcessSection({ data }: { data: ProcessData }) {
   return (
-    <section className="py-8 bg-background-primary text-foreground relative overflow-hidden">
+    <section className="relative py-6 md:py-12 overflow-hidden">
 
       {/* AMBIENT */}
       <div className="absolute inset-0 bg-background-ambient opacity-30 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative">
+      <div className="site-container space-y-12 md:space-y-16">
 
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
 
-          {/* LEFT SIDE (Eyebrow + Title) */}
-          <div>
-            {data.eyebrow && (
-              <p className="text-sm font-bold uppercase tracking-widest mb-4 
-                bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 
-                bg-clip-text text-transparent">
-                {data.eyebrow}
-              </p>
-            )}
+          <div className="max-w-2xl">
+            <p className="eyebrow-orange">
+              {data.eyebrow.normal}{" "}
+              <span className="eyebrow-highlight eyebrow-highlight-orange">
+                {data.eyebrow.highlight}
+              </span>
+            </p>
 
-            <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold leading-tight text-foreground">
               {data.title}
             </h2>
           </div>
 
           {/* CTA */}
-          {data.cta && (
-            <div className="flex gap-3">
-
-              {data.cta.primary && (
-                <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm hover:scale-105 transition">
-                  {data.cta.primary}
-                </button>
-              )}
-
-              {data.cta.secondary && (
-                <button className="border border-border px-5 py-2.5 rounded-full text-sm hover:bg-background-elevated transition">
-                  {data.cta.secondary}
-                </button>
-              )}
-
-            </div>
-          )}
+          <div className="pt-2 md:pt-0">
+            <ButtonGroup buttons={heroButtons} />
+          </div>
 
         </div>
 
         {/* PROCESS FLOW */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-hidden">
 
-          <div className="flex md:grid md:grid-cols-4 gap-8 md:gap-10 min-w-[700px] md:min-w-0">
+          <div className="flex md:grid md:grid-cols-4 gap-6 md:gap-10 min-w-[700px] md:min-w-0 py-3">
 
-            {data.steps.map((step, i) => (
-              <div key={i} className="relative group min-w-[220px] md:min-w-0 flex">
+            {data.steps.map((step, i) => {
+              const isFirst = i === 0;
+              const isLast = i === data.steps.length - 1;
 
-                {/* CONNECTOR */}
-                {i !== data.steps.length - 1 && (
-                  <div className="hidden md:block  absolute top-6 right-[-20px] w-10 h-px bg-border" />
-                )}
+              return (
+                <div
+                  key={i}
+                  className="relative group min-w-[220px] md:min-w-0 flex"
+                >
 
-                {/* CARD */}
-<div className="p-6 rounded-xl bg-background-elevated border border-border 
-  transition-all duration-300 
-   hover:border-orange-500 hover:shadow-lg
-  flex flex-col h-full">
+                  {/* CONNECTOR */}
+                  {!isLast && (
+                    <div className="hidden md:block absolute top-6 right-[-30px] w-10 h-px bg-orange-100" />
+                  )}
 
-                  {/* NUMBER */}
-                  <p className="text-orange-400 mb-2">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
+                  {/* CARD */}
+                  <div
+                    className={`
+                      p-5 md:p-6
+                      rounded-xl
+                      bg-card
+                      border border-border
+                      transition-all duration-300
+                      group-hover:border-orange-500
+                      group-hover:bg-background-glass
+                      group-hover:scale-[1.02]
+                      group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)]
+                      flex flex-col h-full w-full
+                      ${isFirst ? "origin-left" : isLast ? "origin-right" : "origin-center"}
+                    `}
+                  >
 
-                  {/* TITLE */}
-                  <h3 className="text-lg font-semibold group-hover:text-primary transition">
-                    {step.title}
-                  </h3>
+                    {/* NUMBER */}
+                    <p className="text-orange-400 font-mono text-sm md:text-base mb-2">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
 
-                  {/* DESC */}
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-grow">
-                    {step.desc}
-                  </p>
+                    {/* TITLE */}
+                    <h3 className="text-base md:text-lg font-semibold text-foreground group-hover:text-primary transition">
+                      {step.title}
+                    </h3>
+
+                    {/* DESC */}
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed flex-grow">
+                      {step.desc}
+                    </p>
+
+                  </div>
 
                 </div>
-
-              </div>
-            ))}
+              );
+            })}
 
           </div>
 

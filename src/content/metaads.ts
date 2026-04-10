@@ -4,8 +4,12 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Meta Ads Services (Facebook & Instagram)",
+  
 
+eyebrow: {
+  normal: "Meta Ads Services",
+  highlight: "(Facebook & Instagram)"
+},
   title: "Running Ads Is Easy.",
   highlight: "Getting Results Is Not.",
 
@@ -23,7 +27,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0"
+    image: "/src/assets/services/metadss.jpg"
   },
   buttons: [
   {
@@ -52,7 +56,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
   title: {
   normal: "Most ads get attention but not results —",
@@ -85,9 +92,14 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
-
-  title: "Everything needed to make Meta Ads perform",
+eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
+title: {
+  normal: "Everything needed to make",
+  highlight: "Meta Ads perform"
+},
 
   subtitle:
     "We focus on the full system — targeting, creatives, and optimization.",
@@ -150,9 +162,16 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
+eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
 
-  title: "We don’t just run ads.\nWe build scalable growth systems.",
+ title: {
+  normal: "We don’t just run ads.",
+  highlight: "We build scalable growth systems."
+}
+,
 
   description:
     "Every campaign is built around testing, learning, and scaling what works.",
@@ -187,7 +206,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How Meta Ads actually scale",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -218,9 +240,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "Better targeting. Stronger creatives. Real results.",
+  title: {
+  normal: "Better targeting.",
+  highlight: "Stronger creatives. Real results."
+},
 
   highlight: {
     value: "Higher",
@@ -229,9 +257,9 @@ export const resultsData: ResultsData = {
       "By focusing on creatives and audience targeting, campaigns start delivering measurable results."
   },
 
-  metrics: [
-    { value: "↓ CPA", label: "Lower Cost Per Lead" },
-    { value: "↑ ROAS", label: "Better Returns" }
+  metrics:  [
+    { icon: "down", value: "CPA", label: "Lower Cost Per Lead" },
+    { icon: "up", value: "ROAS", label: "Higher Return on Ad Spend" }
   ],
 
   proofItems: [

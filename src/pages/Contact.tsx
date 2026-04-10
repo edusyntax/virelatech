@@ -74,14 +74,19 @@ const ContactPage = () => {
           },
         }}
       />
-      <PageHero overline="Contact" title="Let's build something" titleAccent="extraordinary" description="Whether you're looking to scale your marketing, optimize conversions, or build AI-powered systems — we're ready to help." />
+      <PageHero overline={{ normal: "Contact", highlight: "Us" }} title="Let's build something" titleAccent="extraordinary" description="Whether you're looking to scale your marketing, optimize conversions, or build AI-powered systems — we're ready to help." />
 
       <SectionTransition>
         <section className="py-20 site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <ScrollReveal>
-                <h2 className="text-orange-600 text-2xl md:text-3xl font-grotesk font-bold mb-6">Get in Touch</h2>
+       <p className="eyebrow-orange">
+             Get in{" "}
+            <span className="eyebrow-highlight eyebrow-highlight-orange">
+              Touch
+            </span>
+          </p>
                 <p className="text-muted-foreground text-base leading-relaxed mb-8">We partner with visionary brands to create digital experiences that define categories. Tell us about your project and we'll respond within 24 hours.</p>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>

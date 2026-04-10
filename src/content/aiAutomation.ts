@@ -4,7 +4,10 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "AI Automation Services",
+  eyebrow: {
+  normal: "AI Automation",
+  highlight: "Services"
+},
 
   title: "Doing Everything Manually",
   highlight: "Doesn’t Scale.",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995"
+    image: "/src/assets/services/aiautomation.jpg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
  title: {
   normal: "Most ads get attention but not results —",
@@ -86,9 +92,15 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
+  eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Automation systems built around your business",
+  title: {
+  normal: "Automation systems built ",
+  highlight: "around your business"
+},
 
   subtitle:
     "We don’t just use tools — we design workflows that actually make sense.",
@@ -151,9 +163,15 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
+  eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
 
-  title: "We don’t automate tools.\nWe automate workflows.",
+  title: {
+  normal: "We don’t automate tools.",
+  highlight: "We automate workflows."
+},
 
   description:
     "Every automation is built around how your business actually operates — not generic templates.",
@@ -188,7 +206,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How automation actually helps",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -219,9 +240,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What ",
+  highlight: "You’llNotice"
+},
 
-  title: "Less manual work. More efficiency. Better systems.",
+  title: {
+  normal: "Less manual work.",
+  highlight: "More efficiency. Better systems."
+},
 
   highlight: {
     value: "Smarter",
@@ -230,9 +257,9 @@ export const resultsData: ResultsData = {
       "Automation allows your business to run more efficiently while reducing effort and errors."
   },
 
-  metrics: [
-    { value: "↓ Time", label: "Reduced Manual Work" },
-    { value: "↑ Efficiency", label: "Better Productivity" }
+  metrics:[
+    { icon: "down", value: "Time", label: "Reduced Manual Work" },
+    { icon: "up", value: "Efficiency", label: "Higher Productivity" }
   ],
 
   proofItems: [

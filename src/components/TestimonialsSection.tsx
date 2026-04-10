@@ -35,7 +35,7 @@ const testimonials = [
   },
   {
     quote:
-      "Communication has been smooth throughout. We always know what’s happening and why. The results didn’t come overnight, but they’ve been consistent, which is exactly what we were looking for.",
+      "Communication has been smooth throughout. We always know what’s happening and why. The results didn’t come overnight, but they’ve been consistent, which is exactly what were looking for.",
     name: "Anjali Verma",
     role: "D2C Brand",
   },
@@ -123,19 +123,19 @@ const TestimonialsSection = () => {
       {/* ===== HEADING ===== */}
       <div className="site-container">
         <ScrollReveal>
-          <p className="text-xs tracking-[0.4em] uppercase text-accent mb-2">
-            Strategic{" "}
-            <span className="bg-[#FF6A3D] text-white px-2 py-2 rounded-md">
-              Intelligence
-            </span>
-          </p>
+ <p className="section-title">
+  Trusted{" "}
+  <span className="section-highlight">
+    Voices
+  </span>
+</p>
 
-          <h2 className="text-[clamp(2.4rem,3.5vw,3.2rem)] mb-1 leading-tight font-bold tracking-tight text-foreground max-w-2xl">
-            Insights shaping digital{" "}
-            <span className="font-serif text-gradient-accent">
-              authority
-            </span>
-          </h2>
+<h2 className="text-[clamp(2.8rem,4vw,3.8rem)] leading-[1.1] font-bold tracking-tight text-foreground max-w-2xl">
+  The proof behind every{" "}
+  <span className="font-serif italic text-gradient-accent">
+    result
+  </span>
+</h2>
         </ScrollReveal>
       </div>
 

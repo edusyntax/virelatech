@@ -9,8 +9,8 @@ const serviceLinks = [
   { label: "Google Ads", href: "/services/google-ads" },
   { label: "Lead Generation", href: "/services/lead-generation-campaigns" },
   { label: "Social Media Marketing", href: "/services/social-media-marketing" },
-  { label: "Content marketing", href: "/services/content-marketing" },
-  { label: "Email marketing", href: "/services/email-marketing" },
+  { label: "Content Marketing", href: "/services/content-marketing" },
+  { label: "Email Marketing", href: "/services/email-marketing" },
   { label: "Meta Ads", href: "/services/meta-ads" },
   { label: "AI Automation", href: "/services/ai-automation" },
 ];

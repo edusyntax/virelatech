@@ -132,9 +132,9 @@ const AboutSection = () => {
         <div className="relative max-w-6xl">
 
           <ScrollReveal>
-            <p className="text-xs tracking-[0.4em] uppercase text-accent mb-2">
+            <p className="eyebrow-orange ">
               About{" "}
-              <span className="bg-[#FF6A3D] text-white px-2 py-1 rounded-md">
+              <span className="eyebrow-highlight eyebrow-highlight-orange">
                 VirelaTech
               </span>
             </p>
@@ -147,7 +147,7 @@ const AboutSection = () => {
 
               <h2 className="text-[clamp(2.6rem,3.5vw,3.6rem)] leading-[1.1] font-semibold tracking-tight text-foreground max-w-2xl">
                 We don’t build campaigns. We engineer{" "}
-                <span className="text-accent">systems.</span>
+                <span className="text-accent font-serif italic">systems.</span>
               </h2>
 
               <p className="text-muted-foreground/80 text-base leading-relaxed max-w-md mt-5">

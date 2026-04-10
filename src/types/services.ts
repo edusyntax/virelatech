@@ -9,7 +9,7 @@ export interface HeroBackground {
 }
 
 export interface HeroData {
-  eyebrow: string;
+  eyebrow: { normal: string; highlight: string; } ;
   title: string;
   highlight?: string;
   subtitle: string;
@@ -36,7 +36,7 @@ export interface ProblemCTA {
 }
 
 export interface ProblemData {
-  eyebrow: string;
+  eyebrow: { normal: string; highlight: string; }
   title:{ normal: string; highlight: string; }
   subtitle?: string;
 
@@ -56,8 +56,8 @@ export interface ServiceItem {
 }
 
 export interface ServiceData {
-  eyebrow: string;
-  title: string;
+  eyebrow: { normal: string; highlight: string; }
+  title: { normal: string; highlight: string; }
   subtitle?: string;
 
   services: ServiceItem[];
@@ -75,8 +75,8 @@ export interface ApproachCTA {
 }
 
 export interface ApproachData {
-  eyebrow: string;
-  title: string;
+  eyebrow: { normal: string; highlight: string; } 
+  title:{ normal: string; highlight: string; }
   description: string;
 
   steps: ApproachStep[];
@@ -97,7 +97,7 @@ export interface ProcessCTA {
 export interface ProcessData {
 
   title: string;
-  eyebrow: string;
+  eyebrow: { normal: string; highlight: string; }
 
   steps: ProcessStep[];
 
@@ -105,6 +105,7 @@ export interface ProcessData {
 }
 
 export interface ResultMetric {
+  icon: "up" | "down";
   value: string;
   label: string;
 }
@@ -121,8 +122,8 @@ export interface ResultsCTA {
 }
 
 export interface ResultsData {
-  eyebrow: string;
-  title: string;
+  eyebrow: { normal: string; highlight: string; };
+  title: { normal: string; highlight: string; };
 
   highlight: ResultHighlight;
   metrics: ResultMetric[];

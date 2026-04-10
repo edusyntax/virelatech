@@ -4,7 +4,10 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Content Marketing Services",
+  eyebrow: {
+  normal: "Content Marketing",
+  highlight: "Services"
+},
 
   title: "Content Isn’t About Writing More.",
   highlight: "It’s About Saying the Right Things.",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a"
+    image: "/src/assets/services/contentmarketing.jpg"
   },
 buttons: [
   {
@@ -52,8 +55,10 @@ buttons: [
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
-
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
 title: {
   normal: "Manual work slows your growth —",
@@ -85,9 +90,15 @@ title: {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do Differently",
+  eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Content built around intent, not assumptions",
+title: {
+  normal: "Content built around intent,",
+  highlight: "not assumptions"
+},
 
   subtitle:
     "We focus on what your audience needs to see — not just what you want to say.",
@@ -150,9 +161,16 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
-
-  title: "We don’t write more.\nWe write what matters.",
+  eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
+title: {
+  normal: "We don’t write more.",
+  highlight: "We write what matters."
+}
+,
+  
 
   description:
     "Every piece of content is created with a clear purpose — to inform, connect, or convert.",
@@ -187,7 +205,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How content actually works",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -218,9 +239,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "Why This Matters",
+  eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
+title: {
+  normal: "Content that supports growth —",
+  highlight: "not just presence"
+},
 
-  title: "Content that supports growth — not just presence",
 
   highlight: {
     value: "Stronger",
@@ -229,9 +256,9 @@ export const resultsData: ResultsData = {
       "When content aligns with user intent, it drives traffic, builds trust, and improves conversions."
   },
 
-  metrics: [
-    { value: "↑ Traffic", label: "Organic Growth" },
-    { value: "↑ Conversions", label: "Better Results" }
+  metrics:[
+    { icon: "up", value: "Traffic", label: "Higher Organic Traffic" },
+    { icon: "up", value: "Conversions", label: "Better Conversion Rate" }
   ],
 
   proofItems: [

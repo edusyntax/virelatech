@@ -51,10 +51,33 @@
     --background-glass: 0 0% 100% / 0.05;
     --background-ambient: 0 0% 0% / 0.2;
 
+    /* --font-sans: 'Inter', system-ui, sans-serif;
+--font-serif: 'Playfair Display', Georgia, serif;
+--font-grotesk: 'Space Grotesk', system-ui, sans-serif; */
+
+/* --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+--font-serif: 'Libre Baskerville', Georgia, serif;
+--font-grotesk: 'Satoshi', system-ui, sans-serif; */
+
+/* Montserrat Playwrite Ireland Poiret One Montserrat Alternates Jura Final Frontier Font */
+/* --font-sans: 'Roboto', system-ui, sans-serif; */
+ --font-serif: 'Final Frontier', 'Serpentine', sans-serif;
+--font-serif: 'Merriweather', Georgia, serif;
+--font-grotesk: 'Space Grotesk', system-ui, sans-serif;
+/* 
+--font-sans: 'Inter', system-ui, sans-serif;
+--font-serif: 'Playfair Display', Georgia, serif;
+--font-grotesk: 'Clash Display', system-ui, sans-serif; */
+
+/* --font-sans: 'Open Sans', system-ui, sans-serif;
+--font-serif: 'Lora', Georgia, serif;
+--font-grotesk: 'Josefin Sans', system-ui, sans-serif; */
+
     /* Font families */
-    --font-sans: 'Inter', system-ui, sans-serif;
+    /* --font-sans: 'Satoshi', system-ui, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-serif: 'Playfair Display', Georgia, serif;
-    --font-grotesk: 'Space Grotesk', system-ui, sans-serif;
+    --font-grotesk: 'Space Grotesk', system-ui, sans-serif; */
     --font-display: var(--font-sans);
 
     --sidebar-background: 0 0% 5%;
@@ -357,4 +380,23 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* Reusable header styles for sections */
+.section-title {
+  @apply text-accent font-grotesk text-[18px] font-extrabold uppercase tracking-[0.3em] mb-4;
+}
+
+.section-highlight {
+  @apply bg-[#FF6A3D] text-white px-2 py-1 rounded-md;
+}
+
+.eyebrow-orange {
+   @apply text-accent font-grotesk text-[18px] font-extrabold uppercase tracking-[0.3em] mb-4;
+}
+
+/* Highlight overrides gradient clipping for emphasis */
+.eyebrow-highlight {
+  @apply text-white p-1 rounded-sm bg-orange-500; /* or use solid contrast color */
 }

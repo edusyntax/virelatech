@@ -4,7 +4,10 @@ import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "Social Media Marketing Services",
+  eyebrow: {
+  normal: "Social Media Marketing",
+  highlight: "Services"
+},
 
   title: "Not Just Posting Content.",
   highlight: "Building Something People Care About.",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113"
+    image: "/src/assets/services/socialm.jpeg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
  title: {
   normal: "Traffic doesn’t guarantee growth —",
@@ -84,10 +90,16 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Do",
+ eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Social media that actually builds your brand",
-
+ 
+title: {
+  normal: "Social media that actually",
+  highlight: "builds your brand"
+},
   subtitle:
     "We focus on strategy, content, and performance — not just posting.",
 
@@ -149,10 +161,16 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "How We Work",
+  eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
 
-  title: "No templates.\nNo forced strategies.",
-
+  
+title: {
+  normal: "No templates.",
+  highlight: "No forced strategies."
+},
   description:
     "Every brand is different. We build a direction based on your audience, goals, and positioning — not trends or guesswork.",
 
@@ -186,7 +204,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How growth actually happens",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -217,9 +238,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What You’ll Notice",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "More structure. Better engagement. Real growth.",
+  title: {
+  normal: "More structure.",
+  highlight: " Better engagement. Real growth."
+},
 
   highlight: {
     value: "Stronger",
@@ -228,9 +255,9 @@ export const resultsData: ResultsData = {
       "Instead of random posting, your social media starts working as a clear and consistent growth channel."
   },
 
-  metrics: [
-    { value: "↑ Engagement", label: "Better Interaction" },
-    { value: "↑ Reach", label: "Targeted Visibility" }
+  metrics:[
+    { icon: "up", value: "Engagement", label: "Higher User Engagement" },
+    { icon: "up", value: "Reach", label: "Greater Targeted Reach" }
   ],
 
   proofItems: [

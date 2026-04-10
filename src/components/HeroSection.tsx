@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FaChartLine,FaIdBadge, FaSearch, FaRobot } from "react-icons/fa";
-
+import { FaChartLine, FaSearch, FaRobot } from "react-icons/fa";
+import { Medal } from "lucide-react";
 
 import MagneticButton from "./MagneticButton";
-import { getLenis } from "./SmoothScroll";
 import LeadCaptureModal from "./LeadCaptureModal";
 
 import heroPoster from "@/assets/hero-object.jpg";
-import { Medal } from "lucide-react";
+
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const KEYWORDS = [
   "Performance Marketing",
@@ -20,51 +20,65 @@ const KEYWORDS = [
 
 const HERO_VIDEO = "https://assets.mixkit.co/videos/5744/5744-720.mp4";
 
+const WHATSAPP_URL =
+  "https://wa.me/919753456333?text=Hi%20I%20want%20to%20know%20more%20about%20your%20services";
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
 const HeroSection = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // FIX #1: store the pause timeout in a ref so it can be cleaned up on unmount
+  const pauseTimeoutRef = useRef(null);
 
   const { scrollY } = useScroll();
   const yOffset = useTransform(scrollY, [0, 400], [0, -60]);
 
+  // ── Typing effect ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const currentWord = KEYWORDS[wordIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
 
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        const next = currentWord.substring(0, typedText.length + 1);
+        setTypedText(next);
 
+        if (next === currentWord) {
+          // FIX #1: track the inner timeout so it can be cancelled on unmount
+          pauseTimeoutRef.current = setTimeout(
+            () => setIsDeleting(true),
+            1200
+          );
+        }
+      } else {
+        const next = currentWord.substring(0, typedText.length - 1);
+        setTypedText(next);
 
-  const [typedText, setTypedText] = useState("");
-const [isDeleting, setIsDeleting] = useState(false);
-
-useEffect(() => {
-  const currentWord = KEYWORDS[wordIndex];
-  let typingSpeed = isDeleting ? 40 : 80;
-
-  const timeout = setTimeout(() => {
-    if (!isDeleting) {
-      setTypedText(currentWord.substring(0, typedText.length + 1));
-
-      if (typedText === currentWord) {
-        setTimeout(() => setIsDeleting(true), 1200);
+        if (next === "") {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % KEYWORDS.length);
+        }
       }
-    } else {
-      setTypedText(currentWord.substring(0, typedText.length - 1));
+    }, typingSpeed);
 
-      if (typedText === "") {
-        setIsDeleting(false);
-        setWordIndex((prev) => (prev + 1) % KEYWORDS.length);
-      }
-    }
-  }, typingSpeed);
+    // FIX #1: clean up both the outer and inner timeouts
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(pauseTimeoutRef.current);
+    };
+  }, [typedText, isDeleting, wordIndex]);
 
-  return () => clearTimeout(timeout);
-}, [typedText, isDeleting, wordIndex]);
-  
-const handleChatClick = () => {
-  window.open(
-    "https://wa.me/919753456333?text=Hi%20I%20want%20to%20know%20more%20about%20your%20services",
-    "_blank"
-  );
-};
+  // ── Handlers ─────────────────────────────────────────────────────────────────
+  const handleChatClick = () => {
+    // FIX #4: URL is now a named constant at the top of the file
+    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+  };
 
-
+  // ─── Render ──────────────────────────────────────────────────────────────────
   return (
     <section className="relative min-h-[680px] md:min-h-screen flex items-center overflow-hidden pt-28 md:pt-32 pb-12">
 
@@ -85,10 +99,10 @@ const handleChatClick = () => {
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/45 to-black/50" />
+        {/* FIX #10: increased overlay opacity to ensure WCAG AA contrast for body text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/65 to-black/70" />
 
-        {/* vignette */}
+        {/* Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent,rgba(0,0,0,0.65))]" />
       </div>
 
@@ -97,60 +111,59 @@ const handleChatClick = () => {
         <motion.div style={{ y: yOffset }} className="max-w-5xl">
 
           {/* Overline */}
-  <motion.p
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.2, duration: 0.8 }}
-  className="flex items-center gap-2 text-accent font-semibold text-[20px] text-sm uppercase tracking-[0.35em] mb-5 whitespace-nowrap"
->
-  <Medal className="text-accent w-4 h-4 shrink-0" />
-  Digital <span className="text-orange-500">Growth Partner</span>
-</motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            // FIX #6: removed conflicting text-[20px] + text-sm — use a single size
+            className="flex items-center gap-2 section-title mt-4 whitespace-nowrap"
+          >
+            <Medal className="text-accent w-4 h-4 shrink-0 " />
+            Digital <span className="text-orange-400">Growth Partner</span>
+          </motion.p>
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.9 }}
-            className="editorial-heading text-[clamp(2.4rem,3vw,4rem)] leading-[1.1] text-white max-w-[24ch]"
+            // FIX #8: removed max-w-[24ch] — too narrow for the heading copy; parent handles width
+            className="editorial-heading text-[clamp(2.4rem,3vw,4rem)] leading-[1.1] text-white"
           >
             Empowering your Digital Growth with Expert AI Solutions
-
-
-
           </motion.h1>
 
-          {/* Subtext */}
-<p className="text-white/90 text-lg md:text-xl max-w-xl mt-6 leading-relaxed">
-  We help startups and brands grow using {" "}
-  <span className="bg-orange-500 p-1 rounded-sm font-semibold">
-    {typedText}
-    <span className="ml-1 inline-block w-[2px] h-5 bg-accent animate-pulse" />
-  </span>
-</p>
+          
+        {/* Subtext */}
+          <p className="text-white text-lg md:text-xl max-w-xl mt-6 leading-relaxed">
+            We help startups and brands grow using
+            <span className="block mt-1">
+              <span className="bg-orange-600 px-1 py-0.5 rounded-sm font-semibold text-white whitespace-nowrap">
+                {typedText}
+                <span className="ml-1 inline-block w-[2px] h-5 bg-white align-text-bottom animate-pulse" />
+              </span>
+            </span>
+          </p>
 
           {/* Feature icons */}
+          {/* FIX #9: added explicit w-4 h-4 shrink-0 to every icon */}
           <div className="flex flex-wrap gap-6 mt-7 text-white/90 text-sm">
-
             <span className="flex items-center gap-2">
-              <FaChartLine className="text-accent" />
+              <FaChartLine className="text-accent w-4 h-4 shrink-0" />
               Performance Marketing
             </span>
-
             <span className="flex items-center gap-2">
-              <FaSearch className="text-accent" />
+              <FaSearch className="text-accent w-4 h-4 shrink-0" />
               SEO Growth
             </span>
-
             <span className="flex items-center gap-2">
-              <FaRobot className="text-accent" />
+              <FaRobot className="text-accent w-4 h-4 shrink-0" />
               AI Automation
             </span>
-
           </div>
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-9 w-full items-stretch sm:items-start">
-
             <MagneticButton
               className="bg-accent text-accent-foreground rounded-full text-base font-medium glow px-8 h-[54px] w-full sm:w-auto flex items-center justify-center"
               onClick={() => setModalOpen(true)}
@@ -158,19 +171,12 @@ const handleChatClick = () => {
               Get Free Strategy →
             </MagneticButton>
 
-<MagneticButton
-  className="
-    glass rounded-full text-base font-medium px-8 h-[54px]
-    w-full sm:w-auto flex items-center justify-center
-    
-    transition-all duration-300
-   hover:text-white  hover:bg-accent
-  "
-  onClick={handleChatClick}
->
-  Chat with us
-</MagneticButton>
-    
+            <MagneticButton
+              className="glass rounded-full text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center transition-all duration-300 hover:text-white hover:bg-accent"
+              onClick={handleChatClick}
+            >
+              Chat with us
+            </MagneticButton>
           </div>
 
         </motion.div>
@@ -183,10 +189,9 @@ const handleChatClick = () => {
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
-        <span className="text-orange-500 font-semibold text-xs uppercase tracking-[0.2em]">
+        <span className="text-orange-400 font-semibold text-xs uppercase tracking-[0.2em]">
           Scroll
         </span>
-
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}

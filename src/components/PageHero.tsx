@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
 interface PageHeroProps {
-  overline: string;
+  overline: {
+    normal: string;
+    highlight: string;
+  };
   title: string;
   titleAccent?: string;
   description: string;
 }
-
 const PageHero = ({ overline, title, titleAccent, description }: PageHeroProps) => {
   return (
     <section className="relative pt-40 pb-20 md:pt-48 md:pb-28 site-container overflow-hidden">
@@ -16,8 +18,11 @@ const PageHero = ({ overline, title, titleAccent, description }: PageHeroProps) 
 
       <div className="relative z-10 max-w-4xl">
         <ScrollReveal>
-          <p className="text-orange-500 font-grotesk text-xs sm:text-sm uppercase tracking-[0.3em] mb-6">
-            {overline}
+       <p className="eyebrow-orange">
+            {overline.normal}{" "}
+            <span className="eyebrow-highlight eyebrow-highlight-orange">
+              {overline.highlight}
+            </span>
           </p>
         </ScrollReveal>
 

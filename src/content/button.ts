@@ -1,7 +1,7 @@
 import { ButtonItem } from "@/types/button";
 
 
-export const heroButtons: ButtonItem[] = [ { label: "contact us", type: "call", phone: "+919753456333", variant: "primary" }, { label: "WhatsApp Us", type: "whatsapp", whatsapp: "919753456333", variant: "secondary", newTab: true } ];
+export const heroButtons: ButtonItem[] = [ { label: "Contact us", type: "call", phone: "+919753456333", variant: "primary" }, { label: "WhatsApp Us", type: "whatsapp", whatsapp: "919753456333", variant: "secondary", newTab: true } ];
 
 export const problemButtons:Record<string, ButtonItem[]> = {
 

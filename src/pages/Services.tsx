@@ -88,7 +88,10 @@ const ServicesPage = () => {
       />
 
       <PageHero
-        overline="Our Services"
+        overline={{
+    normal: "Our",
+    highlight: "Services",
+}}
         title="Services built for"
         titleAccent="exceptional outcomes"
         description="We combine deep expertise in digital marketing with cutting-edge technology to deliver measurable results for ambitious brands."

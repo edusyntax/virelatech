@@ -2,10 +2,13 @@
 import { ProblemData ,HeroData} from "@/types/services";
 
 export const heroData: HeroData = {
-  eyebrow: "Trusted by growing brands",
+  eyebrow: {
+    normal: "Trusted by ",
+    highlight: "growing brands"
+  },
 
-  title: "Websites That Turn Visitors",
-  highlight: "Into Customers",
+ title: "Design That Converts Visitors",
+highlight: "Into Paying Customers",
 
   subtitle:
     "High-performance, SEO-ready websites built around user behavior — designed to convert traffic into real business growth.",
@@ -21,7 +24,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+    image: "/src/assets/services/webdesign.jpg"
   },
   buttons: [
   {
@@ -49,7 +52,10 @@ export const heroData: HeroData = {
 
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+  eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
 title: {
   normal: "Most websites look good but don’t perform —",
@@ -73,9 +79,15 @@ title: {
 import { ServiceData } from "@/types/services";
 
 export const serviceData: ServiceData = {
-  eyebrow: "What You Get",
+  eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "Everything needed to build a high-performing website",
+title: {
+  normal: "Everything needed to build",
+  highlight: "a high-performing website"
+},
 
   subtitle:
     "From strategy to execution, every layer is designed for results.",
@@ -129,9 +141,15 @@ services: [
 import { ApproachData } from "@/types/services";
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
+  eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
 
-  title: "We don’t design pages.\nWe design decisions.",
+  title: {
+  normal: "We don’t design pages.",
+  highlight: "\nWe design decisions"
+},
 
   description:
     "Every section is intentionally crafted to guide users, reduce friction, and drive meaningful action.",
@@ -165,7 +183,10 @@ import { ProcessData } from "@/types/services";
 
 export const processData: ProcessData = {
   title: "Our process",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -195,9 +216,15 @@ export const processData: ProcessData = {
 import { ResultsData } from "@/types/services";
 
 export const resultsData: ResultsData = {
-  eyebrow: "Proven Results",
+ eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "Real impact, not just design",
+ title: {
+  normal: "Real impact,",
+  highlight: "not just design"
+},
 
   highlight: {
     value: "186%",
@@ -207,8 +234,8 @@ export const resultsData: ResultsData = {
   },
 
   metrics: [
-    { value: "1.2s", label: "Load Time" },
-    { value: "42%", label: "Bounce Reduction" }
+    { icon: "down", value: "Load Time", label: "Faster Page Speed (1.2s)" },
+    { icon: "down", value: "Bounce", label: "Lower Bounce Rate (42%)" }
   ],
 
   proofItems: [

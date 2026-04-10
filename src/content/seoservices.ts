@@ -4,7 +4,10 @@ import { HeroData,ProblemData, ServiceData, ApproachData, ProcessData, ResultsDa
 /* ================= HERO ================= */
 
 export const heroData: HeroData = {
-  eyebrow: "SEO Services That Focus On Results",
+ eyebrow: {
+  normal: "SEO Services That Focus On",
+  highlight: "Results"
+},
 
   title: "Getting Traffic Is Easy.",
   highlight: "Getting the Right Traffic Is Not.",
@@ -23,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07"
+    image: "/src/assets/services/seoservices.jpg"
   },
   buttons: [
   {
@@ -52,7 +55,10 @@ export const heroData: HeroData = {
 /* ================= PROBLEM ================= */
 
 export const problemData: ProblemData = {
-  eyebrow: "The Reality",
+    eyebrow: {
+  normal: "The",
+  highlight: "Reality"
+},
 
   title: {
   normal: "Ranking alone doesn’t grow your business —",
@@ -84,9 +90,15 @@ export const problemData: ProblemData = {
 /* ================= SERVICES ================= */
 
 export const serviceData: ServiceData = {
-  eyebrow: "What We Focus On",
+eyebrow: {
+  normal: "what",
+  highlight: "WE Do"
+},
 
-  title: "SEO is not one thing — it’s a system",
+title: {
+  normal: "SEO is not one thing —",
+  highlight: "it’s a system"
+},
 
   subtitle:
     "We work across multiple layers to build sustainable search visibility.",
@@ -139,9 +151,15 @@ export const serviceData: ServiceData = {
 /* ================= APPROACH ================= */
 
 export const approachData: ApproachData = {
-  eyebrow: "Our Approach",
+ eyebrow: {
+  normal: "Our",
+  highlight: "Approach"
+},
 
-  title: "We don’t chase rankings.\nWe build visibility that converts.",
+  title: {
+  normal: "We don’t chase rankings.",
+  highlight: "We build visibility that converts."
+},
 
   description:
     "SEO is approached as a long-term system — not quick hacks or shortcuts.",
@@ -176,7 +194,10 @@ export const approachData: ApproachData = {
 
 export const processData: ProcessData = {
   title: "How results actually build",
-  eyebrow:"Growth Engine",
+  eyebrow: {
+  normal: "Growth",
+  highlight: "Engine"
+},
 
   steps: [
     {
@@ -207,9 +228,15 @@ export const processData: ProcessData = {
 /* ================= RESULTS ================= */
 
 export const resultsData: ResultsData = {
-  eyebrow: "What Makes the Difference",
+eyebrow: {
+  normal: "What",
+  highlight: "You’ll Notice"
+},
 
-  title: "SEO that works for users — not just search engines",
+  title: {
+  normal: "SEO that works for users —",
+  highlight: "not just search engines"
+},
 
   highlight: {
     value: "Long-Term",
@@ -218,9 +245,9 @@ export const resultsData: ResultsData = {
       "When users find value in your content, rankings become more stable and effective."
   },
 
-  metrics: [
-    { value: "↑ Traffic", label: "Better Quality Traffic" },
-    { value: "↑ Leads", label: "Higher Conversions" }
+  metrics:  [
+    { icon: "up", value: "Traffic", label: "Higher Quality Traffic" },
+    { icon: "up", value: "Leads", label: "Higher Conversions" }
   ],
 
   proofItems: [
