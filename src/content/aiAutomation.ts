@@ -2,6 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
+import aiAutomation from "@/assets/services/aiautomation.jpg";
 
 export const heroData: HeroData = {
   eyebrow: {
@@ -26,7 +27,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "/src/assets/services/aiautomation.jpg"
+    image: aiAutomation
   },
   buttons: [
   {

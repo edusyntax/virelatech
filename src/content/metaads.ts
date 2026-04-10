@@ -2,6 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
+import metaAds from "@/assets/services/metadss.jpg";
 
 export const heroData: HeroData = {
   
@@ -27,7 +28,7 @@ eyebrow: {
 
   background: {
     type: "image",
-    image: "/src/assets/services/metadss.jpg"
+    image: metaAds
   },
   buttons: [
   {

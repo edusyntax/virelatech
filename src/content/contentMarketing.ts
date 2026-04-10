@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-
+import contentMarketing from "@/assets/services/contentmarketing.jpg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Content Marketing",
@@ -26,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "/src/assets/services/contentmarketing.jpg"
+    image: contentMarketing
   },
 buttons: [
   {

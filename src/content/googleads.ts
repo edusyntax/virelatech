@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-
+import googleAds from "@/assets/services/googleadsser.jpeg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Google Ads",
@@ -26,7 +26,7 @@ export const heroData: HeroData = {
 
   background: {
     type: "image",
-    image: "/src/assets/services/googleadsser.jpeg"
+    image: googleAds
   },
   buttons: [
   {

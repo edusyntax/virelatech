@@ -1,6 +1,6 @@
 
 import { ProblemData ,HeroData} from "@/types/services";
-
+import webDesign from "@/assets/services/webdesign.jpg";
 export const heroData: HeroData = {
   eyebrow: {
     normal: "Trusted by ",
@@ -24,7 +24,7 @@ highlight: "Into Paying Customers",
 
   background: {
     type: "image",
-    image: "/src/assets/services/webdesign.jpg"
+    image: webDesign
   },
   buttons: [
   {
