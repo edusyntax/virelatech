@@ -2,7 +2,7 @@
 import { HeroData,ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import leadGeneration from "@/assets/services/leadgeneration.jpg"
+import leadGeneration from "@/assets/services/leadg.jpeg"
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Lead Generation",

@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import socialMedia from "@/assets/services/socialm.jpeg";
+import socialMedia from "@/assets/services/smmedia.jpeg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Social Media Marketing",

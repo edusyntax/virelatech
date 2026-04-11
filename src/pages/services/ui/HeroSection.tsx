@@ -38,7 +38,7 @@ export function HeroSection({ data }: Props) {
       <div className="site-container relative z-10">
         <div
           className={`grid grid-cols-1 gap-0 ${
-            hasImage ? "md:grid-cols-2 md:gap-16" : ""
+            hasImage ? "md:grid-cols-2 md:gap-16 md:items-stretch" : ""
           }`}
         >
           {/* LEFT */}
@@ -77,8 +77,8 @@ export function HeroSection({ data }: Props) {
 
           {/* RIGHT */}
           {hasImage && (
-            <div className="order-2 pb-12 md:pt-24 flex items-stretch">
-              <div className="w-full rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:min-h-0 md:flex-1">
+            <div className="order-2 pb-12 md:pt-24 flex items-stretch self-stretch">
+              <div className="w-full rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:h-full">
                 <img
                   src={data.background.image!}
                   alt=""

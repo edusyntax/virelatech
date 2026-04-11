@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import metaAds from "@/assets/services/metadss.jpg";
+import metaAds from "@/assets/services/metaads_1.jpeg";
 
 export const heroData: HeroData = {
   
