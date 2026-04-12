@@ -34,7 +34,7 @@ import MediaLibrary from "./pages/admin/MediaLibrary";
 import Authors from "./pages/admin/Authors";
 import Leads from "./pages/admin/Leads";
 import LeadDetail from "./pages/admin/LeadDetail";
-import HoverFlexSection from "../src/components/ui/Faq"
+import { LeadModalProvider } from "./contexts/LeadModalContext";
 
 import TestimonialsPage from "./pages/TestimonialsPage";
 import EmailMarketing from "./pages/services/Emailmarketing";
@@ -55,6 +55,7 @@ const App = () => (
   <ThemeProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <LeadModalProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -99,6 +100,7 @@ const App = () => (
             </Routes>
           </AuthProvider>
         </BrowserRouter>
+        </LeadModalProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>

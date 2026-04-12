@@ -32,8 +32,7 @@ export const heroData: HeroData = {
   buttons: [
   {
     label: "See Automation Plan",
-    type: "call",
-    phone: "+919753456333",
+  type: "modal" ,
     variant: "primary"
   },
   {

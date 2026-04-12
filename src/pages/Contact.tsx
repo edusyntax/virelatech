@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionTransition from "@/components/SectionTransition";
 import MagneticButton from "@/components/MagneticButton";
 import SEOHead from "@/components/SEOHead";
+import {Mail, MapPin, Phone} from "lucide-react"
 
 const serviceOptions = ["SEO Services", "Performance Marketing", "Social Media Marketing", "Conversion Rate Optimization", "AI Marketing Automation", "Content Marketing", "Full-Service Strategy"];
 
@@ -77,7 +78,7 @@ const ContactPage = () => {
       <PageHero overline={{ normal: "Contact", highlight: "Us" }} title="Let's build something" titleAccent="extraordinary" description="Whether you're looking to scale your marketing, optimize conversions, or build AI-powered systems — we're ready to help." />
 
       <SectionTransition>
-        <section className="py-20 site-container">
+        <section className=" site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <ScrollReveal>
@@ -91,9 +92,9 @@ const ContactPage = () => {
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
                 <div className="space-y-6 mb-10">
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Email</p><p className="text-foreground text-sm">connect@virelatech.com</p></div>
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Phone</p><p className="text-foreground text-sm">+919753456333</p></div>
-                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm">Parsippany, NJ-07054, USA & <br /> Madhapur Hyderabad, India.</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Email</p><p className="text-foreground text-sm"><Mail className="inline-block w-4 h-4 mr-2 text-orange-500" />connect@virelatech.com</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Phone</p><p className="text-foreground text-sm"><Phone className="inline-block w-4 h-4 mr-2 text-orange-500" />+919753456333</p></div>
+                  <div><p className="text-accent font-grotesk text-xs uppercase tracking-[0.3em] mb-2">Office</p><p className="text-foreground text-sm"><MapPin className="inline-block w-4 h-4 mr-2 text-orange-500" /> Madhapur Hyderabad, India. <br /> {" "} <span className="ms-8">Parsippany, NJ-07054, USA</span></p></div>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>

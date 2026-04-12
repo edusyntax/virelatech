@@ -34,7 +34,7 @@ const TestimonialsPage = () => (
       description="Read what our clients say about working with VirelaTech. Real results, real stories from industry leaders who trust our digital marketing expertise."
     />
     <PageHero
-      overline="Testimonials"
+      overline={{ normal: "What our clients say", highlight: "about us" }}
       title="Trusted by brands that demand"
       titleAccent="excellence"
       description="Hear directly from the leaders and teams who've experienced the VirelaTech difference."

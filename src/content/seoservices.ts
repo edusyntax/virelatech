@@ -2,7 +2,7 @@
 import { HeroData,ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import seoServices from "@/assets/services/seo_1.jpeg";
+import seoServices from "@/assets/services/seopage.jpeg";
 export const heroData: HeroData = {
  eyebrow: {
   normal: "SEO Services That Focus On",
@@ -31,8 +31,7 @@ export const heroData: HeroData = {
   buttons: [
   {
     label: "Get SEO Audit",
-    type: "call",
-    phone: "+919753456333",
+    type: "modal" ,
     variant: "primary"
   },
   {

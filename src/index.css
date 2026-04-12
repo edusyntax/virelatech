@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,34 +56,40 @@
     --background-glass: 0 0% 100% / 0.05;
     --background-ambient: 0 0% 0% / 0.2;
 
-    /* --font-sans: 'Inter', system-ui, sans-serif;
---font-serif: 'Playfair Display', Georgia, serif;
---font-grotesk: 'Space Grotesk', system-ui, sans-serif; */
+  
 
-/* --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
---font-serif: 'Libre Baskerville', Georgia, serif;
---font-grotesk: 'Satoshi', system-ui, sans-serif; */
-
-/* Montserrat Playwrite Ireland Poiret One Montserrat Alternates Jura Final Frontier Font */
-/* --font-sans: 'Roboto', system-ui, sans-serif; */
- --font-serif: 'Final Frontier', 'Serpentine', sans-serif;
---font-serif: 'Merriweather', Georgia, serif;
---font-grotesk: 'Space Grotesk', system-ui, sans-serif;
-/* 
---font-sans: 'Inter', system-ui, sans-serif;
---font-serif: 'Playfair Display', Georgia, serif;
---font-grotesk: 'Clash Display', system-ui, sans-serif; */
-
-/* --font-sans: 'Open Sans', system-ui, sans-serif;
---font-serif: 'Lora', Georgia, serif;
---font-grotesk: 'Josefin Sans', system-ui, sans-serif; */
 
     /* Font families */
-    /* --font-sans: 'Satoshi', system-ui, sans-serif;
-    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-grotesk: 'Space Grotesk', system-ui, sans-serif; */
-    --font-display: var(--font-sans);
+    /* --font-sans: 'Inter', system-ui, sans-serif;
+--font-serif: 'DM Serif Display', Georgia, serif;
+--font-grotesk: 'Clash Display', system-ui, sans-serif;
+--font-display: 'Clash Display', system-ui, sans-serif; */
+
+
+/* --font-sans: 'Neue Haas Grotesk', system-ui, sans-serif;
+--font-serif: 'Canela', Georgia, serif;
+--font-grotesk: 'Space Grotesk', system-ui, sans-serif;
+--font-display: 'Canela', Georgia, serif; */
+
+/* --font-sans: 'Inter', system-ui, sans-serif;
+--font-serif: 'Playfair Display', Georgia, serif;
+--font-grotesk: 'Space Grotesk', system-ui, sans-serif;
+--font-display: 'Space Grotesk', system-ui, sans-serif; */
+
+/* --font-sans: 'Inter', system-ui, sans-serif;
+--font-serif: 'DM Serif Display', Georgia, serif;
+--font-grotesk: 'Clash Display', system-ui, sans-serif;
+--font-display: 'Clash Display', system-ui, sans-serif; */
+
+    --font-sans: 'Satoshi', system-ui, sans-serif;
+/* --font-grotesk: 'Bricolage Grotesque', system-ui, sans-serif;
+--font-serif: 'Fraunces', Georgia, serif; */
+
+/* --font-grotesk: 'Plus Jakarta Sans', system-ui, sans-serif;
+--font-serif: 'Fraunces', Georgia, serif; */
+--font-grotesk: 'Bricolage Grotesque', system-ui, sans-serif;
+--font-serif: 'Spectral', Georgia, serif;
+  --font-display: var(--font-serif);
 
     --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 90%;
@@ -94,6 +105,7 @@
   .light {
     --background: 225 14% 95%;
     --foreground: 222 18% 12%;
+    
 
     --card: 220 14% 98%;
     --card-foreground: 222 18% 12%;
@@ -109,6 +121,7 @@
 
     --muted: 220 10% 88%;
     --muted-foreground: 220 8% 42%;
+    
 
     --accent: 217 88% 50%;
     --accent-foreground: 0 0% 100%;
@@ -383,9 +396,14 @@ html {
 }
 
 
+
 /* Reusable header styles for sections */
 .section-title {
-  @apply text-accent font-grotesk text-[18px] font-extrabold uppercase tracking-[0.3em] mb-4;
+  @apply text-accent font-grotesk 
+         text-[13px] md:text-[18px] 
+         font-extrabold uppercase 
+         tracking-[0.15em] md:tracking-[0.3em] 
+         mb-4;
 }
 
 .section-highlight {
@@ -393,10 +411,10 @@ html {
 }
 
 .eyebrow-orange {
-   @apply text-accent font-grotesk text-[18px] font-extrabold uppercase tracking-[0.3em] mb-4;
+  @apply text-accent font-grotesk text-[13px] md:text-[18px] font-extrabold uppercase tracking-[0.15em] md:tracking-[0.3em] mb-4;
 }
 
-/* Highlight overrides gradient clipping for emphasis */
 .eyebrow-highlight {
-  @apply text-white p-1 rounded-sm bg-orange-500; /* or use solid contrast color */
+  @apply text-white p-1 rounded-sm bg-orange-500;
 }
+

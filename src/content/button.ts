@@ -1,15 +1,14 @@
 import { ButtonItem } from "@/types/button";
 
 
-export const heroButtons: ButtonItem[] = [ { label: "Contact us", type: "call", phone: "+919753456333", variant: "primary" }, { label: "WhatsApp Us", type: "whatsapp", whatsapp: "919753456333", variant: "secondary", newTab: true } ];
+export const heroButtons: ButtonItem[] = [ { label: "Contact US",   type: "modal" , variant: "primary" }, { label: "WhatsApp Us", type: "whatsapp", whatsapp: "919753456333", variant: "secondary", newTab: true } ];
 
 export const problemButtons:Record<string, ButtonItem[]> = {
 
   seo: [
     {
       label: "Fix SEO",
-      type: "call",
-      phone: "+919753456333",
+      type: "modal" ,
       variant: "primary"
     },
     {
@@ -24,8 +23,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   googleAds: [
     {
       label: "Fix Ads",
-      type: "call",
-      phone: "+919753456333",
+       type: "modal" ,
       variant: "primary"
     },
     {
@@ -40,8 +38,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   metaAds: [
     {
       label: "Fix Ads",
-      type: "call",
-      phone: "+919753456333",
+        type: "modal" ,
       variant: "primary"
     },
     {
@@ -56,8 +53,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   webDevelopment: [
     {
       label: "Fix Website",
-      type: "call",
-      phone: "+919753456333",
+  type: "modal" ,
       variant: "primary"
     },
     {
@@ -72,8 +68,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   aiAutomation: [
     {
       label: "Automate Work",
-      type: "call",
-      phone: "+919753456333",
+        type: "modal" ,
       variant: "primary"
     },
     {
@@ -88,8 +83,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   contentMarketing: [
     {
       label: "Fix Content",
-      type: "call",
-      phone: "+919753456333",
+       type: "modal" ,
       variant: "primary"
     },
     {
@@ -104,8 +98,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   emailMarketing: [
     {
       label: "Fix Emails",
-      type: "call",
-      phone: "+919753456333",
+       type: "modal" ,
       variant: "primary"
     },
     {
@@ -120,8 +113,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   leadGeneration: [
     {
       label: "Get Leads",
-      type: "call",
-      phone: "+919753456333",
+        type: "modal" ,
       variant: "primary"
     },
     {
@@ -136,8 +128,7 @@ export const problemButtons:Record<string, ButtonItem[]> = {
   socialMedia: [
     {
       label: "Fix Growth",
-      type: "call",
-      phone: "+919753456333",
+        type: "modal" ,
       variant: "primary"
     },
     {

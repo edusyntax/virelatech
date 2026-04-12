@@ -10,7 +10,8 @@ import { ProcessSection } from "@/pages/services/ui/ProcessSection";
 import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { CTASection } from "@/pages/services/ui/CTASection";
-import { ctaData } from "@/content/webDesign";
+import { ctaData ,webDesignSingle} from "@/content/webDesign";
+import ContentSplitSection from "@/pages/services/ui/ContentSection"
 
 
 
@@ -43,7 +44,7 @@ const WebsiteDesign = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
-
+{/* <ContentSplitSection data={webDesignSingle} /> */}
       <FAQSection data={faqData} categories={["Web Development"]} />
 
       <CTASection data={ctaData} />

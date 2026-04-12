@@ -31,8 +31,7 @@ export const heroData: HeroData = {
   buttons: [
   {
     label: "Get Cost Per Lead Estimate",
-    type: "call",
-    phone: "+919753456333",
+    type: "modal" ,
     variant: "primary"
   },
   {

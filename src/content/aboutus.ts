@@ -20,3 +20,36 @@ export const blogctaData: CTAData = {
   primaryCTA: "Start Your Growth System →",
   secondaryCTA: "Start a Conversation"
 };
+
+
+import { ButtonItem } from "@/types/button";
+
+export const aboutHeroButtons: ButtonItem[] = [
+  {
+    label: "Work With Us",
+    type: "whatsapp",
+    whatsapp: "919753456333",
+    variant: "primary",
+  },
+  {
+    label: "See Our Services",
+    type: "link",
+    href: "/services", 
+    variant: "secondary",
+  },
+];
+
+export const aboutClosingButtons: ButtonItem[] = [
+  {
+    label: "Book a Free Strategy Call",
+    type: "whatsapp",
+    whatsapp: "919753456333",
+    variant: "primary",
+  },
+  {
+    label: "Explore Our Services",
+    type: "link",
+    href: "/services",
+    variant: "secondary",
+  },
+];

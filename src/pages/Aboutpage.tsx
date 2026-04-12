@@ -1,13 +1,19 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import ScrollReveal from "../components/ScrollReveal";
-import holographicFluid from "@/assets/aboutus.png";
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import PageLayout from "../components/PageLayout";
 import SEOHead from "../components/SEOHead";
-import PageHero from "../components/PageHero";
+import AboutStory from "./services/ui/AboutStory";
+import { ButtonGroup } from "@/components/ui/ButtonGroup";
+import { aboutHeroButtons,aboutClosingButtons } from "@/content/aboutus";
 
-/* =========================== DATA =========================== */
+const metrics = [
+  { value: "47+", label: "Clients Served" },
+  { value: "3.2x", label: "Avg. Lead Increase" },
+  { value: "91%", label: "Client Retention" },
+  { value: "6mo", label: "Avg. to Page 1 SEO" },
+];
 
 const callouts = [
   {
@@ -39,10 +45,13 @@ const arrowPaths = [
   "M 0,0 C 30,40 90,50 130,20",
 ];
 
+
 const AboutSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const metricsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const metricsInView = useInView(metricsRef, { once: true, margin: "-60px" });
   const isMobile = useIsMobile();
   const autoTriggered = useRef(false);
 
@@ -62,269 +71,125 @@ const AboutSection = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="About VirelaTech"
-        description="Discover VirelaTech's system-driven approach to scaling brands through digital infrastructure."
+        title="About VirelaTech — Digital Marketing Agency in Hyderabad"
+        description="Discover how VirelaTech helps businesses in Hyderabad and the US grow through performance marketing, SEO, and AI automation."
       />
 
-<section className="relative pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-24 md:pb-2 overflow-hidden">
+      {/* ── HERO ── */}
+      <section className="relative pt-32 sm:pt-36 md:pt-36  overflow-hidden">
+        {/* <div className="absolute top-0 right-0 w-[20rem] sm:w-[36rem] h-[20rem] sm:h-[36rem] bg-accent/10 blur-[140px] rounded-full pointer-events-none" /> */}
+        {/* <div className="absolute bottom-0 left-0 w-[18rem] h-[18rem] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none" /> */}
 
-  {/* Background Glow */}
-  <div className="absolute top-0 right-0 w-[20rem] sm:w-[30rem] md:w-[40rem] h-[20rem] sm:h-[30rem] md:h-[40rem] bg-accent/10 blur-[100px] md:blur-[140px] rounded-full" />
+        <div className="site-container relative text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="eyebrow-orange text-[18px] "
+          >
+            About{" "}
+            <span className="eyebrow-highlight ">VirelaTech</span>
+          </motion.p>
 
-  <div className="site-container relative mx-auto text-center px-4 sm:px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="editorial-heading text-[clamp(2.4rem,5vw,4.2rem)] text-foreground mt-4"
+          >
+            We fix marketing that{" "}
+            <span className="font-serif italic text-gradient-accent">
+              doesn't connect
+            </span>
+          </motion.h1>
 
-    {/* EYEBROW (premium gradient — keep this) */}
-    <p className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase 
-      bg-gradient-to-r from-[#FF6A3D] via-orange-500 to-orange-600 
-      bg-clip-text text-transparent mb-4 sm:mb-6 font-bold">
-      About VirelaTech
-    </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed"
+          >
+            Most businesses don't fail because of lack of effort. They fail
+            because their marketing reaches the wrong people with the wrong
+            message. We built Virelatech to fix exactly that — for brands in
+            Hyderabad and the United States.
+          </motion.p>
 
-    {/* HEADING */}
-    <h1 className="editorial-heading font-semibold leading-[1.1] tracking-tight text-[clamp(3rem,6vw,4.4rem)]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 flex justify-center"
+          >
+            <ButtonGroup buttons={aboutHeroButtons} />
 
-  We Build Systems That{" "}
-
-  <span className="font-serif italic text-gradient-accent">
-    Scale Businesses
-  </span>
-
-</h1>
-
-    {/* DESCRIPTION */}
-    <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed">
-      We don’t run campaigns. We engineer structured digital systems that compound 
-      visibility, authority, and revenue over time.
-    </p>
-
-    {/* CTA */}
-    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-10 justify-center items-center">
-
-      {/* Primary (premium solid) */}
-      <button className="w-full sm:w-auto bg-[#FF6A3D] text-white 
-        px-6 py-3 rounded-xl font-medium 
-        shadow-[0_8px_30px_rgba(255,106,61,0.25)]
-        hover:shadow-[0_10px_40px_rgba(255,106,61,0.35)]
-        hover:scale-[1.02]
-        transition-all duration-300 text-sm sm:text-base">
-        Work With Us
-      </button>
-
-      {/* Secondary (glass + accent border) */}
-      <button className="w-full sm:w-auto border border-[#FF6A3D]/60 
-        px-6 py-3 rounded-xl font-medium 
-        hover:bg-[#FF6A3D]/10 
-        hover:border-[#FF6A3D]
-        transition-all duration-300 text-sm sm:text-base">
-        See Our Systems
-      </button>
-
-    </div>
-
-  </div>
-</section>
-
-      <section ref={sectionRef} className="relative py-2 site-container">
-
-        {/* Background Glow */}
-        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="relative max-w-6xl">
-
-          <ScrollReveal>
-            <p className="eyebrow-orange ">
-              About{" "}
-              <span className="eyebrow-highlight eyebrow-highlight-orange">
-                VirelaTech
-              </span>
-            </p>
-          </ScrollReveal>
-
-          <div className="grid lg:grid-cols-12 gap-16 items-center">
-
-            {/* ================= LEFT ================= */}
-            <div className="lg:col-span-6">
-
-              <h2 className="text-[clamp(2.6rem,3.5vw,3.6rem)] leading-[1.1] font-semibold tracking-tight text-foreground max-w-2xl">
-                We don’t build campaigns. We engineer{" "}
-                <span className="text-accent font-serif italic">systems.</span>
-              </h2>
-
-              <p className="text-muted-foreground/80 text-base leading-relaxed max-w-md mt-5">
-                Every engagement becomes a structured digital command center —
-                built to scale authority, narrative, and conversion.
-              </p>
-
-              {/* DESKTOP CALLOUTS */}
-              <div className="hidden md:flex flex-col gap-5 mt-12 relative">
-
-                {callouts.map((c, i) => {
-                  const isActive = activeIndex === i;
-
-                  return (
-                    <div key={c.id} className="relative flex items-start gap-4">
-
-                      <svg
-                        className="hidden lg:block absolute -right-[160px] top-2 w-[150px] h-[60px]"
-                        viewBox="-5 -40 155 100"
-                        fill="none"
-                      >
-                        <motion.path
-                          d={arrowPaths[i]}
-                          stroke="#f97316"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          initial={{ pathLength: 0, opacity: 0 }}
-                          animate={
-                            isActive
-                              ? { pathLength: 1, opacity: 0.9 }
-                              : { pathLength: 0, opacity: 0 }
-                          }
-                          transition={{ duration: 0.8 }}
-                        />
-                         <motion.circle
-                                                cx={i === 0 ? 120 : i === 1 ? 140 : 130}
-                                                cy={i === 0 ? 10 : i === 1 ? 5 : 20}
-                                                r={3}
-                                                fill="#f97316"
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                animate={
-                                                  isActive
-                                                    ? { opacity: 1, scale: 1 }
-                                                    : { opacity: 0, scale: 0 }
-                                                }
-                                                transition={{ duration: 0.3, delay: 0.4 }}
-                                              />
-                      </svg>
-
-                      <motion.button
-                        onMouseEnter={() => !isMobile && setActiveIndex(i)}
-                        onClick={() => handleActivate(i)}
-                        className={`w-full text-left rounded-2xl border px-5 py-4 transition-all duration-300 ${isActive
-                          ? "border-orange-500/40 bg-orange-500/[0.06]"
-                          : "border-white/15 bg-white/[0.02] hover:border-orange-500/40"
-                        }`}
-                      >
-                       <div className="flex items-center gap-3">
-                        <div
-                          className={`w-2 h-2 rounded-full ${isActive ? "bg-orange-500" : "bg-muted-foreground/30"
-                            }`}
-                        />
-                        <span
-                          className={`text-lg font-semibold ${isActive ? "text-accent" : "text-muted-foreground"
-                            }`}
-                        >
-                          {c.label}
-                        </span>
-                      </div>
-
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.p
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              className="text-sm mt-3 ml-5"
-                            >
-                              {c.description}
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-                      </motion.button>
-
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* ✅ PREMIUM MOBILE CALLOUTS */}
-              <div className="md:hidden mt-10 flex flex-col gap-4">
-
-                {callouts.map((c, i) => {
-                  const isActive = activeIndex === i;
-
-                  return (
-                    <motion.button
-                      key={c.id}
-                      onClick={() => handleActivate(i)}
-                      className={`relative w-full text-left rounded-2xl px-5 py-4 overflow-hidden border ${
-                        isActive
-                          ? "border-accent/60 bg-accent/[0.08]"
-                          : "border-white/10 bg-white/[0.03]"
-                      }`}
-                    >
-
-                      <div className={`absolute inset-0 bg-gradient-to-r from-accent/10 to-transparent ${
-                        isActive ? "opacity-100" : "opacity-0"
-                      }`} />
-
-                      <div className="relative flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-
-                          <motion.div
-                            className={`w-2 h-2 rounded-full ${
-                              isActive ? "bg-accent" : "bg-muted-foreground/30"
-                            }`}
-                            animate={isActive ? { scale: [1, 1.4, 1] } : {}}
-                          />
-
-                          <span className={`text-sm ${
-                            isActive ? "text-accent" : "text-muted-foreground"
-                          }`}>
-                            {c.label}
-                          </span>
-                        </div>
-
-                        <motion.span animate={{ rotate: isActive ? 180 : 0 }}>
-                          ▾
-                        </motion.span>
-                      </div>
-
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="text-sm mt-3"
-                          >
-                            {c.description}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
-
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-            </div>
-
-            {/* RIGHT IMAGE */}
-            <div className="lg:col-span-5 lg:col-start-8">
-
-              <div className="relative rounded-3xl overflow-hidden border border-white/10">
-                <div className="relative aspect-[4/5]">
-
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={activeIndex ?? "default"}
-                      src={
-                        activeIndex !== null
-                          ? callouts[activeIndex].image
-                          : holographicFluid
-                      }
-                      className="w-full h-full object-cover"
-                    />
-                  </AnimatePresence>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* ── METRICS STRIP ── */}
+      {/* <div ref={metricsRef} className="site-container mb-20 md:mb-28">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
+          {metrics.map((m, i) => (
+            <motion.div
+              key={m.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={metricsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-card px-6 py-8 md:py-10 flex flex-col gap-1 hover:bg-orange-500/[0.04] transition-colors duration-300"
+            >
+              <span className="editorial-heading text-[clamp(2rem,4vw,3rem)] text-orange-500">
+                {m.value}
+              </span>
+              <span className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider font-medium">
+                {m.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div> */}
+
+      {/* ── INTERACTIVE CALLOUTS + IMAGE ── */}
+     
+
+      {/* ── STORY + SERVICES + TRUST ── */}
+      <AboutStory />
+
+      {/* ── CLOSING CTA ── */}
+      <section className="relative py-8 md:py-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.03] to-transparent pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="site-container relative text-center">
+           <p className="eyebrow-orange justify-center flex">
+              Ready to{" "}
+              <span className="eyebrow-highlight eyebrow-highlight-orange">
+               Grow?
+              </span>
+            </p>
+         
+          <h2 className="editorial-heading text-[clamp(2rem,4vw,3.4rem)] text-foreground mt-4 max-w-2xl mx-auto">
+            Let's build something that{" "}
+            <span className="font-serif italic text-orange-500">
+              actually works
+            </span>
+          </h2>
+
+          <p className="mt-6 text-muted-foreground text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+            No long-term contracts. No vague reports. Just a clear strategy,
+            honest communication, and results you can measure.
+          </p>
+
+          <div className="mt-10 flex justify-center">
+            <ButtonGroup buttons={aboutClosingButtons} />
+          </div>
+
+          <p className="mt-6 text-xs text-muted-foreground/60">
+            Serving businesses in Hyderabad &amp; the United States
+          </p>
+        </div>
+      </section>
+
     </PageLayout>
   );
 };

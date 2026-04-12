@@ -1,5 +1,5 @@
 import { useState, useCallback, lazy, Suspense } from "react";
-import SmoothScroll from "@/components/SmoothScroll";
+
 import BackgroundLayers from "@/components/BackgroundLayers";
 import CustomCursor from "@/components/CustomCursor";
 import Navigation from "@/components/Navigation";
@@ -15,7 +15,6 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollToTop from "@/components/ScrollToTop";
-import PageTransition from "@/components/PageTransition";
 import SectionTransition from "@/components/SectionTransition";
 import SEOHead, { organizationJsonLd } from "@/components/SEOHead";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -34,13 +33,13 @@ const Index = () => {
         jsonLd={organizationJsonLd}
       />
       {!loaded && <LoadingScreen onComplete={handleLoadComplete} />}
-      <SmoothScroll>
+  
         <BackgroundLayers />
         <CustomCursor />
         <ScrollProgress />
         <Navigation />
         <ScrollToTop />
-        <PageTransition>
+   
           <main>
             <HeroSection />
             <SectionTransition><TrustStrip /></SectionTransition>
@@ -55,8 +54,8 @@ const Index = () => {
             <Faq />
             <SectionTransition><Footer /></SectionTransition>
           </main>
-        </PageTransition>
-      </SmoothScroll>
+        
+      
     </>
   );
 };

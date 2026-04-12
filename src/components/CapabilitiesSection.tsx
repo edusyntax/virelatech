@@ -95,9 +95,9 @@ const CapabilitiesSection = () => {
     <section id="services" className="py-6 md:py-4 site-container">
 
     <ScrollReveal>
-        <p className="section-title">
+        <p className="eyebrow-orange">
           What{" "}
-          <span className="section-highlight">
+          <span className="eyebrow-highlight">
             We Do
           </span>
         </p>

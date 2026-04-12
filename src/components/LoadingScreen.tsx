@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { VTLogo } from "@/logo/logo";
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [phase, setPhase] = useState(0);
@@ -49,7 +50,15 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
               >
-                VirelaTech
+                <div className="flex justify-center mb-3">
+  <img
+    src="/vt.png"
+    alt="Virela Tech Logo"
+    className="w-14 md:w-30 h-auto object-contain
+    brightness-125 contrast-125
+    drop-shadow-[0_0_12px_rgba(249,115,22,0.7)]"
+  />
+</div>
               </motion.h1>
             </motion.div>
 

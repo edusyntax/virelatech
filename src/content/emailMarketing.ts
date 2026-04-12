@@ -31,8 +31,7 @@ export const heroData: HeroData = {
   buttons: [
   {
     label: "Build Email Funnel",
-    type: "call",
-    phone: "+919753456333",
+  type: "modal" ,
     variant: "primary"
   },
   {

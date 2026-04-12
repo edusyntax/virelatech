@@ -24,7 +24,7 @@ const FAQSection = ({
   categories,
   title = "Frequently Asked Questions",
 }: Props) => {
-  const [active, setActive] = useState<number | null>(0);
+ const [active, setActive] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -37,14 +37,14 @@ const FAQSection = ({
   }, []);
 
   /* AUTO SCROLL MOBILE */
-  useEffect(() => {
-    if (isMobile && active !== null) {
-      itemRefs.current[active]?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [active, isMobile]);
+  // useEffect(() => {
+  //   if (isMobile && active !== null) {
+  //     itemRefs.current[active]?.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "center",
+  //     });
+  //   }
+  // }, [active, isMobile]);
 
   /* GENERAL */
   const generalFaq = data.find((item) => item.category === "General");

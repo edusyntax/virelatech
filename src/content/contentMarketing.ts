@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import contentMarketing from "@/assets/services/contentmarketing.jpg";
+import contentMarketing from "@/assets/services/cmmarketing.jpeg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Content Marketing",
@@ -31,8 +31,7 @@ export const heroData: HeroData = {
 buttons: [
   {
     label: "Get Content Strategy",
-    type: "call",
-    phone: "+919753456333",
+  type: "modal" ,
     variant: "primary"
   },
   {

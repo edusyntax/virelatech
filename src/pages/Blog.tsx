@@ -294,7 +294,7 @@ const BlogSection = () => {
             VirelaTech Team
           </p>
           <p className="text-xs text-muted-foreground">
-            June 2026
+            april 2026
           </p>
         </div>
       </div>

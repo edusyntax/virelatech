@@ -42,7 +42,7 @@ const items = [
 ];
 
 const HoverFlexSection = () => {
-  const [active, setActive] = useState<number | null>(0);
+const [active, setActive] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -56,14 +56,14 @@ const HoverFlexSection = () => {
   }, []);
 
   // Auto scroll into view on mobile
-  useEffect(() => {
-    if (isMobile && active !== null) {
-      itemRefs.current[active]?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [active, isMobile]);
+  // useEffect(() => {
+  //   if (isMobile && active !== null) {
+  //     itemRefs.current[active]?.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "center",
+  //     });
+  //   }
+  // }, [active, isMobile]);
 
   return (
     <section className="relative py-6 md:py-12 overflow-hidden">

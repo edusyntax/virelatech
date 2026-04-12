@@ -1,4 +1,5 @@
 import { ButtonItem } from "@/types/button";
+import { useLeadModal } from "@/contexts/LeadModalContext";
 
 interface Props {
   buttons: ButtonItem[];
@@ -26,6 +27,8 @@ export function ButtonGroup({
   fullWidth = false
 }: Props) {
 
+  const { openModal } = useLeadModal(); // ✅ global modal
+
   const alignClass = {
     left: "justify-start",
     center: "justify-center",
@@ -42,10 +45,29 @@ export function ButtonGroup({
         const isPrimary = btn.variant === "primary";
 
         const variantStyle = isPrimary
-          ? "bg-accent text-accent-foreground rounded-full text-base font-medium glow px-6  w-full sm:w-auto flex items-center justify-center"
+          ? "bg-accent text-accent-foreground rounded-full text-base font-medium glow px-6 w-full sm:w-auto flex items-center justify-center"
           : btn.variant === "ghost"
           ? "text-primary hover:underline"
           : "glass border border-white/30 rounded-full text-base font-medium px-6 w-full sm:w-auto flex items-center justify-center transition-all duration-300 hover:text-white hover:bg-accent";
+
+        const commonClass = `
+          ${fullWidth ? "w-full sm:w-auto" : "flex-1 sm:flex-none"}
+          ${baseStyle}
+          ${variantStyle}
+        `;
+
+        // ✅ FIX: inside map
+        if (btn.type === "modal") {
+          return (
+            <button
+              key={i}
+           onClick={() => openModal()}
+              className={commonClass}
+            >
+              {btn.label}
+            </button>
+          );
+        }
 
         return (
           <a
@@ -53,11 +75,7 @@ export function ButtonGroup({
             href={getHref(btn)}
             target={btn.newTab ? "_blank" : undefined}
             rel={btn.newTab ? "noopener noreferrer" : undefined}
-            className={`
-              ${fullWidth ? "w-full sm:w-auto " : "flex-1 sm:flex-none"}
-              ${baseStyle}
-              ${variantStyle}
-            `}
+            className={commonClass}
           >
             {btn.label}
           </a>

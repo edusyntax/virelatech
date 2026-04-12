@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import socialMedia from "@/assets/services/smmedia.jpeg";
+import socialMedia from "@/assets/services/vectorimg.jpeg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Social Media Marketing",
@@ -31,8 +31,7 @@ export const heroData: HeroData = {
   buttons: [
   {
     label: "Get Growth Plan",
-    type: "call",
-    phone: "+919753456333",
+    type: "modal" ,
     variant: "primary"
   },
   {

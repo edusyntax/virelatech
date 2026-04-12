@@ -2,14 +2,14 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import metaAds from "@/assets/services/metaads_1.jpeg";
+import metaAds from "@/assets/services/metaadsnow.jpeg";
 
 export const heroData: HeroData = {
   
 
 eyebrow: {
   normal: "Meta Ads Services",
-  highlight: "(Facebook & Instagram)"
+  highlight: "Facebook & Instagram"
 },
   title: "Running Ads Is Easy.",
   highlight: "Getting Results Is Not.",
@@ -33,8 +33,7 @@ eyebrow: {
   buttons: [
   {
     label: "Get Website Conversion Audit",
-    type: "call",
-    phone: "+919753456333",
+    type: "modal" ,
     variant: "primary"
   },
   {
