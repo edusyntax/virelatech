@@ -284,3 +284,94 @@ export const ctaData: CTAData = {
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
 };
+
+
+// data/leadGenContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const leadGenContent: EditorialSectionData = {
+  eyebrow: { normal: "Performance", highlight: "Marketing" },
+  title: "Lead Generation Services That Actually Bring You Business",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Getting traffic is easy. Getting leads that turn into customers? That's where most businesses struggle." },
+        { type: "paragraph", text: "You might already be running ads, posting on social media, or ranking on Google — but if those efforts aren't bringing consistent inquiries, something is missing. That's exactly what we solve." },
+      ],
+    },
+    {
+      heading: "Why Most Lead Generation Doesn't Work",
+      content: [
+        { type: "paragraph", text: "The issue is rarely effort. It's usually the approach." },
+        {
+          type: "list",
+          items: [
+            "Running ads without proper targeting",
+            "Getting leads that are not relevant",
+            "High spending with low returns",
+            "No proper tracking or follow-up system",
+          ],
+        },
+        { type: "highlight", text: "Our performance marketing services are built to fix these exact gaps — by focusing on quality over quantity." },
+      ],
+    },
+    {
+      heading: "What We Do Differently",
+      content: [
+        { type: "paragraph", text: "We don't treat lead generation as a one-step activity. It's a process. We combine the right platforms, messaging, and tracking to create a flow where potential customers can find you, trust you, and reach out." },
+      ],
+    },
+    {
+      number: "01",
+      heading: "Understanding Your Audience",
+      content: [
+        { type: "paragraph", text: "We identify who is most likely to convert — not just who might click. Depending on your business, we use Google Ads, Meta Ads, or other channels where your audience is active." },
+      ],
+    },
+    {
+      number: "02",
+      heading: "Campaign Setup & Optimization",
+      content: [
+        {
+          type: "list",
+          items: [
+            "Ads that feel relevant and natural, not overly salesy",
+            "Landing pages built to convert visitors into leads",
+            "Close performance monitoring and continuous improvement",
+          ],
+        },
+      ],
+    },
+    {
+      number: "03",
+      heading: "What Kind of Results You Can Expect",
+      content: [
+        {
+          type: "list",
+          items: [
+            "More consistent lead flow",
+            "Better quality inquiries",
+            "Improved return on your ad spend",
+            "Clear visibility on what's working",
+          ],
+        },
+        { type: "highlight", text: "You're not guessing anymore — you're scaling what works." },
+      ],
+    },
+    {
+      number: "04",
+      heading: "Who This Is For",
+      content: [
+        {
+          type: "list",
+          items: [
+            "Real estate businesses looking for serious buyers",
+            "Service-based businesses needing consistent inquiries",
+            "Coaching or training institutes looking for enrollments",
+            "Local businesses wanting more calls and visits",
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getLenis } from "./SmoothScroll";
 import { useTheme } from "next-themes";
+import vtlogo from "@/assets/Vtlg.png"
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -51,18 +52,18 @@ const NavLogo = ({ className }: { className?: string }) => {
   if (imgError) {
     return (
      <img
-  src="/vt.png"
+  src={vtlogo}
   alt="VirelaTech"
   onError={() => setImgError(true)}
   className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain 
-  brightness-125 contrast-125 drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+  brightness-125 contrast-125 drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]"
 />
     );
   }
 
   return (
     <img
-      src="/vtg.png"
+      src={vtlogo}
       alt="VirelaTech"
       onError={() => setImgError(true)}
       className={`h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain rounded-md px-1 py-[2px] ${className ?? ""}`}

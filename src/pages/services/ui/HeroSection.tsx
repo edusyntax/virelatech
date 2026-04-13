@@ -84,15 +84,15 @@ export function HeroSection({ data }: Props) {
                 className="w-full h-full object-cover object-center"
                 // Add to the img style object:
 style={{
-  minHeight: "320px",
+  minHeight: "200px",
   maskImage: `
     linear-gradient(to right,  transparent 0%, black 28%, black 80%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 18%, black 72%, transparent 100%)
+    linear-gradient(to bottom, transparent 0%, black 18%, black 55%, transparent 100%)
   `,
   maskComposite: "intersect",
   WebkitMaskImage: `
     linear-gradient(to right,  transparent 0%, black 10%, black 90%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 10%, black 70%, transparent 100%)
+    linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)
   `,
   WebkitMaskComposite: "source-in",
 }}

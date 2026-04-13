@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import aiAutomation from "@/assets/services/aiautomation.jpg";
+import aiAutomation from "@/assets/services/aiauto.jpeg";
 
 export const heroData: HeroData = {
   eyebrow: {
@@ -286,4 +286,106 @@ export const ctaData: CTAData = {
 
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
+};
+
+
+// data/aiAutomationContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const aiAutomationContent: EditorialSectionData = {
+  eyebrow: { normal: "AI", highlight: "Automation" },
+  title: "AI Automation Services That Save Time and Help Your Business Run Smarter",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Most businesses are spending hours every week on tasks that don't actually need a human. Responding to the same questions, following up on leads, updating spreadsheets, sending reminders — it adds up." },
+        { type: "paragraph", text: "At Virelatech, we help businesses use AI automation to handle the repetitive stuff — so you and your team can focus on work that actually moves things forward." },
+      ],
+    },
+    {
+      heading: "Where Businesses Are Losing Time Without Realising It",
+      content: [
+        { type: "paragraph", text: "It's rarely one big problem. It's dozens of small ones that stack up every day." },
+        {
+          type: "list",
+          items: [
+            "Manually replying to the same customer questions repeatedly",
+            "Following up with leads that fall through the cracks",
+            "Data entry and report generation done by hand",
+            "No system to handle inquiries outside business hours",
+            "Disconnected tools that don't talk to each other",
+          ],
+        },
+        { type: "highlight", text: "These aren't just time problems — they're growth problems. Every hour spent on repetitive tasks is an hour not spent on your customers or your business." },
+      ],
+    },
+    {
+      heading: "How We Approach AI Automation",
+      content: [
+        { type: "paragraph", text: "We don't come in with a one-size-fits-all solution. We start by understanding how your business actually works — what your team does daily, where things slow down, and where human effort is being wasted on tasks a system could handle." },
+        { type: "paragraph", text: "Then we build automation around your existing workflow. Not a replacement for your team — a support system that makes them more effective." },
+        { type: "highlight", text: "The goal is simple: less manual work, fewer things falling through the cracks, and a business that keeps moving even when you're not watching." },
+      ],
+    },
+    {
+      heading: "What We Can Actually Automate For You",
+      content: [
+        { type: "paragraph", text: "Every business is different, but here's what we commonly help with:" },
+        {
+          type: "list",
+          items: [
+            "AI chatbots that handle customer queries 24/7",
+            "Automated lead follow-up sequences via WhatsApp, email, or SMS",
+            "CRM updates and pipeline management without manual input",
+            "Appointment booking and reminder systems",
+            "Internal reporting and data summaries generated automatically",
+            "Connecting your existing tools so information flows without manual transfer",
+          ],
+        },
+      ],
+    },
+    {
+      number: "01",
+      heading: "Who This Is For",
+      content: [
+        { type: "paragraph", text: "AI automation makes the most sense if:" },
+        {
+          type: "list",
+          items: [
+            "Your team is spending too much time on repetitive tasks",
+            "Leads are going cold because follow-ups aren't happening fast enough",
+            "You're scaling and can't afford to hire for every new task",
+            "You want your business to respond and operate outside of working hours",
+            "You have multiple tools that aren't connected properly",
+          ],
+        },
+      ],
+    },
+    {
+      number: "02",
+      heading: "What You Can Expect",
+      content: [
+        { type: "paragraph", text: "We won't promise overnight transformation. But with the right automation in place, you'll start noticing:" },
+        {
+          type: "list",
+          items: [
+            "Hours saved every week on manual tasks",
+            "Faster response times for leads and customers",
+            "Fewer things getting missed or delayed",
+            "A cleaner, more organised way of working",
+            "More time for your team to focus on high-value work",
+          ],
+        },
+        { type: "highlight", text: "Automation doesn't replace good people — it removes the tasks that were holding them back." },
+      ],
+    },
+    {
+      number: "03",
+      heading: "Let's Figure Out What Makes Sense For You",
+      content: [
+        { type: "paragraph", text: "Not every business needs the same automation. Some need a simple chatbot. Others need a full lead nurturing system. We'll look at what you're doing right now and suggest what would actually make a difference." },
+        { type: "paragraph", text: "No unnecessary complexity. No pushing tools you don't need. Just a clear look at where automation can genuinely help your business run better." },
+      ],
+    },
+  ],
 };

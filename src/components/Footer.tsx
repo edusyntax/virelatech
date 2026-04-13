@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import ScrollReveal from "./ScrollReveal";
+import fimg from "@/assets/ft_we.jpg"
+import vtlogo from "@/assets/Vtlg.png"
 
 const serviceLinks = [
   { label: "Web Development", href: "/services/website-design" },
@@ -24,10 +26,8 @@ const companyLinks = [
 ];
 
 const socialLinks = [
-  { label: "Twitter / X", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Dribbble", href: "#" },
-  { label: "Instagram", href: "#" },
+  { label: "FaceBook", href: "https://www.facebook.com/VirelaTech" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/virelatech" },
 ];
 
 const Footer = () => {
@@ -61,7 +61,7 @@ const Footer = () => {
         <div
           className="absolute inset-0 -z-10"
           style={{
-            backgroundImage: "url('/src/assets/ft_we.jpg')",
+            backgroundImage: `url(${fimg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -83,9 +83,12 @@ const Footer = () => {
           {/* Column 1 */}
           <ScrollReveal>
             <div>
-              <h3 className="text-orange-500 font-grotesk font-bold text-xl tracking-tight mb-4">
-                VirelaTech
-              </h3>
+              <img
+                src={vtlogo}
+                alt="VirelaTech"
+                className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain mb-5
+  brightness-125 contrast-125 drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+              />
               <p className="text-white dark:text-foreground text-sm leading-relaxed mb-6">
                 Engineering digital authority for visionary brands.
               </p>

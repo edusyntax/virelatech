@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
 // Content (Lead Generation content file)
 import {
@@ -20,7 +21,8 @@ import {
   approachData,
   processData,
   resultsData,
-  ctaData
+  ctaData,
+  leadGenContent
 } from "@/content/leadgeneration";
 
 const LeadGeneration = () => {
@@ -46,6 +48,7 @@ const LeadGeneration = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
+      <EditorialSection data={leadGenContent} />
       <FAQSection data={faqData} categories={["Lead Generation"]} />
       {/* Final CTA */}
       <CTASection data={ctaData} />

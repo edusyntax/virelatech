@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { VTLogo } from "@/logo/logo";
+
+import vtlogo from "@/assets/Vtlg.png"
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [phase, setPhase] = useState(0);
@@ -41,25 +42,13 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
               animate={{ opacity: phase >= 2 ? 1 : 0 }}
               transition={{ duration: 0.5 }}
             >
-              <motion.h1
-                className="font-grotesk text-3xl md:text-5xl font-bold tracking-[0.15em] text-foreground uppercase"
-                initial={{ y: 40, filter: "blur(10px)" }}
-                animate={{
-                  y: phase >= 2 ? 0 : 40,
-                  filter: phase >= 2 ? "blur(0px)" : "blur(10px)",
-                }}
-                transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-              >
-                <div className="flex justify-center mb-3">
-  <img
-    src="/vt.png"
-    alt="Virela Tech Logo"
-    className="w-14 md:w-30 h-auto object-contain
-    brightness-125 contrast-125
-    drop-shadow-[0_0_12px_rgba(249,115,22,0.7)]"
-  />
-</div>
-              </motion.h1>
+                 <img
+  src={vtlogo}
+  alt="VirelaTech"
+  
+  className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain 
+  brightness-125 contrast-125 drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]"
+/>
             </motion.div>
 
             {/* Light streak */}

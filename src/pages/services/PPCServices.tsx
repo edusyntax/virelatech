@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
 // Content (Meta Ads content file)
 import {

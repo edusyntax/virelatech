@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
 // Content (Email Marketing content file)
 import {
@@ -20,7 +21,7 @@ import {
   approachData,
   processData,
   resultsData,
-  ctaData
+  ctaData,emailMarketingContent
 } from "@/content/emailMarketing";
 
 const EmailMarketing = () => {
@@ -46,6 +47,7 @@ const EmailMarketing = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
+      <EditorialSection data={emailMarketingContent} />
       <FAQSection data={faqData} categories={["Email Marketing"]} />  
 
       {/* Final CTA */}

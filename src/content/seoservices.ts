@@ -274,3 +274,94 @@ export const ctaData: CTAData = {
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
 };
+
+
+
+// data/seoContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const seoContent: EditorialSectionData = {
+  eyebrow: { normal: "SEO Services", highlight: "Hyderabad" },
+  title: "SEO Services in Hyderabad That Help Your Business Get Found",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Let's be honest — most business owners don't care about 'SEO.' They care about getting more calls, more leads, and more customers." },
+        { type: "paragraph", text: "You either have a website that no one visits, or you're getting traffic that doesn't convert. That's exactly what we fix." },
+        { type: "paragraph", text: "At Virelatech, we offer SEO services in Hyderabad built around one simple idea — help your business get found by people who are already looking for what you offer." },
+      ],
+    },
+    {
+      heading: "So, What's Actually Going Wrong?",
+      content: [
+        { type: "paragraph", text: "From what we've seen, most businesses face one or more of these:" },
+        {
+          type: "list",
+          items: [
+            "Your website isn't ranking at all",
+            "You're ranking, but for the wrong keywords",
+            "You're getting visitors, but no inquiries",
+            "Your competitors are always ahead of you",
+          ],
+        },
+        { type: "highlight", text: "A lot of SEO work out there is either outdated or too generic. We don't try to game Google — we align your website with what your customers are actually searching for." },
+      ],
+    },
+    {
+      heading: "How We Work (No Complicated Stuff)",
+      content: [
+        { type: "paragraph", text: "We keep things simple — not because SEO is simple, but because clarity matters." },
+        { type: "paragraph", text: "First, we look at your business properly. What do you offer? Who are you trying to reach? What's already working? Then we figure out where the gap is — sometimes it's your content, sometimes it's technical issues, sometimes it's just targeting the wrong keywords." },
+        { type: "paragraph", text: "Once that's clear, we start improving things step by step. Not rushed, not random, but consistent." },
+      ],
+    },
+    {
+      heading: "What We'll Actually Do For You",
+      content: [
+        {
+          type: "list",
+          items: [
+            "Help your website show up when someone searches for your service",
+            "Improve your pages so people don't leave immediately",
+            "Make sure your site works properly on mobile and loads fast",
+            "Create content that sounds natural — not forced",
+            "Build your presence so Google starts trusting your site more",
+          ],
+        },
+      ],
+    },
+    {
+      number: "01",
+      heading: "Who This Works Best For",
+      content: [
+        { type: "paragraph", text: "SEO isn't for everyone, and we're clear about that. But our services work really well if:" },
+        {
+          type: "list",
+          items: [
+            "You want steady, long-term growth",
+            "You're tired of depending only on ads",
+            "You want better quality leads, not just traffic",
+            "You're willing to give it some time to build",
+          ],
+        },
+        { type: "highlight", text: "SEO is not instant — but once it works, it keeps working." },
+      ],
+    },
+    {
+      number: "02",
+      heading: "What You Can Expect",
+      content: [
+        { type: "paragraph", text: "No unrealistic promises. But if things are done right, you'll start noticing:" },
+        {
+          type: "list",
+          items: [
+            "More relevant visitors coming to your site",
+            "Better visibility on Google",
+            "Increased inquiries over time",
+            "More trust from potential customers",
+          ],
+        },
+      ],
+    },
+  ],
+};

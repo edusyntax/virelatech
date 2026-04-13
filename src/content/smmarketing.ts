@@ -284,3 +284,74 @@ export const ctaData: CTAData = {
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
 };
+
+
+// data/socialMediaContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const socialMediaContent: EditorialSectionData = {
+  eyebrow: { normal: "Social Media", highlight: "Hyderabad" },
+  title: "Social Media Services in Hyderabad Built Around Being Effective, Not Just Active",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Posting regularly, getting some likes, maybe a few comments — but no real business coming from it. Sounds familiar?" },
+        { type: "paragraph", text: "That's because most brands focus on being active instead of being effective. At Virelatech, our social media services in Hyderabad are about building trust, visibility, and turning attention into leads." },
+      ],
+    },
+    {
+      heading: "What Most Businesses Are Missing",
+      content: [
+        { type: "paragraph", text: "Social media isn't just about design or captions. If your content isn't connecting with the right audience, nothing else matters." },
+        {
+          type: "list",
+          items: [
+            "Random posts without a clear direction",
+            "Content that looks good but doesn't convert",
+            "No consistency in messaging",
+            "No strategy behind reels, ads, or engagement",
+          ],
+        },
+      ],
+    },
+    {
+      heading: "How We Approach Social Media",
+      content: [
+        { type: "paragraph", text: "First, we understand your brand — what you offer, who you're targeting, and how people should perceive you. Then we build a clear direction:" },
+        {
+          type: "list",
+          items: [
+            "Content that feels natural and relatable",
+            "Posts that actually speak to your audience",
+            "Consistent branding across platforms",
+            "Smart use of reels and trends without forcing it",
+          ],
+        },
+        { type: "highlight", text: "If needed, we combine organic content with paid ads to increase reach — not just content, but the purpose behind content." },
+      ],
+    },
+    {
+      number: "01",
+      heading: "What You Can Expect",
+      content: [
+        {
+          type: "list",
+          items: [
+            "Better engagement from the right audience",
+            "More profile visits and inquiries",
+            "Stronger brand presence over time",
+            "People starting to recognize and trust your business",
+          ],
+        },
+      ],
+    },
+    {
+      number: "02",
+      heading: "Keep It Simple",
+      content: [
+        { type: "paragraph", text: "You don't need to be everywhere. You just need to show up the right way." },
+        { type: "highlight", text: "No hype. No unnecessary complexity. Just clear, practical social media services in Hyderabad that actually connect with people." },
+      ],
+    },
+  ],
+};

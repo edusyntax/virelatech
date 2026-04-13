@@ -1,6 +1,6 @@
 
 import { ProblemData ,HeroData} from "@/types/services";
-import webDesign from "@/assets/services/webdesign.jpg";
+import webDesign from "@/assets/services/webdev.jpeg";
 export const heroData: HeroData = {
 eyebrow: {
   normal: "Web development ",
@@ -265,79 +265,74 @@ export const ctaData: CTAData = {
 
 // data/pages/webDesignPlainAligned.ts
 
-// data/pages/webDesignSingle.ts
+// data/webDevelopmentContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
 
-export const webDesignSingle = {
+export const webDevelopmentContent: EditorialSectionData = {
+   eyebrow: {
+  normal: "web",
+  highlight: "development"
+},
   title: "Web Development Services That Actually Help Your Business Grow",
-
-  content: [
+  blocks: [
     {
-      paragraphs: [
-        "Let’s be real for a moment.",
-        "A website is not just something you have for your business. It either works for you or it just sits there doing nothing.",
-        "A lot of businesses invest in websites that look good but don’t bring any results. No leads, no calls, no real impact.",
-        "That’s where things need to change.",
-        "At Virelatech, we offer web development services built around one goal—creating websites that don’t just look clean, but actually help your business grow.",
+      content: [
+        { type: "paragraph", text: "Let's be real for a moment. A website is not just something you have for your business — it either works for you or it just sits there doing nothing." },
+        { type: "paragraph", text: "At Virelatech, we build websites around one goal: results that actually move your business forward." },
       ],
     },
     {
       heading: "What Most Websites Are Missing",
-      paragraphs: [
-        "From the outside, everything might look fine. But when you go deeper, the issues start showing.",
-        "We often come across websites that take too long to load, don’t work properly on mobile, confuse visitors instead of guiding them, have no clear call-to-action, and get traffic but no conversions.",
-        "These small gaps make a big difference.",
-        "That’s why our web development services focus not just on design, but on how your website actually performs.",
+      content: [
+        { type: "paragraph", text: "From the outside, everything might look fine. But when you go deeper, the issues start showing." },
+        {
+          type: "list",
+          items: [
+            "Takes too long to load on mobile",
+            "Confuses visitors instead of guiding them",
+            "No clear call-to-action anywhere on the page",
+            "Gets traffic but converts no one",
+          ],
+        },
       ],
     },
     {
       heading: "How We Approach Web Development",
-      paragraphs: [
-        "We don’t start with design. We start with understanding.",
-        "What is your business about?",
-        "Who are your customers?",
-        "What action do you want visitors to take?",
-        "Once that’s clear, we build your website around that goal.",
-        "Every section of your website has a purpose—nothing is random, nothing is just for show.",
+      content: [
+        { type: "paragraph", text: "We don't start with design. We start with understanding — what is your business, who are your customers, and what action should visitors take?" },
+        { type: "highlight", text: "Every section of your website has a purpose. Nothing is random, nothing is just for show." },
+        { type: "paragraph", text: "Once that's clear, we build your website around that goal." },
       ],
     },
     {
-      heading: "What We Actually Build For You",
-      paragraphs: [
-        "Instead of using complex terms, here’s what it really means.",
-        "We create websites that are simple and easy to navigate, fast-loading across all devices, mobile-friendly from the start, designed to guide users toward taking action, and built with SEO in mind so people can find you.",
-        "Whether it’s a business website, landing page, or service-based site, everything is focused on clarity and effectiveness.",
-      ],
-    },
-    {
-      heading: "More Than Just Design",
-      paragraphs: [
-        "A good-looking website is great—but if it doesn’t convert, it’s just decoration.",
-        "We focus on how your homepage communicates your value, where your call-to-action is placed, how easily someone can contact you, and whether your content feels natural.",
-        "These details turn a visitor into a lead.",
-      ],
-    },
-    {
+      number: "01",
       heading: "Who This Is For",
-      paragraphs: [
-        "Our web development services are a good fit if you don’t have a website yet, your current site feels outdated or slow, you’re getting traffic but no inquiries, or you want a website that supports your marketing.",
-        "If your website isn’t helping your business grow, it’s time to fix that.",
+      content: [
+        {
+          type: "list",
+          items: [
+            "You don't have a website yet",
+            "Your current site feels outdated or slow",
+            "You're getting traffic but no inquiries",
+            "You want a website that supports your marketing",
+          ],
+        },
       ],
     },
     {
+      number: "02",
       heading: "What You Can Expect",
-      paragraphs: [
-        "We keep expectations clear.",
-        "We won’t promise anything unrealistic—but we will build something that works.",
-        "You’ll get a website that reflects your business properly, improves user experience, provides clear structure, and gives you a strong base for digital marketing.",
-      ],
-    },
-    {
-      heading: "Let’s Build Something That Works",
-      paragraphs: [
-        "If your website isn’t doing its job right now, it’s a missed opportunity.",
-        "We can review what you have, understand what’s not working, and help you build something better.",
-        "No pressure. No unnecessary complexity.",
-        "Just web development services that make sense for your business—and actually help you move forward.",
+      content: [
+        { type: "paragraph", text: "We won't promise anything unrealistic — but we will build something that works." },
+        {
+          type: "list",
+          items: [
+            "Reflects your business properly",
+            "Improves user experience end to end",
+            "Provides clear structure and conversion paths",
+            "Gives you a strong base for digital marketing",
+          ],
+        },
       ],
     },
   ],

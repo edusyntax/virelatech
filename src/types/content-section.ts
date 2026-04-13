@@ -1,11 +1,27 @@
 
-export type PointsBlock = {
-  title: string;
+export type ContentHighlight = {
+  type: "highlight";
+  text: string;
+};
+
+export type ContentList = {
+  type: "list";
   items: string[];
 };
 
-export type ContentSectionProps = {
-  heading: string;
-  intro?: string[];
-  blocks: PointsBlock[];
+export type ContentParagraph = {
+  type: "paragraph";
+  text: string;
+};
+
+export type ContentBlock = {
+  heading?: string;
+  number?: string;        
+  content: (ContentParagraph | ContentList | ContentHighlight)[];
+};
+
+export type EditorialSectionData = {
+  eyebrow: { normal: string; highlight: string; } ;
+  title: string;
+  blocks: ContentBlock[];
 };

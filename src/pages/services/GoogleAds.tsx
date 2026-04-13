@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
 
 // Content (Google Ads content file)
@@ -21,7 +22,8 @@ import {
   approachData,
   processData,
   resultsData,
-  ctaData
+  ctaData,
+  googleAdsContent
 } from "@/content/googleads";
 
 const GoogleAds = () => {
@@ -47,7 +49,7 @@ const GoogleAds = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
-
+<EditorialSection data={googleAdsContent} />
       <FAQSection data={faqData} categories={["Google Ads"]} /> 
 
       {/* Final CTA */}

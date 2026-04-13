@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "./ui/ContentSection";
 
 
 // Content (SEO content file)
@@ -21,7 +22,8 @@ import {
   approachData,
   processData,
   resultsData,
-  ctaData
+  ctaData,
+  seoContent 
 } from "@/content/seoservices";
 
 const SEOService = () => {
@@ -47,7 +49,7 @@ const SEOService = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
-
+       <EditorialSection data={seoContent} /> 
       <FAQSection data={faqData} categories={["SEO"]} />
 
       {/* Final CTA */}

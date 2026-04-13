@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   darkMode: ["class"],
@@ -15,9 +16,13 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        grotesk: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        // sans: ['Inter', 'system-ui', 'sans-serif'],
+        // serif: ['Playfair Display', 'Georgia', 'serif'],
+        // grotesk: ['Space Grotesk', 'system-ui', 'sans-serif'],
+         sans:    ["Geist", ...fontFamily.sans],
+        serif:   ["Instrument Serif", ...fontFamily.serif],
+        grotesk: ["Cabinet Grotesk", ...fontFamily.sans],
+        display: ["Instrument Serif", ...fontFamily.serif],
       },
       transitionDuration: {
         DEFAULT: '400ms',

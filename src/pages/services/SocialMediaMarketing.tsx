@@ -11,6 +11,7 @@ import { ResultsSection } from "@/pages/services/ui/ResultsSection";
 import { CTASection } from "@/pages/services/ui/CTASection";
 import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
+import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
 // Content (Social Media content file)
 import {
@@ -20,7 +21,8 @@ import {
   approachData,
   processData,
   resultsData,
-  ctaData
+  ctaData,
+  socialMediaContent
 } from "@/content/smmarketing";
 
 const SocialMedia = () => {
@@ -46,6 +48,7 @@ const SocialMedia = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
+      <EditorialSection data={socialMediaContent} />
       <FAQSection data={faqData} categories={["Social Media Marketing"]} />
       {/* Final CTA */}
       <CTASection data={ctaData} />

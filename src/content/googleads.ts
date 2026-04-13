@@ -2,7 +2,7 @@
 import {HeroData, ProblemData, ServiceData, ApproachData, ProcessData, ResultsData, CTAData } from "@/types/services";
 
 /* ================= HERO ================= */
-import googleAds from "@/assets/services/googleadsser.jpeg";
+import googleAds from "@/assets/services/gad.jpeg";
 export const heroData: HeroData = {
   eyebrow: {
   normal: "Google Ads",
@@ -284,4 +284,75 @@ export const ctaData: CTAData = {
 
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
+};
+
+
+// data/googleAdsContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const googleAdsContent: EditorialSectionData = {
+  eyebrow: { normal: "Google Ads", highlight: "Hyderabad" },
+  title: "Google Ads Services in Hyderabad That Actually Bring Results",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Running ads sounds easy… until you actually start spending money. A lot of businesses come to us after trying Google Ads themselves or working with someone who promised quick results — and getting clicks with very few actual leads." },
+        { type: "paragraph", text: "At Virelatech, we treat your ad budget like it's our own. Every click should have a purpose. Every campaign should move you closer to getting real customers." },
+      ],
+    },
+    {
+      heading: "Where Most Google Ads Go Wrong",
+      content: [
+        { type: "paragraph", text: "The problem is rarely the platform. Google Ads works — but only when it's set up properly. Common issues we fix:" },
+        {
+          type: "list",
+          items: [
+            "Ads targeting the wrong audience",
+            "Keywords that bring traffic but not leads",
+            "Poor landing pages that don't convert",
+            "Budget getting wasted without clear tracking",
+          ],
+        },
+      ],
+    },
+    {
+      heading: "How We Handle Your Ads",
+      content: [
+        { type: "paragraph", text: "We don't just run campaigns — we build a system around your ads. First, we understand what you actually want: more calls, form submissions, walk-ins, or something else." },
+        {
+          type: "list",
+          items: [
+            "Choosing keywords that match buyer intent",
+            "Writing ads that feel relevant, not generic",
+            "Creating landing page flow that converts",
+            "Setting up tracking so you know what's working",
+          ],
+        },
+        { type: "highlight", text: "Google Ads are not set and forget. Once everything is live, we keep optimizing — focused on performance, not just activity." },
+      ],
+    },
+    {
+      number: "01",
+      heading: "What You'll Notice Over Time",
+      content: [
+        {
+          type: "list",
+          items: [
+            "Better quality leads instead of random clicks",
+            "Lower cost per lead over time",
+            "Clear understanding of where your money goes",
+            "More consistent results month by month",
+          ],
+        },
+      ],
+    },
+    {
+      number: "02",
+      heading: "Let's Be Straight",
+      content: [
+        { type: "paragraph", text: "If your ads aren't bringing results right now, something needs fixing. We can take a look, tell you honestly what's going wrong, and suggest a better way forward." },
+        { type: "highlight", text: "No over-selling. No complicated explanations. Just practical Google Ads services in Hyderabad that actually make sense for your business." },
+      ],
+    },
+  ],
 };

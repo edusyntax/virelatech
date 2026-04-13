@@ -285,3 +285,104 @@ export const ctaData: CTAData = {
   primaryCTA: "Start Project →",
   secondaryCTA: "Talk to Us"
 };
+
+
+// data/emailMarketingContent.ts
+import type { EditorialSectionData } from "@/types/content-section";
+
+export const emailMarketingContent: EditorialSectionData = {
+  eyebrow: { normal: "Email", highlight: "Marketing" },
+  title: "Email Marketing Services That Actually Get Read — and Get Results",
+  blocks: [
+    {
+      content: [
+        { type: "paragraph", text: "Email marketing is one of those things that sounds straightforward until you realise your open rates are low, your clicks are almost nothing, and you're not sure what's actually working." },
+        { type: "paragraph", text: "At Virelatech, we build email marketing systems that don't just send emails — they send the right message to the right person at the right time. That's what turns a list into actual revenue." },
+      ],
+    },
+    {
+      heading: "Why Most Email Marketing Falls Flat",
+      content: [
+        { type: "paragraph", text: "The problem usually isn't the platform or even the product. It's how the emails are built and when they're sent." },
+        {
+          type: "list",
+          items: [
+            "Sending the same email to everyone regardless of where they are in the journey",
+            "Subject lines that don't give people a reason to open",
+            "Emails that feel promotional rather than useful",
+            "No clear next step or call to action",
+            "No follow-up sequence after the first email",
+          ],
+        },
+        { type: "highlight", text: "Most email lists are underused. The people on your list already showed interest — the only question is whether your emails are giving them a reason to act." },
+      ],
+    },
+    {
+      heading: "How We Approach Email Marketing",
+      content: [
+        { type: "paragraph", text: "We start by understanding your audience and where they are in their relationship with your business. A new subscriber needs something different from a lead who's been sitting on your list for three months." },
+        { type: "paragraph", text: "From there, we build sequences and campaigns that feel personal and relevant — not like mass broadcasts." },
+        { type: "highlight", text: "Good email marketing doesn't feel like marketing. It feels like a useful, timely message from someone who understands what you need." },
+      ],
+    },
+    {
+      heading: "What We'll Build For You",
+      content: [
+        { type: "paragraph", text: "Depending on your business and goals, here's what we typically work on:" },
+        {
+          type: "list",
+          items: [
+            "Welcome sequences that onboard new subscribers properly",
+            "Lead nurture flows that move prospects toward a decision",
+            "Re-engagement campaigns for cold or inactive contacts",
+            "Promotional emails that don't feel pushy",
+            "Post-purchase or follow-up emails that build long-term trust",
+            "Segmentation so different audiences get relevant content",
+          ],
+        },
+      ],
+    },
+    {
+      number: "01",
+      heading: "Who This Works Best For",
+      content: [
+        { type: "paragraph", text: "Our email marketing services are a good fit if:" },
+        {
+          type: "list",
+          items: [
+            "You have a list but aren't using it effectively",
+            "Your emails get ignored or have very low open rates",
+            "You want to stay in touch with leads without manually reaching out",
+            "You're launching something and want a proper campaign behind it",
+            "You want a long-term channel that doesn't depend on ad spend",
+          ],
+        },
+      ],
+    },
+    {
+      number: "02",
+      heading: "What You Can Expect",
+      content: [
+        { type: "paragraph", text: "Results from email marketing build over time, but with the right foundation you'll start to see:" },
+        {
+          type: "list",
+          items: [
+            "Higher open and click rates compared to generic blasts",
+            "More consistent inquiries from people already on your list",
+            "Better relationships with leads who aren't ready to buy yet",
+            "A channel that keeps working without ongoing ad spend",
+          ],
+        },
+        { type: "highlight", text: "Your email list is an asset. We help you use it properly — so it actually contributes to your growth instead of just sitting there." },
+      ],
+    },
+    {
+      number: "03",
+      heading: "Let's Make Your Emails Work Harder",
+      content: [
+        { type: "paragraph", text: "If you have a list and it's not bringing you business, something in the approach needs to change. We can look at what you're currently sending, identify what's missing, and build something that actually moves people to act." },
+        { type: "paragraph", text: "No complicated jargon. No unnecessary tools. Just email marketing that makes sense for your business and the people you're trying to reach." },
+      ],
+    },
+  ],
+};
