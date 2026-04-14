@@ -4,6 +4,13 @@ import { toast } from "sonner";
 import ScrollReveal from "./ScrollReveal";
 import fimg from "@/assets/ft_we.jpg"
 import vtlogo from "@/assets/Vtlg.png"
+import {
+  FaFacebook,
+  FaLinkedin,
+  FaInstagram,
+  FaTwitter,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 const serviceLinks = [
   { label: "Web Development", href: "/services/website-design" },
@@ -25,11 +32,39 @@ const companyLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const socialLinks = [
-  { label: "FaceBook", href: "https://www.facebook.com/VirelaTech" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/virelatech" },
-];
 
+export const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/VirelaTech",
+    icon: FaFacebook,
+    color: "text-[#1877F2]",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/virelatech",
+    icon: FaLinkedin,
+    color: "text-[#0A66C2]",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+    icon: FaInstagram,
+    color: "text-[#E4405F]",
+  },
+  {
+    label: "Twitter",
+    href: "https://twitter.com/",
+    icon: FaTwitter,
+    color: "text-[#1DA1F2]",
+  },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/919876543210", 
+    icon: FaWhatsapp,
+    color: "text-[#25D366]",
+  },
+];
 const Footer = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
@@ -151,17 +186,24 @@ const Footer = () => {
                 Connect
               </h4>
 
-              <div className="flex flex-wrap gap-3 mb-6">
-                {socialLinks.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    className="text-white dark:text-foreground text-xs uppercase tracking-widest"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
+       <div className="flex flex-wrap gap-4 mb-6">
+  {socialLinks.map((s) => {
+  const Icon = s.icon;
+
+  return (
+    <a
+      key={s.label}
+      href={s.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2 text-sm"
+    >
+      <Icon size={18} className={s.color} />
+      {s.label}
+    </a>
+  );
+})}
+</div>
 
               <form onSubmit={handleSubmit} className="relative">
                 <input

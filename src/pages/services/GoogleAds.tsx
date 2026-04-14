@@ -43,8 +43,7 @@ const GoogleAds = () => {
       <ProblemSection data={problemData}  service="googleAds"/>
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA (important for ads traffic) */}
-      <CTASection data={ctaData} />
+
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

@@ -9,7 +9,7 @@ import type {
 
 function Paragraph({ item }: { item: ContentParagraph }) {
   return (
-    <p className="text-[0.9375rem] text-muted-foreground leading-[1.8] last:mb-0">
+    <p className="text-[0.9375rem] text-foreground leading-[1.8] last:mb-0">
       {item.text}
     </p>
   );

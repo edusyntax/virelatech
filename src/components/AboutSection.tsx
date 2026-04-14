@@ -5,7 +5,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 import holographicFluid from "@/assets/aboutus.png";
 import aboutM2 from "@/assets/aboutm2.jpg";
-import aboutM1 from "@/assets/aboutm1.jpg";
+import aboutM1 from "@/assets/services/contentm.jpeg";
 
 const callouts = [
   {

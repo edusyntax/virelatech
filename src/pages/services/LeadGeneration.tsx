@@ -42,8 +42,6 @@ const LeadGeneration = () => {
       <ProblemSection data={problemData} service="leadGeneration"/>
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

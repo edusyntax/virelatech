@@ -41,8 +41,7 @@ const MetaAds = () => {
       <ProblemSection data={problemData} service="metaAds" />
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
+
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

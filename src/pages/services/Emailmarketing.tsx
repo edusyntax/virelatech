@@ -41,9 +41,7 @@ const EmailMarketing = () => {
       <ProblemSection data={problemData} service="emailMarketing"/>
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
-
+   
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />

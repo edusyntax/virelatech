@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getLenis } from "./SmoothScroll";
+
 import { useTheme } from "next-themes";
 import vtlogo from "@/assets/Vtlg.png"
 
@@ -94,11 +94,10 @@ const Navigation = () => {
     setMobileServicesOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
-
+useEffect(() => {
+  document.body.style.overflow = menuOpen ? "hidden" : "";
+  return () => { document.body.style.overflow = ""; };
+}, [menuOpen]);
   // Clear timeout on unmount to avoid state updates on unmounted component
   useEffect(() => {
     return () => clearTimeout(dropdownTimeout.current);
@@ -107,16 +106,14 @@ const Navigation = () => {
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
       e.preventDefault();
-      if (href.startsWith("#")) {
-        const el = document.getElementById(href.replace("#", ""));
-        if (!el) return;
-        setMenuOpen(false);
-        const lenis = getLenis();
-        if (lenis) {
-          lenis.scrollTo(el, { offset: -80, duration: 1.6, easing: (t: number) => 1 - Math.pow(1 - t, 4) });
-        } else {
-          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
-        }
+ if (href.startsWith("#")) {
+  const el = document.getElementById(href.replace("#", ""));
+  if (!el) return;
+  setMenuOpen(false);
+  window.scrollTo({ 
+    top: el.getBoundingClientRect().top + window.scrollY - 80, 
+    behavior: "smooth" 
+  })
       } else {
         setMenuOpen(false);
         setDropdownOpen(false);
@@ -313,14 +310,17 @@ const Navigation = () => {
       {/* Mobile fullscreen overlay */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[1000] bg-background/98 backdrop-blur-2xl flex flex-col overflow-y-auto"
-          >
-            <nav className="flex flex-col gap-5 px-6 w-full max-w-sm mx-auto pt-28 pb-10">
+        <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  transition={{ duration: 0.3 }}
+  onAnimationComplete={() => {
+    if (!menuOpen) document.body.style.overflow = "";
+  }}
+  className="fixed inset-0 z-[1001] bg-background/98 backdrop-blur-2xl flex flex-col overflow-hidden"
+>
+            <nav className="flex flex-col gap-5 px-6 w-full max-w-sm mx-auto pt-28 pb-10 overflow-y-auto h-full">
               {NAV_LINKS.map((link, i) => {
                 const active = isActive(link.href);
 

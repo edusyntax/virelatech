@@ -43,8 +43,7 @@ const SEOService = () => {
       <ProblemSection data={problemData} service="seo"/>
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
+    
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

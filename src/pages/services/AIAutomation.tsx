@@ -41,8 +41,7 @@ const AIAutomation = () => {
       <ProblemSection data={problemData} service="aiAutomation"/>
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
+ 
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

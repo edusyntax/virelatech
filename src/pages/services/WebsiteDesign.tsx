@@ -39,7 +39,7 @@ const WebsiteDesign = () => {
       <ProblemSection data={problemData} service="webDevelopment" />
       <ServiceBreakdown data={serviceData} />
 
-     <CTASection data={ctaData} />
+
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

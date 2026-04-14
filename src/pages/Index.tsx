@@ -1,8 +1,10 @@
+// ─── MODIFIED: src/pages/Index.tsx ───────────────────────────────────────────
 import { useState, useCallback, lazy, Suspense } from "react";
 
-import BackgroundLayers from "@/components/BackgroundLayers";
-import CustomCursor from "@/components/CustomCursor";
-import Navigation from "@/components/Navigation";
+// ✅ FIX: Import PageLayout — homepage was bypassing SmoothScroll entirely
+import PageLayout from "@/components/PageLayout";
+import SEOHead, { organizationJsonLd } from "@/components/SEOHead";
+import LoadingScreen from "@/components/LoadingScreen";
 import HeroSection from "@/components/HeroSection";
 import TrustStrip from "@/components/TrustStrip";
 import CapabilitiesSection from "@/components/CapabilitiesSection";
@@ -12,12 +14,9 @@ import HowItWorks from "@/components/HowItWorks";
 import MetricsSection from "@/components/MetricsSection";
 import FullscreenCTA from "@/components/FullscreenCTA";
 import Footer from "@/components/Footer";
-import ScrollProgress from "@/components/ScrollProgress";
-import LoadingScreen from "@/components/LoadingScreen";
-import ScrollToTop from "@/components/ScrollToTop";
 import SectionTransition from "@/components/SectionTransition";
-import SEOHead, { organizationJsonLd } from "@/components/SEOHead";
 import TestimonialsSection from "@/components/TestimonialsSection";
+
 const LazyBlogPage = lazy(() => import("./Blog"));
 
 const Index = () => {
@@ -32,30 +31,26 @@ const Index = () => {
         path="/"
         jsonLd={organizationJsonLd}
       />
+
       {!loaded && <LoadingScreen onComplete={handleLoadComplete} />}
-  
-        <BackgroundLayers />
-        <CustomCursor />
-        <ScrollProgress />
-        <Navigation />
-        <ScrollToTop />
-   
-          <main>
-            <HeroSection />
-            <SectionTransition><TrustStrip /></SectionTransition>
-            <SectionTransition><CapabilitiesSection /></SectionTransition>
-            <SectionTransition><AboutSection /></SectionTransition>
-            <SectionTransition><MetricsSection /></SectionTransition>
-            <SectionTransition><HowItWorks /></SectionTransition>
-            <SectionTransition><TestimonialsSection /></SectionTransition>
-            <Suspense fallback={null}>
-              <LazyBlogPage />
-            </Suspense>
-            <Faq />
-            <SectionTransition><Footer /></SectionTransition>
-          </main>
-        
-      
+
+      {/* ✅ FIX: PageLayout provides SmoothScroll + ScrollReset + Navigation +
+          CustomCursor + ScrollProgress + ScrollToTop — don't duplicate them */}
+      <PageLayout>
+        <HeroSection />
+        <SectionTransition><TrustStrip /></SectionTransition>
+        <SectionTransition><CapabilitiesSection /></SectionTransition>
+        <SectionTransition><AboutSection /></SectionTransition>
+        <SectionTransition><MetricsSection /></SectionTransition>
+        <SectionTransition><HowItWorks /></SectionTransition>
+        <SectionTransition><TestimonialsSection /></SectionTransition>
+        <Suspense fallback={null}>
+          <LazyBlogPage />
+        </Suspense>
+        <Faq />
+        {/* ✅ NOTE: Footer is already rendered by PageLayout inside SectionTransition.
+            Remove it here to avoid a duplicate footer. */}
+      </PageLayout>
     </>
   );
 };

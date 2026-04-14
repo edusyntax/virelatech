@@ -42,8 +42,7 @@ const SocialMedia = () => {
       <ProblemSection data={problemData} service="socialMedia" />
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
+
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

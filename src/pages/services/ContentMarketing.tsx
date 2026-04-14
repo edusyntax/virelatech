@@ -41,8 +41,6 @@ const ContentMarketing = () => {
       <ProblemSection data={problemData} service="contentMarketing" />
       <ServiceBreakdown data={serviceData} />
 
-      {/* Mid CTA */}
-      <CTASection data={ctaData} />
 
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />

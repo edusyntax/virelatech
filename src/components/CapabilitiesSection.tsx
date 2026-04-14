@@ -8,7 +8,7 @@ import ScrollReveal from "./ScrollReveal";
 import web from "@/assets/services/webservices.jpeg";
 import seo from "@/assets/services/seo.jpeg";
 import lead from "@/assets/services/leadgeneration.jpeg";
-import sm from "@/assets/services/sm.jpeg";
+import sm from "@/assets/services/smcard.jpeg";
 import ppc from "@/assets/services/GD.jpeg";
 import email from "@/assets/services/email.jpeg";
 import meta from "@/assets/services/metaads.jpeg";

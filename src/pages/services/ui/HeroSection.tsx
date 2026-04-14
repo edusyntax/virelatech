@@ -23,7 +23,7 @@ export function HeroSection({ data }: Props) {
     data.background.type === "image" && !!data.background.image;
 
   return (
-   <section className="relative overflow-hidden pt-24 md:pt-8 min-h-screen md:min-h-[700px] flex flex-col justify-center">
+    <section className="relative overflow-hidden pt-24 md:pt-8 min-h-[100svh] md:min-h-[700px] flex flex-col justify-center">
 
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
