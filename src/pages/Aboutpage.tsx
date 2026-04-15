@@ -161,7 +161,7 @@ const AboutSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="site-container relative text-center">
-           <p className="eyebrow-orange justify-center flex">
+           <p className="eyebrow-orange ">
               Ready to{" "}
               <span className="eyebrow-highlight eyebrow-highlight-orange">
                Grow?

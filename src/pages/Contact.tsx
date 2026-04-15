@@ -8,7 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionTransition from "@/components/SectionTransition";
 import MagneticButton from "@/components/MagneticButton";
 import SEOHead from "@/components/SEOHead";
-import {Mail, MapPin, Phone} from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
 
 const serviceOptions = ["SEO Services", "Performance Marketing", "Social Media Marketing", "Conversion Rate Optimization", "AI Marketing Automation", "Content Marketing", "Full-Service Strategy"];
 
@@ -33,11 +33,10 @@ const ContactPage = () => {
     const result = await submitLead({
       name: formData.name,
       email: formData.email,
-      company: formData.company,
-      service_interest: formData.service,
-      message: formData.message,
+      service: formData.service,   // ← was service_interest
       source_page: "Contact Page",
       source_label: "Contact Form",
+      // ← drop company and message entirely
     });
     if (!result.success) {
       toast.error(result.error || "Submission failed. Please try again.");
@@ -82,12 +81,12 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <ScrollReveal>
-       <p className="eyebrow-orange">
-             Get in{" "}
-            <span className="eyebrow-highlight eyebrow-highlight-orange">
-              Touch
-            </span>
-          </p>
+                <p className="eyebrow-orange">
+                  Get in{" "}
+                  <span className="eyebrow-highlight eyebrow-highlight-orange">
+                    Touch
+                  </span>
+                </p>
                 <p className="text-muted-foreground text-base leading-relaxed mb-8">We partner with visionary brands to create digital experiences that define categories. Tell us about your project and we'll respond within 24 hours.</p>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
@@ -116,7 +115,17 @@ const ContactPage = () => {
                     </motion.div>
                     <h3 className="text-xl font-medium text-foreground">Message received</h3>
                     <p className="text-muted-foreground text-sm max-w-xs">We'll review your project details and respond within 24 hours.</p>
+                    <button
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({ name: "", email: "", company: "", service: "", message: "" });
+                      }}
+                      className="mt-2 text-accent text-sm font-medium hover:underline"
+                    >
+                      Send another message
+                    </button>
                   </motion.div>
+
                 ) : (
                   <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-4">
                     <div className="relative">{floatingLabel("name", "Name *")}<input className={inputClasses} value={formData.name} onChange={(e) => handleChange("name", e.target.value)} onFocus={() => setFocused("name")} onBlur={() => setFocused(null)} maxLength={100} /></div>
