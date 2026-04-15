@@ -94,15 +94,17 @@ const Navigation = () => {
     setMobileServicesOpen(false);
   }, [location.pathname]);
 
-useEffect(() => {
-  document.body.style.overflow = menuOpen ? "hidden" : "";
-  return () => { document.body.style.overflow = ""; };
-}, [menuOpen]);
+   useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   // Clear timeout on unmount to avoid state updates on unmounted component
   useEffect(() => {
     return () => clearTimeout(dropdownTimeout.current);
   }, []);
 
+  
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
       e.preventDefault();
@@ -206,7 +208,7 @@ useEffect(() => {
                                     key={item.href}
                                     href={item.href}
                                     onClick={(e) => handleNavClick(e, item.href)}
-                                    className="flex flex-col gap-0.5 px-3 py-2.5 rounded-lg hover:bg-accent/10 transition-colors duration-200 group/item"
+                                    className="flex flex-col gap-0.5 px-3 py-1 rounded-lg hover:bg-accent/10 transition-colors duration-200 group/item"
                                     data-hover
                                   >
                                     <span className="text-popover-foreground text-[15px] font-grotesk font-semibold group-hover/item:text-accent transition-colors duration-200">
@@ -315,12 +317,9 @@ useEffect(() => {
   animate={{ opacity: 1 }}
   exit={{ opacity: 0 }}
   transition={{ duration: 0.3 }}
-  onAnimationComplete={() => {
-    if (!menuOpen) document.body.style.overflow = "";
-  }}
-  className="fixed inset-0 z-[1001] bg-background/98 backdrop-blur-2xl flex flex-col overflow-hidden"
+  className="fixed inset-0 z-[1000] bg-background/98 backdrop-blur-2xl flex flex-col overflow-y-auto"
 >
-            <nav className="flex flex-col gap-5 px-6 w-full max-w-sm mx-auto pt-28 pb-10 overflow-y-auto h-full">
+            <nav className="flex flex-col gap-5 px-6 w-full max-w-sm mx-auto pt-28 pb-10 ">
               {NAV_LINKS.map((link, i) => {
                 const active = isActive(link.href);
 
