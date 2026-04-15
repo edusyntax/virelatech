@@ -5,7 +5,7 @@ const CustomCursor = () => {
   const ringPos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
 
-  const [hover, setHover] = useState<"none" | "link" | "cta">("none");
+const [hover, setHover] = useState<"none" | "link" | "cta" | "text">("none");
   const [visible, setVisible] = useState(false);
   const [enabled, setEnabled] = useState(true);
 
@@ -69,12 +69,14 @@ const CustomCursor = () => {
 
       if (el.closest("[data-cursor-cta], .glow")) setHover("cta");
       else if (el.closest("a, button, [data-hover], input, textarea, select")) setHover("link");
+      else if (el.closest("p, span, h1, h2, h3, h4, h5, h6")) setHover("text"); 
+  
     };
 
     const out = (e: MouseEvent) => {
       const el = e.target as HTMLElement;
 
-      if (el.closest("[data-cursor-cta], .glow, a, button, [data-hover], input, textarea, select")) {
+      if (el.closest("[data-cursor-cta], .glow, a, button, [data-hover], input, textarea, select, p, span, h1, h2, h3, h4, h5, h6")) {
         setHover("none");
       }
     };
@@ -91,10 +93,10 @@ const CustomCursor = () => {
   if (!enabled) return null;
 
   // Dynamic sizing
-  const size = hover === "cta" ? 20 : hover === "link" ? 48 : 38;
+  const size = hover === "cta" ? 20 : hover === "link" ? 48 : hover === "text"? 50 : 38;
 
   // Increased brightness levels
-  const opacity = hover === "cta" ? 2.9 : hover === "link" ? 0.45 : 0.28;
+  const opacity = hover === "cta" ? 2.9 : hover === "link" ? 0.45 : hover === "text"? 0.18: 0.28;
 
   return (
     <div
@@ -112,19 +114,37 @@ const CustomCursor = () => {
           height: size,
 
           // 🔶 Orange border (strong)
-          border: `4px solid rgba(255, 106, 91, ${Math.min(opacity * 8, 0.9)})`,
+          border: `3px solid rgba(255, 106, 91, ${Math.min(opacity * 8, 0.9)})`,
 
-          // 🔵 Blue inner glow (layered gradient)
-          background: `radial-gradient(circle,
-            rgba(69,150,246,${opacity * 1.8}) 30%,
-            rgba(59,150,246,0.4) 40%,
-            transparent 75%)`,
+        
+   background:
+  hover === "link" || hover === "text"
+    ? `radial-gradient(circle,
+        rgba(59,130,246,0.25) 15%,
+        rgba(59,130,246,0.12) 40%,
+        transparent 70%)`
+    : `radial-gradient(circle,
+        rgba(69,150,246,${opacity * 1.8}) 10%,
+        rgba(59,150,246,0.4) 50%,
+        transparent 65%)`,
 
-          // ✨ Dual glow (blue + orange)
-          boxShadow: `
-            0 0 5px rgba(59,130,246,0.6),
-            0 0 4px rgba(255,106,61,0.4)
-          `,
+    
+  boxShadow:
+  hover === "cta"
+    ? `
+      0 0 15px rgba(255,106,61,0.8),
+      0 0 30px rgba(255,106,61,0.4)
+    `
+    : hover === "link" || hover === "text"
+    ? `
+      0 0 12px rgba(59,130,246,0.6),
+      0 0 25px rgba(59,130,246,0.25)
+    `
+    : `
+      0 0 5px rgba(59,130,246,0.6),
+      0 0 4px rgba(255,106,61,0.4)
+    `,
+    
 
           transition:
             "width 0.3s ease, height 0.3s ease, border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease",

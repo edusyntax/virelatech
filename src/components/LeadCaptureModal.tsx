@@ -156,15 +156,14 @@ const LeadCaptureModal = ({
     setSubmitted(true);
     toast.success("We'll be in touch within 24 hours!");
     const fullPhone = `${countryCode.code} ${form.phone.trim()}`;
-    submitLead({
-      name: form.name,
-      email: form.email,
-      phone: fullPhone,
-      message: form.service ? `Service Interest: ${form.service}` : "",
-      service_interest: form.service || serviceInterest,
-      source_page: sourcePage,
-      source_label: sourceLabel,
-    }).then((result) => {
+   submitLead({
+  name: form.name,
+  email: form.email,
+  phone: fullPhone,
+  service: form.service || serviceInterest || "Not Selected",
+  source_page: sourcePage,
+  source_label: sourceLabel,
+}).then((result) => {
       if (!result.success) {
         toast.error(result.error || "Submission failed. Please try again.");
       }
