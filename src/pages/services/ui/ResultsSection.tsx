@@ -57,22 +57,22 @@ export function ResultsSection({ data }: { data: ResultsData }) {
 
             {/* SIDE METRICS */}
             <div className="space-y-2">
-              {data.metrics.map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between border-b border-border pb-4 group"
-                >
-                  <p className="text-muted-foreground">{item.label}</p>
+  {data.metrics.map((item, i) => (
+    <div
+      key={i}
+      className="grid grid-cols-[1fr_auto] items-center border-b border-border pb-4 group"
+    >
+      <p className="text-muted-foreground">{item.label}</p>
 
-                  <div className="flex items-center gap-2">
-                    {iconMap[item.icon]}
-                    <span className="text-2xl font-semibold group-hover:text-primary transition">
-                      {item.value}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="flex items-center gap-2 justify-end">
+        {iconMap[item.icon]}
+        <span className="text-xl font-semibold group-hover:text-primary transition-colors  text-right tabular-nums">
+          {item.value}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>
 
           </div>
 

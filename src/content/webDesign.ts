@@ -234,7 +234,7 @@ export const resultsData: ResultsData = {
 
   metrics: [
     { icon: "down", value: "Load Time", label: "Faster Page Speed (1.2s)" },
-    { icon: "down", value: "Bounce", label: "Lower Bounce Rate (42%)" }
+    { icon: "down", value: "Bounce Rate", label: "Lower Bounce Rate (42%)" }
   ],
 
   proofItems: [
