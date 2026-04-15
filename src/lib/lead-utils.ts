@@ -42,23 +42,23 @@
 // }
 
 
+      // "https://script.google.com/macros/s/AKfycbwi9oo88hc7p67AH2DB5HOaZyx9ZbKg7EUnH_Zliy_JuqxGjuGLUWOUE-v2BZ9HX6p5/exechttps://script.google.com/macros/s/AKfycbwi9oo88hc7p67AH2DB5HOaZyx9ZbKg7EUnH_Zliy_JuqxGjuGLUWOUE-v2BZ9HX6p5/exec",
 
 export async function submitLead(data: any) {
   try {
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbwi9oo88hc7p67AH2DB5HOaZyx9ZbKg7EUnH_Zliy_JuqxGjuGLUWOUE-v2BZ9HX6p5/exec",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    );
+    const SCRIPT_URL ="https://script.google.com/macros/s/AKfycbwo7lHIN5lEidVr7U9IZEOHh4mvGTajhP7kdgr1VUfVnGynuG3PnkEksQrC4Ov2Ex8J/exec"
 
-    const result = await response.json();
+    // Encode as form data — required for no-cors mode
+    const formBody = new URLSearchParams(data).toString();
 
-    if (!result.success) {
-      throw new Error(result.error || "Submission failed");
-    }
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors", 
+      body: formBody,
+    });
 
+    // no-cors gives an opaque response — we can't read it,
+    // so optimistically assume success
     return { success: true };
   } catch (error: any) {
     console.error("Lead submission error:", error);

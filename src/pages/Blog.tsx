@@ -220,10 +220,7 @@ const posts: Post[] = [
 const BlogSection = () => {
   return (
     <>
-      <SEOHead
-        title="Blog — Digital Marketing Insights"
-        description="Actionable strategies, industry analysis, and expert perspectives on digital marketing, SEO, AI, and growth from the VirelaTech team."
-      />
+      
       {/* <PageHero overline="Blog" title="Insights for" titleAccent="growth-driven brands" description="Actionable strategies, industry analysis, and expert perspectives on digital marketing, SEO, AI, and growth." />      */}
     <section
       id="blog"
