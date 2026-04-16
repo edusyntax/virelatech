@@ -1,5 +1,6 @@
 import { ButtonItem } from "@/types/button";
 import { useLeadModal } from "@/contexts/LeadModalContext";
+import { Link } from "react-router-dom";
 
 interface Props {
   buttons: ButtonItem[];
@@ -69,6 +70,13 @@ export function ButtonGroup({
           );
         }
 
+    if (btn.type === "link") {
+  return (
+    <Link key={i} to={btn.href || "/"} className={commonClass}>
+      {btn.label}
+    </Link>
+  );
+}
         return (
           <a
             key={i}
