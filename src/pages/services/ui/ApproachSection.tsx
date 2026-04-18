@@ -8,7 +8,7 @@ export function ApproachSection({ data }: { data: ApproachData }) {
 <section className="py-4 relative overflow-hidden">
       {/* AMBIENT */}
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative grid lg:grid-cols-2 gap-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative grid lg:grid-cols-2 gap-20">
 
         {/* LEFT */}
         <div className="space-y-6 lg:sticky lg:top-32 h-fit">
@@ -28,7 +28,7 @@ export function ApproachSection({ data }: { data: ApproachData }) {
           </p>
 
           {/* CTA */}
-           <ButtonGroup buttons={heroButtons} />
+           {/* <ButtonGroup buttons={heroButtons} /> */}
 
         </div>
 

@@ -11,7 +11,7 @@ export function ProblemSection({ data, service }: { data: ProblemData, service: 
       <div className="site-container relative grid lg:grid-cols-2 gap-12 md:gap-16 items-start">
 
         {/* LEFT */}
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-4 md:space-y-6 mb-3">
 
           <p className="eyebrow-orange">
             {data.eyebrow.normal}{" "}
@@ -29,11 +29,11 @@ export function ProblemSection({ data, service }: { data: ProblemData, service: 
             </span>
           </h2>
 
-          {data.subtitle && (
+          {/* {data.subtitle && (
             <p className="text-muted-foreground max-w-md leading-relaxed">
               {data.subtitle}
             </p>
-          )}
+          )} */}
 
         </div>
 
@@ -46,7 +46,7 @@ export function ProblemSection({ data, service }: { data: ProblemData, service: 
           </p>
 
           {/* PROBLEM LIST */}
-          <div className="space-y-3 md:space-y-4">
+          <div className="space-y-3 md:space-y-4 mb-4">
             {data.problems.map((item, i) => (
               <div
                 key={i}
@@ -73,16 +73,16 @@ export function ProblemSection({ data, service }: { data: ProblemData, service: 
           </div>
 
           {/* INSIGHT */}
-          {data.insight && (
+          {/* {data.insight && (
             <p className="text-sm text-muted-foreground leading-relaxed">
               {data.insight}
             </p>
-          )}
+          )} */}
 
           {/* CTA */}
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <ButtonGroup buttons={problemButtons[service]} />
-          </div>
+          </div> */}
 
         </div>
 

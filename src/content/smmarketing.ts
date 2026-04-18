@@ -35,7 +35,7 @@ export const heroData: HeroData = {
     variant: "primary"
   },
   {
-    label: "See Content Strategy",
+    label: "Contact Us",
     type: "whatsapp",
     whatsapp: "919753456333",
     variant: "secondary"

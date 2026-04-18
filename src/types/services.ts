@@ -9,7 +9,7 @@ export interface HeroBackground {
 }
 
 export interface HeroData {
-  eyebrow: { normal: string; highlight: string; } ;
+eyebrow: { normal: string; highlight: string; } ;
   title: string;
   highlight?: string;
   subtitle: string;

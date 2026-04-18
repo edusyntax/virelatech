@@ -24,7 +24,7 @@ const services = [
     description:
       "Stunning, conversion-focused websites that captivate visitors and drive measurable business results.",
     image: web,
-    href: "/services/website-design",
+    href: "/services/website-development-services",
   },
   {
     title: "SEO Services",
@@ -38,28 +38,28 @@ const services = [
     description:
       "ROI-focused paid advertising campaigns across Google and social platforms.",
     image:cm,
-    href: "/services/content-marketing",
+    href: "/services/content-marketing-services",
   },
     {
     title: "Google Ads   ",
     description:
       "ROI-focused paid advertising campaigns across Google and social platforms.",
     image: gi,
-    href: "/services/google-ads",
+    href: "/services/google-ads-services",
   },
   {
     title: "Lead Generation",
     description:
       "High-converting lead generation campaigns that fill your pipeline with qualified prospects.",
     image: lead,
-    href: "/services/lead-generation-campaigns",
+    href: "/services/lead-generation-campaigns-services",
   },
   {
     title: "Social Media Marketing",
     description:
       "Strategic social media management that builds engaged communities.",
     image: sm,
-    href: "/services/social-media-marketing",
+    href: "/services/social-media-marketing-services",
   },
 
   {
@@ -67,7 +67,7 @@ const services = [
     description:
       "ROI-focused paid advertising campaigns across  social platforms.",
     image:metas,
-    href: "/services/meta-ads",
+    href: "/services/meta-ads-services",
   },
 
    {
@@ -75,7 +75,7 @@ const services = [
     description:
       "Custom AI integrations and workflow automation that scale marketing operations.",
     image: ai,
-    href: "/services/ai-automation",
+    href: "/services/ai-automation-services",
   },
   
   {
@@ -83,7 +83,7 @@ const services = [
     description:
       "Custom AI integrations and workflow automation that scale marketing operations.",
     image: email,
-    href: "/services/email-marketing",
+    href: "/services/email-marketing-services",
   },
 ];
 
@@ -128,18 +128,16 @@ const CapabilitiesSection = () => {
           };
 
           return (
-            <motion.div
-              key={svc.title}
-              onClick={() => navigate(svc.href)}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={() => setPos({ x: 0, y: 0 })}
-              className="relative h-[360px] rounded-2xl overflow-hidden cursor-pointer group border border-orange-400"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-            >
+           <motion.div
+  key={svc.title}
+  onMouseMove={handleMouseMove}
+  onMouseLeave={() => setPos({ x: 0, y: 0 })}
+  className="relative h-[360px] rounded-2xl overflow-hidden group border border-orange-400"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ delay: i * 0.08 }}
+  viewport={{ once: true }}
+>
 
               {/* Image with Inner Zoom + Parallax */}
               <motion.img
@@ -182,8 +180,12 @@ const CapabilitiesSection = () => {
 
                   {/* Explore Button */}
                   <button
-                    className="flex items-center gap-2 text-white text-sm font-medium px-4 py-2 rounded-full bg-[#FF6A3D] backdrop-blur-md border border-white/20  hover:border-accent transition"
-                  >
+                    onClick={(e) => {
+    e.stopPropagation(); 
+    navigate(svc.href);
+  }}
+  className="flex items-center gap-2 text-white text-sm font-medium px-4 py-2 rounded-full bg-[#FF6A3D]"
+>
                     Explore
                     <motion.span
                       whileHover={{ x: 4 }}
@@ -202,14 +204,14 @@ const CapabilitiesSection = () => {
                       animate={{ opacity: 1, scale: 1 }}
                     >
                       <a
-                        href="https://wa.me/919999999999"
+                        href="https://wa.me/919753456333"
                         className="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center text-white"
                       >
                         <FaWhatsapp />
                       </a>
 
                       <a
-                        href="tel:+919999999999"
+                        href="tel:+919753456333"
                         className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-white"
                       >
                         <FaPhone />

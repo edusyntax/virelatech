@@ -13,6 +13,7 @@ import FAQSection from "@/components/ui/serviceFaq";
 import { faqData } from "@/content/servicesfaq";
 import { EditorialSection } from "@/pages/services/ui/ContentSection";
 
+
 // Content (Content Marketing content file)
 import {
   heroData,
@@ -25,6 +26,7 @@ import {
 } from "@/content/contentMarketing";
 
 const ContentMarketing = () => {
+
   return (
     <PageLayout>
       <SEOHead

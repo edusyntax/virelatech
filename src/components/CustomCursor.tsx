@@ -2,23 +2,25 @@ import { useEffect, useRef, useState } from "react";
 
 const CustomCursor = () => {
   const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+
   const ringPos = useRef({ x: -100, y: -100 });
+  const dotPos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
 
-const [hover, setHover] = useState<"none" | "link" | "cta" | "text">("none");
   const [visible, setVisible] = useState(false);
   const [enabled, setEnabled] = useState(true);
 
   const raf = useRef(0);
 
-  // Disable on mobile/touch
+  // Disable on mobile
   useEffect(() => {
     if ("ontouchstart" in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768) {
       setEnabled(false);
     }
   }, []);
 
-  // Track mouse movement
+  // Mouse tracking
   useEffect(() => {
     if (!enabled) return;
 
@@ -30,7 +32,7 @@ const [hover, setHover] = useState<"none" | "link" | "cta" | "text">("none");
     const leave = () => setVisible(false);
     const enter = () => setVisible(true);
 
-    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mousemove", move);
     document.addEventListener("mouseleave", leave);
     document.addEventListener("mouseenter", enter);
 
@@ -41,16 +43,25 @@ const [hover, setHover] = useState<"none" | "link" | "cta" | "text">("none");
     };
   }, [enabled, visible]);
 
-  // Smooth follow animation
+  // Animation loop
   useEffect(() => {
     if (!enabled) return;
 
     const loop = () => {
-      ringPos.current.x += (target.current.x - ringPos.current.x) * 0.15;
-      ringPos.current.y += (target.current.y - ringPos.current.y) * 0.15;
+      // 🟠 Large ring (slow)
+      ringPos.current.x += (target.current.x - ringPos.current.x) * 0.12;
+      ringPos.current.y += (target.current.y - ringPos.current.y) * 0.12;
+
+      // ⚪ Small dot (fast)
+      dotPos.current.x += (target.current.x - dotPos.current.x) * 0.35;
+      dotPos.current.y += (target.current.y - dotPos.current.y) * 0.35;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) translate(-50%, -50%)`;
+      }
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${dotPos.current.x}px, ${dotPos.current.y}px) translate(-50%, -50%)`;
       }
 
       raf.current = requestAnimationFrame(loop);
@@ -60,97 +71,39 @@ const [hover, setHover] = useState<"none" | "link" | "cta" | "text">("none");
     return () => cancelAnimationFrame(raf.current);
   }, [enabled]);
 
-  // Hover detection
-  useEffect(() => {
-    if (!enabled) return;
-
-    const over = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-
-      if (el.closest("[data-cursor-cta], .glow")) setHover("cta");
-      else if (el.closest("a, button, [data-hover], input, textarea, select")) setHover("link");
-      else if (el.closest("p, span, h1, h2, h3, h4, h5, h6")) setHover("text"); 
-  
-    };
-
-    const out = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-
-      if (el.closest("[data-cursor-cta], .glow, a, button, [data-hover], input, textarea, select, p, span, h1, h2, h3, h4, h5, h6")) {
-        setHover("none");
-      }
-    };
-
-    window.addEventListener("mouseover", over);
-    window.addEventListener("mouseout", out);
-
-    return () => {
-      window.removeEventListener("mouseover", over);
-      window.removeEventListener("mouseout", out);
-    };
-  }, [enabled]);
-
   if (!enabled) return null;
 
-  // Dynamic sizing
-  const size = hover === "cta" ? 20 : hover === "link" ? 48 : hover === "text"? 50 : 38;
-
-  // Increased brightness levels
-  const opacity = hover === "cta" ? 2.9 : hover === "link" ? 0.45 : hover === "text"? 0.18: 0.28;
-
   return (
-    <div
-      ref={ringRef}
-      className="fixed top-0 left-0 z-[9999] pointer-events-none will-change-transform"
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: "opacity 0.25s ease",
-      }}
-    >
+    <>
+      {/* 🔵 Large transparent ring */}
       <div
-        className="rounded-full "
+        ref={ringRef}
+        className="fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
-          width: size,
-          height: size,
-
-          // 🔶 Orange border (strong)
-          border: `3px solid rgba(255, 106, 91, ${Math.min(opacity * 8, 0.9)})`,
-
-        
-   background:
-  hover === "link" || hover === "text"
-    ? `radial-gradient(circle,
-        rgba(59,130,246,0.25) 15%,
-        rgba(59,130,246,0.12) 40%,
-        transparent 70%)`
-    : `radial-gradient(circle,
-        rgba(69,150,246,${opacity * 1.8}) 10%,
-        rgba(59,150,246,0.4) 50%,
-        transparent 65%)`,
-
-    
-  boxShadow:
-  hover === "cta"
-    ? `
-      0 0 15px rgba(255,106,61,0.8),
-      0 0 30px rgba(255,106,61,0.4)
-    `
-    : hover === "link" || hover === "text"
-    ? `
-      0 0 12px rgba(59,130,246,0.6),
-      0 0 25px rgba(59,130,246,0.25)
-    `
-    : `
-      0 0 5px rgba(59,130,246,0.6),
-      0 0 4px rgba(255,106,61,0.4)
-    `,
-    
-
-          transition:
-            "width 0.3s ease, height 0.3s ease, border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease",
+          width: 40,
+          height: 40,
+          // background:"orange",
+          border: "2.1px solid rgba(255,255,255,0.6)", // subtle white
+          borderRadius: "50%",
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.2s ease",
         }}
       />
-    </div>
+
+      {/* ⚪ Small dot */}
+     <div
+  ref={dotRef}
+  className="fixed top-0 left-0 z-[9999] pointer-events-none"
+  style={{
+    width: 14, // slightly bigger than dot
+    height: 14,
+    border: "1.9px solid rgba(255,255,255,0.8)", // ring instead of fill
+    borderRadius: "50%",
+    opacity: visible ? 1 : 0,
+    transition: "opacity 0.2s ease",
+  }}
+/>
+    </>
   );
 };
 

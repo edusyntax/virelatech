@@ -28,25 +28,15 @@ const FAQSection = ({
   const [isMobile, setIsMobile] = useState(false);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  /* SCREEN DETECT */
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  /* AUTO SCROLL MOBILE */
+  // /* SCREEN DETECT */
   // useEffect(() => {
-  //   if (isMobile && active !== null) {
-  //     itemRefs.current[active]?.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "center",
-  //     });
-  //   }
-  // }, [active, isMobile]);
+  //   const check = () => setIsMobile(window.innerWidth < 768);
+  //   check();
+  //   window.addEventListener("resize", check);
+  //   return () => window.removeEventListener("resize", check);
+  // }, []);
 
-  /* GENERAL */
+
   const generalFaq = data.find((item) => item.category === "General");
 
   /* FILTER */

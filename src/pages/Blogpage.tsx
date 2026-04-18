@@ -66,7 +66,7 @@ const BlogPage = () => {
   <div className="site-container relative mx-auto text-center px-4 sm:px-6">
 
     {/* Overline */}
-    <p className="mt-2 sm:mt-0  font-bold text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-orange-500 mb-4 sm:mb-6">
+    <p className="mt-2 text-accent font-grotesk text-[13px] md:text-[18px] font-extrabold  tracking-[0.3em] sm:tracking-[0.4em] uppercase text-orange-500 mb-4 sm:mb-6">
       Insights
     </p>
 
@@ -90,16 +90,16 @@ const BlogPage = () => {
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-10 justify-center items-center">
 
       {/* Call Button */}
-      <a href="tel:+919753456333" className="w-full sm:w-auto">
+      {/* <a href="tel:+919753456333" className="w-full sm:w-auto">
         <button className="w-full sm:w-auto bg-accent border border-accent text-white 
           px-5 sm:px-6 py-3 rounded-xl font-medium 
           hover:opacity-90 transition text-sm sm:text-base">
           Unlock Your Growth
         </button>
-      </a>
+      </a> */}
 
       {/* WhatsApp Button */}
-      <a
+      {/* <a
         href="https://wa.me/919753456333"
         target="_blank"
         rel="noopener noreferrer"
@@ -110,7 +110,7 @@ const BlogPage = () => {
           hover:bg-accent transition text-sm sm:text-base">
           Create With Us
         </button>
-      </a>
+      </a> */}
 
     </div>
 

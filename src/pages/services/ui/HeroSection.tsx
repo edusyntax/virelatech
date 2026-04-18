@@ -37,12 +37,11 @@ export function HeroSection({ data }: Props) {
       {/* CONTENT */}
       <div className="site-container relative z-10">
         <div
-          className={`grid grid-cols-1 gap-0 ${
-            hasImage ? "md:grid-cols-2 md:gap-0 md:items-stretch" : ""
-          }`}
+          className={`grid grid-cols-1 gap-0 ${hasImage ? "md:grid-cols-2 md:gap-0 md:items-stretch" : ""
+            }`}
         >
           {/* LEFT */}
-        <div className="order-1 pt-8 pb-10 md:pt-24 md:pb-12 md:px-6 md:pr-0">
+          <div className="order-1 pt-8 pb-10 md:pt-24 md:pb-12 md:px-6 md:pr-0">
             <p className="eyebrow-orange">
               {data.eyebrow.normal}{" "}
               <span className="eyebrow-highlight eyebrow-highlight-orange">
@@ -83,19 +82,19 @@ export function HeroSection({ data }: Props) {
                 alt=""
                 className="w-full h-full object-cover object-center"
                 // Add to the img style object:
-style={{
-  minHeight: "200px",
-  maskImage: `
+                style={{
+                  minHeight: "200px",
+                  maskImage: `
     linear-gradient(to right,  transparent 0%, black 28%, black 80%, transparent 100%),
     linear-gradient(to bottom, transparent 0%, black 18%, black 55%, transparent 100%)
   `,
-  maskComposite: "intersect",
-  WebkitMaskImage: `
+                  maskComposite: "intersect",
+                  WebkitMaskImage: `
     linear-gradient(to right,  transparent 0%, black 10%, black 90%, transparent 100%),
     linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)
   `,
-  WebkitMaskComposite: "source-in",
-}}
+                  WebkitMaskComposite: "source-in",
+                }}
               />
             </div>
           )}

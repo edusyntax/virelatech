@@ -21,6 +21,7 @@ const navItems = [
 
 const AdminLayout = () => {
   const { user, role, loading, signOut } = useAuth();
+
   const queryClient = useQueryClient();
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();

@@ -7,22 +7,22 @@ import vtlogo from "@/assets/Vtlg.png"
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Services", href: "/services", hasDropdown: true },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const SERVICE_ITEMS = [
-  { label: "Web Development", description: "Stunning, conversion-focused websites", href: "/services/website-design" },
+  { label: "Web Development", description: "Stunning, conversion-focused websites", href: "/services/website-development-services" },
   { label: "SEO Services", description: "Organic search dominance", href: "/services/seo-services" },
-  { label: "Google Ads", description: "High-converting lead campaigns", href: "/services/google-ads" },
-  { label: "Lead Generation", description: "High-converting lead campaigns", href: "/services/lead-generation-campaigns" },
-  { label: "Social Media Marketing", description: "Community & brand growth", href: "/services/social-media-marketing" },
-  { label: "Content Marketing", description: "Engaging content that ranks and converts", href: "/services/content-marketing" },
-  { label: "Email Marketing", description: "Nurture leads and drive repeat business", href: "/services/email-marketing" },
-  { label: "Meta Ads", description: "Facebook and Instagram advertising", href: "/services/meta-ads" },
-  { label: "AI Automation", description: "Intelligent marketing systems", href: "/services/ai-automation" },
+  { label: "Google Ads", description: "High-converting lead campaigns", href: "/services/google-ads-services" },
+  { label: "Lead Generation", description: "High-converting lead campaigns", href: "/services/lead-generation-campaigns-services" },
+  { label: "Social Media Marketing", description: "Community & brand growth", href: "/services/social-media-marketing-services" },
+  { label: "Content Marketing", description: "Engaging content that ranks and converts", href: "/services/content-marketing-services" },
+  { label: "Email Marketing", description: "Nurture leads and drive repeat business", href: "/services/email-marketing-services" },
+  { label: "Meta Ads", description: "Facebook and Instagram advertising", href: "/services/meta-ads-services" },
+  { label: "AI Automation", description: "Intelligent marketing systems", href: "/services/ai-automation-services" },
 ];
 
 const SunIcon = () => (

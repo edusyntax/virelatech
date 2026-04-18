@@ -28,9 +28,9 @@ export function ProcessSection({ data }: { data: ProcessData }) {
           </div>
 
           {/* CTA */}
-          <div className="pt-2 md:pt-0">
+          {/* <div className="pt-2 md:pt-0">
             <ButtonGroup buttons={heroButtons} />
-          </div>
+          </div> */}
 
         </div>
 

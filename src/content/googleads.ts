@@ -35,7 +35,7 @@ export const heroData: HeroData = {
     variant: "primary"
   },
   {
-    label: "See Campaign Plan",
+    label: "Contact Us",
     type: "whatsapp",
     whatsapp: "919753456333",
     variant: "secondary"
@@ -249,7 +249,7 @@ eyebrow: {
 },
 
   highlight: {
-    value: "3X",
+    value: "Accelerated",
     label: "Better lead quality",
     description:
       "By focusing on intent and optimization, campaigns become predictable and scalable."
@@ -296,21 +296,21 @@ export const googleAdsContent: EditorialSectionData = {
   blocks: [
     {
       content: [
-        { type: "paragraph", text: "Running ads sounds easy… until you actually start spending money. A lot of businesses come to us after trying Google Ads themselves or working with someone who promised quick results — and getting clicks with very few actual leads." },
-        { type: "paragraph", text: "At Virelatech, we treat your ad budget like it's our own. Every click should have a purpose. Every campaign should move you closer to getting real customers." },
+        { type: "paragraph", text: "Running ads is easy — getting leads is not. Many businesses spend on clicks but see very few actual results." },
+        { type: "paragraph", text: "We treat your ad budget with intent — every click should move you closer to real customers." },
       ],
     },
     {
-      heading: "Where Most Google Ads Go Wrong",
+      heading: "Where Google Ads Go Wrong",
       content: [
-        { type: "paragraph", text: "The problem is rarely the platform. Google Ads works — but only when it's set up properly. Common issues we fix:" },
+        { type: "paragraph", text: "Google Ads works — but only when set up correctly. Most issues come from:" },
         {
           type: "list",
           items: [
-            "Ads targeting the wrong audience",
-            "Keywords that bring traffic but not leads",
-            "Poor landing pages that don't convert",
-            "Budget getting wasted without clear tracking",
+            "Wrong audience targeting",
+            "Low-intent keywords",
+            "Weak landing pages",
+            "No proper tracking",
           ],
         },
       ],
@@ -318,40 +318,40 @@ export const googleAdsContent: EditorialSectionData = {
     {
       heading: "How We Handle Your Ads",
       content: [
-        { type: "paragraph", text: "We don't just run campaigns — we build a system around your ads. First, we understand what you actually want: more calls, form submissions, walk-ins, or something else." },
+        { type: "paragraph", text: "We build campaigns around clear goals — calls, leads, or conversions." },
         {
           type: "list",
           items: [
-            "Choosing keywords that match buyer intent",
-            "Writing ads that feel relevant, not generic",
-            "Creating landing page flow that converts",
-            "Setting up tracking so you know what's working",
+            "Intent-based keyword selection",
+            "Clear, relevant ad copy",
+            "Conversion-focused landing flow",
+            "Accurate tracking setup",
           ],
         },
-        { type: "highlight", text: "Google Ads are not set and forget. Once everything is live, we keep optimizing — focused on performance, not just activity." },
+        { type: "highlight", text: "We continuously optimize for performance — not just activity." },
       ],
     },
     {
       number: "01",
-      heading: "What You'll Notice Over Time",
+      heading: "What You'll Notice",
       content: [
         {
           type: "list",
           items: [
-            "Better quality leads instead of random clicks",
-            "Lower cost per lead over time",
-            "Clear understanding of where your money goes",
-            "More consistent results month by month",
+            "Better quality leads",
+            "Lower cost per lead",
+            "Clear performance visibility",
+            "More consistent results",
           ],
         },
       ],
     },
     {
       number: "02",
-      heading: "Let's Be Straight",
+      heading: "Straight Talk",
       content: [
-        { type: "paragraph", text: "If your ads aren't bringing results right now, something needs fixing. We can take a look, tell you honestly what's going wrong, and suggest a better way forward." },
-        { type: "highlight", text: "No over-selling. No complicated explanations. Just practical Google Ads services in Hyderabad that actually make sense for your business." },
+        { type: "paragraph", text: "If your ads aren’t working, something is off. We identify the gaps and show you what needs fixing." },
+        { type: "highlight", text: "No fluff. Just practical Google Ads strategies that drive real results." },
       ],
     },
   ],

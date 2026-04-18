@@ -81,8 +81,8 @@ export function ButtonGroup({
           <a
             key={i}
             href={getHref(btn)}
-            target={btn.newTab ? "_blank" : undefined}
-            rel={btn.newTab ? "noopener noreferrer" : undefined}
+           target={btn.type === "whatsapp" || btn.newTab ? "_blank" : undefined}
+            rel={btn.type === "whatsapp" || btn.newTab ? "noopener noreferrer" : undefined}
             className={commonClass}
           >
             {btn.label}

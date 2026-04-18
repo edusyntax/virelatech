@@ -33,7 +33,7 @@ highlight: "Into Paying Customers",
     variant: "primary"
   },
   {
-    label: "View Our Work",
+    label: "Contact Us",
      type: "whatsapp",
     whatsapp: "919753456333",
     variant: "secondary"

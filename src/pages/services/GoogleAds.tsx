@@ -1,6 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
-
+import { useEffect } from "react";
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
 import { ProblemSection } from "@/pages/services/ui/ProblemSection";
@@ -27,6 +27,13 @@ import {
 } from "@/content/googleads";
 
 const GoogleAds = () => {
+ useEffect(() => {
+  const timer = setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, 50); // slight delay ensures content is mounted
+
+  return () => clearTimeout(timer);
+}, []);
   return (
     <PageLayout>
       <SEOHead
@@ -40,7 +47,7 @@ const GoogleAds = () => {
 
       {/* FLOW: Conversion-focused narrative */}
       <HeroSection data={heroData} />
-      <ProblemSection data={problemData}  service="googleAds"/>
+      <ProblemSection data={problemData} service="googleAds" />
       <ServiceBreakdown data={serviceData} />
 
 
@@ -48,8 +55,8 @@ const GoogleAds = () => {
       <ApproachSection data={approachData} />
       <ProcessSection data={processData} />
       <ResultsSection data={resultsData} />
-<EditorialSection data={googleAdsContent} />
-      <FAQSection data={faqData} categories={["Google Ads"]} /> 
+      <EditorialSection data={googleAdsContent} />
+      <FAQSection data={faqData} categories={["Google Ads"]} />
 
       {/* Final CTA */}
       <CTASection data={ctaData} />

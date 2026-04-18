@@ -101,18 +101,18 @@ const UrgencyCTA = ({
 
             {/* ORANGE URGENCY */}
             <motion.p
-              className="text-[#FF6A3D] font-grotesk text-xs uppercase tracking-[0.3em] mb-6 flex items-center justify-center gap-2"
+              className="text-[#FF6A3D] font-grotesk font-bold text-sm uppercase tracking-[0.3em] mb-6 flex items-center justify-center gap-2"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A3D] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full font-bold bg-[#FF6A3D] animate-pulse" />
               {urgencyNote}
             </motion.p>
 
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <h2 className="editorial-heading text-[clamp(2rem,5vw,4.5rem)] text-foreground mb-6 leading-[1.05]">
+            <h2 className="editorial-heading  text-[clamp(2rem,5vw,4.5rem)] text-foreground mb-6 leading-[1.05]">
               {headline}{" "}
               <span className="font-serif italic text-gradient-accent">{headlineAccent}</span>
             </h2>
@@ -135,7 +135,7 @@ const UrgencyCTA = ({
               </MagneticButton>
 
               <MagneticButton
-                className="glass rounded-full hover:bg-orange-500  text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center"
+                className=" glass rounded-full text-base font-medium px-8 h-[54px] w-full sm:w-auto flex items-center justify-center transition-all duration-300 hover:text-white hover:bg-accent"
                 onClick={handleChatClick}
               >
                 Chat with us

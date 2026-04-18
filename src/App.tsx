@@ -64,15 +64,15 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/about" element={<Aboutus />} />
-              <Route path="/services/website-design" element={<WebsiteDesign />} />
+              <Route path="/services/website-development-services" element={<WebsiteDesign />} />
               <Route path="/services/seo-services" element={<SEOServices />} />
-              <Route path="/services/google-ads" element={<GoogleAds />} />
-              <Route path="/services/lead-generation-campaigns" element={<LeadGeneration />} />
-              <Route path="/services/social-media-marketing" element={<SocialMediaMarketing />} />
-              <Route path="/services/meta-ads" element={<PPCServices />} />
-              <Route path="/services/content-marketing" element={<ContentMarketing />} />
-              <Route path="/services/email-marketing" element={<EmailMarketing />} />
-              <Route path="/services/ai-automation" element={<AIAutomation />} />
+              <Route path="/services/google-ads-services" element={<GoogleAds />} />
+              <Route path="/services/lead-generation-campaigns-services" element={<LeadGeneration />} />
+              <Route path="/services/social-media-marketing-services" element={<SocialMediaMarketing />} />
+              <Route path="/services/meta-ads-services" element={<PPCServices />} />
+              <Route path="/services/content-marketing-services" element={<ContentMarketing />} />
+              <Route path="/services/email-marketing-services" element={<EmailMarketing />} />
+              <Route path="/services/ai-automation-services" element={<AIAutomation />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
               <Route path="/blog" element={<BlogPage/>} />
               <Route path="/blog/:slug" element={<BlogArticle />} />

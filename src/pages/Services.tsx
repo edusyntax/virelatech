@@ -13,7 +13,7 @@ const services = [
     micro: "Design & development",
     description: "Stunning, conversion-focused websites that captivate visitors and drive measurable business results.",
     tags: ["Custom Design", "Responsive", "Performance"],
-    slug: "/services/website-design",
+    slug: "/services/website-development-services",
   },
   {
     title: "SEO Services",
@@ -27,49 +27,49 @@ const services = [
     micro: "Paid search",
     description: "High-converting Google Ads campaigns designed to generate qualified leads and maximize ROI.",
     tags: ["Search Ads", "Display", "Conversion Tracking"],
-    slug: "/services/google-ads",
+    slug: "/services/google-ads-services",
   },
   {
     title: "Meta Ads",
     micro: "Social advertising",
     description: "Facebook and Instagram ad campaigns that scale reach, engagement, and conversions.",
     tags: ["Facebook Ads", "Instagram Ads", "Retargeting"],
-    slug: "/services/meta-ads",
+    slug: "/services/meta-ads-services",
   },
   {
     title: "Lead Generation",
     micro: "Pipeline growth",
     description: "End-to-end lead generation systems that consistently bring in high-quality prospects.",
     tags: ["Funnels", "CRM", "Automation"],
-    slug: "/services/lead-generation-campaigns",
+    slug: "/services/lead-generation-campaigns-services",
   },
   {
     title: "Social Media Marketing",
     micro: "Brand growth",
     description: "Strategic social media management that builds authority, engagement, and loyal communities.",
     tags: ["Content", "Strategy", "Community"],
-    slug: "/services/social-media-marketing",
+    slug: "/services/social-media-marketing-services",
   },
   {
     title: "Content Marketing",
     micro: "Content & authority",
     description: "Engaging, SEO-optimized content that ranks on Google and converts visitors into customers.",
     tags: ["Blogs", "SEO Content", "Copywriting"],
-    slug: "/services/content-marketing",
+    slug: "/services/content-marketing-services",
   },
   {
     title: "Email Marketing",
     micro: "Retention & nurture",
     description: "Automated email campaigns that nurture leads, increase retention, and boost lifetime value.",
     tags: ["Automation", "Sequences", "CRM"],
-    slug: "/services/email-marketing",
+    slug: "/services/email-marketing-services",
   },
   {
     title: "AI Automation",
     micro: "Intelligent systems",
     description: "AI-powered workflows and automation systems that scale your marketing operations efficiently.",
     tags: ["AI Workflows", "Chatbots", "Automation"],
-    slug: "/services/ai-automation",
+    slug: "/services/ai-automation-services",
   },
 ];
 
@@ -111,7 +111,7 @@ const ServicesPage = () => {
                     relative overflow-hidden cursor-pointer 
                     transition-all duration-300 
                     hover:bg-white/[0.08] hover:-translate-y-1 
-                    hover:shadow-[0_10px_40px_rgba(255,106,61,0.15)]"
+                    "
                     onClick={() => navigate(svc.slug)}
                   >
 

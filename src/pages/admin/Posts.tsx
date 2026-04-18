@@ -25,7 +25,7 @@ const Posts = () => {
     queryFn: async () => {
       let query = supabase
         .from("posts")
-        .select("id, title, slug, status, created_at, published_at, view_count, reading_time_minutes, author_id, profiles!posts_author_id_fkey(display_name)")
+        .select("id, title, slug, status, created_at, published_at, view_count, reading_time_minutes, author_id, profiles(display_name)")
         .order("created_at", { ascending: false });
 
       if (statusFilter !== "all") {
@@ -34,7 +34,11 @@ const Posts = () => {
       if (search) {
         query = query.ilike("title", `%${search}%`);
       }
-      const { data } = await query;
+      const { data ,error} = await query;
+      if (error) {
+  console.error("POSTS ERROR:", error);
+  throw error;
+}
       return data ?? [];
     },
   });
@@ -110,7 +114,7 @@ const Posts = () => {
       </div>
 
       {/* Bulk actions */}
-      {selectedIds.length > 0 && role === "admin" && (
+     {selectedIds.length > 0 && ["admin", "superadmin"].includes(role)&& (
         <div className="flex items-center gap-3 bg-muted/30 rounded-lg px-4 py-2">
           <span className="text-sm text-muted-foreground">{selectedIds.length} selected</span>
           <AlertDialog>

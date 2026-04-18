@@ -8,28 +8,29 @@ import {
   FaFacebook,
   FaLinkedin,
   FaInstagram,
-  FaTwitter,
+
   FaWhatsapp,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const serviceLinks = [
-  { label: "Web Development", href: "/services/website-design" },
+  { label: "Web Development", href: "/services/website-development-services" },
   { label: "SEO Services", href: "/services/seo-services" },
-  { label: "Google Ads", href: "/services/google-ads" },
-  { label: "Lead Generation", href: "/services/lead-generation-campaigns" },
-  { label: "Social Media Marketing", href: "/services/social-media-marketing" },
-  { label: "Content Marketing", href: "/services/content-marketing" },
-  { label: "Email Marketing", href: "/services/email-marketing" },
-  { label: "Meta Ads", href: "/services/meta-ads" },
-  { label: "AI Automation", href: "/services/ai-automation" },
+  { label: "Google Ads", href: "/services/google-ads-services" },
+  { label: "Lead Generation", href: "/services/lead-generation-campaigns-services" },
+  { label: "Social Media Marketing", href: "/services/social-media-marketing-services" },
+  { label: "Content Marketing", href: "/services/content-marketing-services" },
+  { label: "Email Marketing", href: "/services/email-marketing-services" },
+  { label: "Meta Ads", href: "/services/meta-ads-services" },
+  { label: "AI Automation", href: "/services/ai-automation-services" },
 ];
 
 const companyLinks = [
   { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Testimonials", href: "/testimonials" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 
@@ -53,14 +54,14 @@ export const socialLinks = [
     color: "text-[#E4405F]",
   },
   {
-    label: "Twitter",
+    label: "",
     href: "https://twitter.com/",
-    icon: FaTwitter,
+    icon: FaXTwitter,
     color: "text-[#1DA1F2]",
   },
   {
     label: "WhatsApp",
-    href: "https://wa.me/919876543210", 
+    href: "https://wa.me/+919753456333", 
     icon: FaWhatsapp,
     color: "text-[#25D366]",
   },

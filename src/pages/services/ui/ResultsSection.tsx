@@ -16,7 +16,7 @@ export function ResultsSection({ data }: { data: ResultsData }) {
         {/* AMBIENT */}
         <div className="absolute inset-0 opacity-30 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-2 md:px-4 lg:px-6 relative space-y-16">
+        <div className="max-w-7xl mx-auto px-2 md:px-4 lg:px-2 relative space-y-16">
 
           {/* HEADER */}
           <div className="max-w-2xl">
@@ -64,12 +64,15 @@ export function ResultsSection({ data }: { data: ResultsData }) {
     >
       <p className="text-muted-foreground">{item.label}</p>
 
-      <div className="flex items-center gap-2 justify-end">
-        {iconMap[item.icon]}
-        <span className="text-xl font-semibold group-hover:text-primary transition-colors  text-right tabular-nums">
-          {item.value}
-        </span>
-      </div>
+      <div className="flex items-center justify-end gap-2 whitespace-nowrap">
+  <span className="shrink-0">
+    {iconMap[item.icon]}
+  </span>
+
+  <span className="text-xl font-semibold text-right tabular-nums group-hover:text-primary transition-colors">
+    {item.value}
+  </span>
+</div>
     </div>
   ))}
 </div>

@@ -138,8 +138,14 @@ const LeadCaptureModal = ({
     setForm((p) => ({ ...p, [field]: value }));
 
   const handlePhoneChange = (value: string) => {
-    const cleaned = value.replace(/[^\d\s-]/g, "");
-    setForm((p) => ({ ...p, phone: cleaned }));
+    const digitsOnly = value.replace(/\D/g, "");
+
+    // 🇮🇳 Strict 10 digits
+    if (countryCode.code === "+91") {
+      setForm((p) => ({ ...p, phone: digitsOnly.slice(0, 10) }));
+    } else {
+      setForm((p) => ({ ...p, phone: digitsOnly }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -149,21 +155,28 @@ const LeadCaptureModal = ({
       return;
     }
     const phoneDigits = form.phone.replace(/\D/g, "");
-    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-      toast.error("Please enter a valid mobile number (7-15 digits).");
-      return;
+    if (countryCode.code === "+91") {
+      if (phoneDigits.length !== 10) {
+        toast.error("Please enter a valid 10-digit Indian mobile number.");
+        return;
+      }
+    } else {
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        toast.error("Please enter a valid mobile number (7-15 digits).");
+        return;
+      }
     }
     setSubmitted(true);
     toast.success("We'll be in touch within 24 hours!");
     const fullPhone = `${countryCode.code} ${form.phone.trim()}`;
-   submitLead({
-  name: form.name,
-  email: form.email,
-  phone: fullPhone,
-  service: form.service || serviceInterest || "Not Selected",
-  source_page: sourcePage,
-  source_label: sourceLabel,
-}).then((result) => {
+    submitLead({
+      name: form.name,
+      email: form.email,
+      phone: fullPhone,
+      service: form.service || serviceInterest || "Not Selected",
+      source_page: sourcePage,
+      source_label: sourceLabel,
+    }).then((result) => {
       if (!result.success) {
         toast.error(result.error || "Submission failed. Please try again.");
       }
@@ -322,12 +335,11 @@ const LeadCaptureModal = ({
                                         setCountryCode(cc);
                                         setShowCodes(false);
                                       }}
-                                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent/10 transition-colors ${
-                                        countryCode.code === cc.code &&
-                                        countryCode.country === cc.country
+                                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent/10 transition-colors ${countryCode.code === cc.code &&
+                                          countryCode.country === cc.country
                                           ? "bg-accent/5 text-accent"
                                           : "text-foreground"
-                                      }`}
+                                        }`}
                                     >
                                       <span className="text-base">{cc.flag}</span>
                                       <span className="text-xs text-muted-foreground">{cc.country}</span>
@@ -344,7 +356,7 @@ const LeadCaptureModal = ({
                             placeholder="Mobile number *"
                             value={form.phone}
                             onChange={(e) => handlePhoneChange(e.target.value)}
-                            maxLength={15}
+                            maxLength={countryCode.code === "+91" ? 10 : 15}
                           />
                         </div>
 
@@ -356,11 +368,10 @@ const LeadCaptureModal = ({
                               setShowServices((prev) => !prev);
                               setShowCodes(false);
                             }}
-                            className={`w-full flex items-center justify-between bg-foreground/[0.04] border rounded-lg px-4 py-3 text-sm transition-all duration-300 hover:border-accent/50 ${
-                              form.service ? "text-foreground" : "text-muted-foreground/50"
-                            } ${showServices ? "border-accent/50" : "border-foreground/[0.1]"}`}
+                            className={`w-full flex items-center justify-between bg-foreground/[0.04] border rounded-lg px-4 py-3 text-sm transition-all duration-300 hover:border-accent/50 ${form.service ? "text-foreground" : "text-muted-foreground/50"
+                              } ${showServices ? "border-accent/50" : "border-foreground/[0.1]"}`}
                           >
-                            <span>{form.service || "Select a service (optional)"}</span>
+                            <span>{form.service || "Select a service "}</span>
                             <motion.div
                               animate={{ rotate: showServices ? 180 : 0 }}
                               transition={{ duration: 0.2 }}
@@ -372,9 +383,8 @@ const LeadCaptureModal = ({
 
                         <MagneticButton
                           type="submit"
-                          className={`w-full bg-accent text-accent-foreground py-3.5 rounded-xl text-sm font-medium glow mt-1 ${
-                            submitting ? "opacity-70 pointer-events-none" : ""
-                          }`}
+                          className={`w-full bg-accent text-accent-foreground py-3.5 rounded-xl text-sm font-medium glow mt-1 ${submitting ? "opacity-70 pointer-events-none" : ""
+                            }`}
                         >
                           {submitting ? "Sending..." : "Get Started"}
                         </MagneticButton>
@@ -432,11 +442,10 @@ const LeadCaptureModal = ({
                   key={service}
                   type="button"
                   onClick={() => handleSelectService(service)}
-                  className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
-                    form.service === service
+                  className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${form.service === service
                       ? "bg-accent/10 text-accent"
                       : "text-foreground hover:bg-accent/10"
-                  }`}
+                    }`}
                 >
                   <span>{service}</span>
                   {form.service === service && (
