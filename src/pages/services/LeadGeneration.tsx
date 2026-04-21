@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -29,12 +30,7 @@ const LeadGeneration = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Lead Generation Services | Generate High-Quality Leads Consistently"
-        description="Build a predictable pipeline with lead generation systems designed to attract, capture, and convert high-quality prospects."
-        jsonLd={serviceJsonLd(
-          "Lead Generation Services",
-          "Multi-channel lead generation systems designed to attract, nurture, and convert qualified prospects into customers."
-        )}
+       {...seoConfig.leadGeneration}
       />
 
       {/* FLOW: Conversion-focused narrative */}

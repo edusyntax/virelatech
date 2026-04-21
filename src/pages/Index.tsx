@@ -3,7 +3,8 @@ import { useState, useCallback, lazy, Suspense } from "react";
 
 // ✅ FIX: Import PageLayout — homepage was bypassing SmoothScroll entirely
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { organizationJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 import LoadingScreen from "@/components/LoadingScreen";
 import HeroSection from "@/components/HeroSection";
 import TrustStrip from "@/components/TrustStrip";
@@ -12,10 +13,9 @@ import AboutSection from "@/components/AboutSection";
 import Faq from "@/components/ui/Faq";
 import HowItWorks from "@/components/HowItWorks";
 import MetricsSection from "@/components/MetricsSection";
-import FullscreenCTA from "@/components/FullscreenCTA";
-import Footer from "@/components/Footer";
 import SectionTransition from "@/components/SectionTransition";
 import TestimonialsSection from "@/components/TestimonialsSection";
+
 
 const LazyBlogPage = lazy(() => import("./Blog"));
 
@@ -25,12 +25,7 @@ const Index = () => {
 
   return (
     <>
-      <SEOHead
-        title="Digital Marketing Agency"
-        description="VirelaTech is an elite digital marketing agency engineering brand authority through performance marketing, SEO, AI automation, and data-driven growth strategies."
-        path="/"
-        jsonLd={organizationJsonLd}
-      />
+     <SEOHead {...seoConfig.home} />
 
       {!loaded && <LoadingScreen onComplete={handleLoadComplete} />}
 

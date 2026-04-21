@@ -1,49 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion,  useInView } from "framer-motion";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import PageLayout from "../components/PageLayout";
-import SEOHead from "../components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 import AboutStory from "./services/ui/AboutStory";
 import { ButtonGroup } from "@/components/ui/ButtonGroup";
 import { aboutHeroButtons,aboutClosingButtons } from "@/content/aboutus";
 
-const metrics = [
-  { value: "47+", label: "Clients Served" },
-  { value: "3.2x", label: "Avg. Lead Increase" },
-  { value: "91%", label: "Client Retention" },
-  { value: "6mo", label: "Avg. to Page 1 SEO" },
-];
 
-const callouts = [
-  {
-    id: "leverage",
-    label: "Digital Leverage",
-    description:
-      "We engineer compounding digital systems — not campaigns. Every asset we create multiplies in value over time.",
-    image: "/src/assets/aboutus.png",
-  },
-  {
-    id: "architecture",
-    label: "Brand Architecture",
-    description:
-      "Strategic positioning that turns attention into authority. We don't decorate — we construct perception.",
-    image: "/src/assets/aboutm2.jpg",
-  },
-  {
-    id: "dominance",
-    label: "Market Dominance",
-    description:
-      "Every engagement is designed as a scalable command center — built to capture, convert, and control your category.",
-    image: "/src/assets/aboutm1.jpg",
-  },
-];
-
-const arrowPaths = [
-  "M 0,0 C 40,-30 80,-20 120,10",
-  "M 0,0 C 50,20 100,30 140,5",
-  "M 0,0 C 30,40 90,50 130,20",
-];
 
 
 const AboutSection = () => {
@@ -70,10 +36,7 @@ const AboutSection = () => {
 
   return (
     <PageLayout>
-      <SEOHead
-        title="About VirelaTech — Digital Marketing Agency in Hyderabad"
-        description="Discover how VirelaTech helps businesses in Hyderabad and the US grow through performance marketing, SEO, and AI automation."
-      />
+     <SEOHead {...seoConfig.about} />
 
       {/* ── HERO ── */}
       <section className="relative pt-32 sm:pt-36 md:pt-36  overflow-hidden">

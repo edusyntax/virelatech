@@ -138,7 +138,7 @@ const HeroSection = () => {
           <p className="text-white text-lg md:text-xl max-w-xl mt-6 leading-relaxed">
             We help startups and brands grow using
             <span className="block mt-1">
-              <span className="bg-orange-600 px-1 py-0.5 rounded-sm font-semibold text-white whitespace-nowrap">
+              <span className="bg-orange-500 px-1 py-0.5 rounded-sm font-semibold text-white whitespace-nowrap">
                 {typedText}
                 <span className="ml-1 inline-block w-[2px] h-5 bg-white align-text-bottom animate-pulse" />
               </span>

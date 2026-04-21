@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -30,12 +31,7 @@ const ContentMarketing = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Content Marketing Services | Drive Traffic, Authority & Conversions"
-        description="Strategic content marketing that attracts the right audience, builds authority, and improves conversions."
-        jsonLd={serviceJsonLd(
-          "Content Marketing Services",
-          "Content strategies designed to drive organic traffic, build authority, and improve business conversions."
-        )}
+        {...seoConfig.contentMarketing}
       />
 
       {/* FLOW: Intent + authority narrative */}

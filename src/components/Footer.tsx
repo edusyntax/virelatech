@@ -8,7 +8,7 @@ import {
   FaFacebook,
   FaLinkedin,
   FaInstagram,
-
+  FaPinterest ,
   FaWhatsapp,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -49,13 +49,13 @@ export const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/virelatech/",
     icon: FaInstagram,
     color: "text-[#E4405F]",
   },
   {
     label: "",
-    href: "https://twitter.com/",
+    href: "https://x.com/VirelaTech",
     icon: FaXTwitter,
     color: "text-[#1DA1F2]",
   },
@@ -64,6 +64,12 @@ export const socialLinks = [
     href: "https://wa.me/+919753456333", 
     icon: FaWhatsapp,
     color: "text-[#25D366]",
+  },
+  {
+    label: "Pinterest",
+    href: "https://in.pinterest.com/virelat/", 
+    icon: FaPinterest ,
+    color: "text-[#E60023]",
   },
 ];
 const Footer = () => {

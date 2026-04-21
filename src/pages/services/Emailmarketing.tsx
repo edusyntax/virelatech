@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -28,12 +29,7 @@ const EmailMarketing = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Email Marketing Services | Engage, Nurture & Convert Customers"
-        description="Email marketing systems designed to improve engagement, nurture leads, and drive consistent conversions through relevant communication."
-        jsonLd={serviceJsonLd(
-          "Email Marketing Services",
-          "Strategic email marketing campaigns and automation designed to engage audiences, nurture leads, and improve conversions."
-        )}
+       {...seoConfig.emailMarketing}
       />
 
       {/* FLOW: Relationship + conversion narrative */}

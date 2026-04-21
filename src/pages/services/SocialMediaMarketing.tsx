@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -29,12 +30,7 @@ const SocialMedia = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Social Media Marketing Services | Build Engagement & Brand Growth"
-        description="Strategic social media marketing that builds brand presence, improves engagement, and drives real business results."
-        jsonLd={serviceJsonLd(
-          "Social Media Marketing Services",
-          "Social media strategies designed to build brand presence, engage audiences, and drive measurable growth."
-        )}
+       {...seoConfig.socialMedia}
       />
 
       {/* FLOW: Brand + engagement narrative */}

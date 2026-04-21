@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -30,12 +31,7 @@ const SEOService = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="SEO Services in Hyderabad | Drive Organic Traffic & Leads"
-        description="Get high-quality organic traffic with SEO strategies focused on intent, visibility, and long-term growth."
-        jsonLd={serviceJsonLd(
-          "SEO Services",
-          "Search engine optimization services designed to improve visibility, attract the right audience, and generate consistent leads."
-        )}
+      {...seoConfig.seo}
       />
 
       {/* FLOW: Trust-driven narrative */}

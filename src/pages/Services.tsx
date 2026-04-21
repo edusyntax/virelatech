@@ -5,7 +5,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionTransition from "@/components/SectionTransition";
 import TiltCard from "@/components/TiltCard";
 import UrgencyCTA from "@/components/UrgencyCTA";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 const services = [
   {
@@ -79,12 +80,7 @@ const ServicesPage = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Digital Marketing Services"
-        description="Explore our full suite of digital marketing services including website design, SEO, lead generation, social media, PPC, and AI automation."
-        jsonLd={serviceJsonLd(
-          "Digital Marketing Services",
-          "Full-service digital marketing agency offering website design, SEO, lead generation, social media, PPC, and AI automation."
-        )}
+       {...seoConfig.services}
       />
 
       <PageHero

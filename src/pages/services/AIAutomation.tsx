@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -27,14 +28,7 @@ import {
 const AIAutomation = () => {
   return (
     <PageLayout>
-      <SEOHead
-        title="AI Automation Services | Automate Workflows & Scale Faster"
-        description="Streamline your business with AI automation. Automate repetitive tasks, improve efficiency, and build scalable systems."
-        jsonLd={serviceJsonLd(
-          "AI Automation Services",
-          "AI-powered automation systems designed to streamline workflows, reduce manual work, and improve efficiency."
-        )}
-      />
+      <SEOHead {...seoConfig.aiAutomation}/>
 
       {/* FLOW: System-focused narrative */}
       <HeroSection data={heroData} />

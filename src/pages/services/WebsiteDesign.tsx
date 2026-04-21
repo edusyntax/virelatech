@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -26,12 +27,7 @@ const WebsiteDesign = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Premium Website Design Services | High-Converting Websites"
-        description="Conversion-focused website design services. Fast, scalable, SEO-optimized websites that turn visitors into customers."
-        jsonLd={serviceJsonLd(
-          "Website Design",
-          "High-performance custom website design built for conversion, speed, and scalability."
-        )}
+       {...seoConfig.websiteDevelopment}
       />
 
       {/* FLOW: clean linear narrative */}

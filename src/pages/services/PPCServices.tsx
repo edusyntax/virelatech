@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -28,12 +29,7 @@ const MetaAds = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Meta Ads Services | Facebook & Instagram Ads for Lead Generation"
-        description="Run high-performing Meta Ads campaigns on Facebook and Instagram. Target the right audience, improve conversions, and scale results."
-        jsonLd={serviceJsonLd(
-          "Meta Ads Services",
-          "Facebook and Instagram advertising campaigns designed to generate leads, improve conversions, and scale business growth."
-        )}
+        {...seoConfig.metaAds}
       />
 
       {/* FLOW: Performance + creative narrative */}

@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionTransition from "@/components/SectionTransition";
 import MagneticButton from "@/components/MagneticButton";
 import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 import { Mail, MapPin, Phone } from "lucide-react"
 
 const serviceOptions = ["SEO Services", "Performance Marketing", "Social Media Marketing", "Conversion Rate Optimization", "AI Marketing Automation", "Content Marketing", "Full-Service Strategy"];
@@ -59,20 +60,7 @@ const ContactPage = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Contact Us"
-        description="Get in touch with VirelaTech. Book a free strategy consultation and discover how we can accelerate your digital growth."
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          name: "Contact VirelaTech",
-          description: "Get in touch for a free strategy consultation.",
-          mainEntity: {
-            "@type": "Organization",
-            name: "VirelaTech",
-            email: "connect@virelatech.com ",
-            telephone: "+919753456333",
-          },
-        }}
+       {...seoConfig.contact}
       />
       <PageHero overline={{ normal: "Contact", highlight: "Us" }} title="Let's build something" titleAccent="extraordinary" description="Whether you're looking to scale your marketing, optimize conversions, or build AI-powered systems — we're ready to help." />
 
@@ -130,7 +118,7 @@ const ContactPage = () => {
                   <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-4">
                     <div className="relative">{floatingLabel("name", "Name *")}<input className={inputClasses} value={formData.name} onChange={(e) => handleChange("name", e.target.value)} onFocus={() => setFocused("name")} onBlur={() => setFocused(null)} maxLength={100} /></div>
                     <div className="relative">{floatingLabel("email", "Email *")}<input type="email" className={inputClasses} value={formData.email} onChange={(e) => handleChange("email", e.target.value)} onFocus={() => setFocused("email")} onBlur={() => setFocused(null)} maxLength={255} /></div>
-                    <div className="relative">{floatingLabel("company", "Company")}<input className={inputClasses} value={formData.company} onChange={(e) => handleChange("company", e.target.value)} onFocus={() => setFocused("company")} onBlur={() => setFocused(null)} maxLength={100} /></div>
+                    <div className="relative">{floatingLabel("company", "Company")}<input className={inputClasses} value={formData.company} onChange={(e) => handleChange("company", e.target.value)} onFocus={() => setFocused("company optional")} onBlur={() => setFocused(null)} maxLength={100} /></div>
                     <div>
                       <p className="text-[10px] text-muted-foreground/60 uppercase tracking-wider mb-2 ml-1">Service Interest</p>
                       <div className="flex flex-wrap gap-2">

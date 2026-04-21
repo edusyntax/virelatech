@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
-import SEOHead, { serviceJsonLd } from "@/components/SEOHead";
+import SEOHead from "@/components/SEOHead";
+import { seoConfig } from "@/seo/seo.config";
 import { useEffect } from "react";
 // Sections
 import { HeroSection } from "@/pages/services/ui/HeroSection";
@@ -37,12 +38,7 @@ const GoogleAds = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Google Ads Services in Hyderabad | Generate High-Quality Leads"
-        description="Get high-intent leads with Google Ads. We create and optimize campaigns focused on conversions, not just clicks."
-        jsonLd={serviceJsonLd(
-          "Google Ads Services",
-          "Intent-driven Google Ads campaigns designed to generate leads and maximize ROI."
-        )}
+       {...seoConfig.googleAds}
       />
 
       {/* FLOW: Conversion-focused narrative */}
