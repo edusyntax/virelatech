@@ -46,6 +46,7 @@ const Posts = () => {
   const deleteMutation = useMutation({
     mutationFn: async (ids: string[]) => {
       const { error } = await supabase.from("posts").delete().in("id", ids);
+      console.log("Deleting IDs:", ids);
       if (error) throw error;
     },
     onSuccess: () => {

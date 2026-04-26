@@ -34,6 +34,14 @@ const PostEditor = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [status, setStatus] = useState<PostStatus>("draft");
   const [scheduledAt, setScheduledAt] = useState("");
+ const [newCategory, setNewCategory] = useState("");
+const [editCategoryId, setEditCategoryId] = useState<string | null>(null);
+const [editCategoryName, setEditCategoryName] = useState("");
+const [featureStatus, setFeatureStatus] = useState<"none" | "featured" | "upcoming">("none");
+
+const [newTag, setNewTag] = useState("");
+const [editTagId, setEditTagId] = useState<string | null>(null);
+const [editTagName, setEditTagName] = useState("");
 
   // SEO
   const [seoTitle, setSeoTitle] = useState("");
@@ -52,6 +60,236 @@ const PostEditor = () => {
   const [geoCity, setGeoCity] = useState("");
   const [geoKeywords, setGeoKeywords] = useState("");
 
+  const LOCAL_DRAFT_KEY = "post-editor-draft";
+
+  useEffect(() => {
+    if (isEdit) return;
+
+    const saved = localStorage.getItem(LOCAL_DRAFT_KEY);
+    if (!saved) return;
+
+    try {
+      const d = JSON.parse(saved);
+
+      setTitle(d.title || "");
+      setSlug(d.slug || "");
+      setExcerpt(d.excerpt || "");
+      setContent(d.content || "");
+      setCoverImage(d.coverImage || "");
+      setCategoryId(d.categoryId || "");
+      setSelectedTags(d.selectedTags || []);
+
+      setSeoTitle(d.seoTitle || "");
+      setSeoDescription(d.seoDescription || "");
+      setFocusKeyword(d.focusKeyword || "");
+      setCanonicalUrl(d.canonicalUrl || "");
+
+      setOgTitle(d.ogTitle || "");
+      setOgDescription(d.ogDescription || "");
+      setOgImage(d.ogImage || "");
+
+      setTwitterTitle(d.twitterTitle || "");
+      setTwitterDescription(d.twitterDescription || "");
+      setTwitterImage(d.twitterImage || "");
+
+      setGeoRegion(d.geoRegion || "");
+      setGeoCity(d.geoCity || "");
+      setGeoKeywords(d.geoKeywords || "");
+      setScheduledAt(d.scheduledAt || "");
+    } catch { }
+  }, [isEdit]);
+
+  useEffect(() => {
+    if (isEdit) return;
+
+    const draft = {
+      title,
+      slug,
+      excerpt,
+      content,
+      coverImage,
+      categoryId,
+      selectedTags,
+      seoTitle,
+      seoDescription,
+      focusKeyword,
+      canonicalUrl,
+      ogTitle,
+      ogDescription,
+      ogImage,
+      twitterTitle,
+      twitterDescription,
+      twitterImage,
+      geoRegion,
+      geoCity,
+      geoKeywords,
+      scheduledAt,
+    };
+
+    localStorage.setItem("post-editor-draft", JSON.stringify(draft));
+  }, [
+    title,
+    slug,
+    excerpt,
+    content,
+    coverImage,
+    categoryId,
+    selectedTags,
+    seoTitle,
+    seoDescription,
+    focusKeyword,
+    canonicalUrl,
+    ogTitle,
+    ogDescription,
+    ogImage,
+    twitterTitle,
+    twitterDescription,
+    twitterImage,
+    geoRegion,
+    geoCity,
+    geoKeywords,
+    scheduledAt,
+    isEdit,
+  ]);
+
+const createCategory = useMutation({
+  mutationFn: async () => {
+    const slug = generateSlug(newCategory);
+
+    const { data: existing } = await supabase
+      .from("categories")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (existing) {
+      await supabase
+        .from("categories")
+        .update({ is_deleted: false })
+        .eq("id", existing.id);
+      return;
+    }
+
+    const { error } = await supabase.from("categories").insert({
+      name: newCategory,
+      slug,
+    });
+
+    if (error) throw error;
+  },
+
+ 
+  onSuccess: () => {
+    setNewCategory("");
+    queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
+    toast.success("Category added/restored");
+  },
+});
+
+const updateCategory = useMutation({
+  mutationFn: async () => {
+    const { error } = await supabase
+      .from("categories")
+      .update({
+        name: editCategoryName,
+        slug: generateSlug(editCategoryName),
+      })
+      .eq("id", editCategoryId!);
+
+    if (error) throw error;
+  },
+  onSuccess: () => {
+    setEditCategoryId(null);
+    queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
+    toast.success("Category updated");
+  },
+});
+
+const deleteCategory = useMutation({
+  mutationFn: async (id: string) => {
+    const { error } = await supabase
+      .from("categories")
+      .update({ is_deleted: true })
+      .eq("id", id);
+
+    if (error) throw error;
+  },
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
+    toast.success("Category deleted");
+  },
+});
+
+
+
+const createTag = useMutation({
+  mutationFn: async () => {
+    const slug = generateSlug(newTag);
+
+    const { data: existing } = await supabase
+      .from("tags")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (existing) {
+      await supabase
+        .from("tags")
+        .update({ is_deleted: false })
+        .eq("id", existing.id);
+      return;
+    }
+
+    const { error } = await supabase.from("tags").insert({
+      name: newTag,
+      slug,
+    });
+
+    if (error) throw error;
+  },
+  onSuccess: () => {
+    setNewTag("");
+    queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
+    toast.success("Tag added");
+  },
+});
+
+const updateTag = useMutation({
+  mutationFn: async () => {
+    const { error } = await supabase
+      .from("tags")
+      .update({
+        name: editTagName,
+        slug: generateSlug(editTagName),
+      })
+      .eq("id", editTagId!);
+
+    if (error) throw error;
+  },
+  onSuccess: () => {
+    setEditTagId(null);
+    queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
+    toast.success("Tag updated");
+  },
+});
+
+const deleteTag = useMutation({
+  mutationFn: async (id: string) => {
+    const { error } = await supabase
+      .from("tags")
+      .update({ is_deleted: true })
+      .eq("id", id);
+
+    if (error) throw error;
+  },
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
+    toast.success("Tag deleted");
+  },
+});
+
+
+
   // Slug auto-gen
   const [slugManual, setSlugManual] = useState(false);
   useEffect(() => {
@@ -59,6 +297,23 @@ const PostEditor = () => {
       setSlug(generateSlug(title));
     }
   }, [title, slugManual]);
+
+
+  useEffect(() => {
+    const handler = (e: BeforeUnloadEvent) => {
+      // Only warn if user has typed something
+      if (!title && !content) return;
+
+      e.preventDefault();
+      e.returnValue = ""; // required for browser to show warning
+    };
+
+    window.addEventListener("beforeunload", handler);
+
+    return () => {
+      window.removeEventListener("beforeunload", handler);
+    };
+  }, [title, content]);
 
   // Fetch existing post
   const { data: existingPost } = useQuery({
@@ -71,10 +326,10 @@ const PostEditor = () => {
   });
 
   // Fetch categories & tags
-  const { data: categories } = useQuery({
+ const { data: categories } = useQuery({
     queryKey: ["admin-categories"],
     queryFn: async () => {
-      const { data } = await supabase.from("categories").select("*").order("name");
+      const { data } = await supabase.from("categories").select("*").or("is_deleted.is.null,is_deleted.eq.false").order("name");
       return data ?? [];
     },
   });
@@ -82,7 +337,7 @@ const PostEditor = () => {
   const { data: tags } = useQuery({
     queryKey: ["admin-tags"],
     queryFn: async () => {
-      const { data } = await supabase.from("tags").select("*").order("name");
+      const { data } = await supabase.from("tags").select("*").or("is_deleted.is.null,is_deleted.eq.false").order("name");
       return data ?? [];
     },
   });
@@ -122,12 +377,21 @@ const PostEditor = () => {
       setGeoRegion(existingPost.geo_region ?? "");
       setGeoCity(existingPost.geo_city ?? "");
       setGeoKeywords(existingPost.geo_keywords ?? "");
+      setFeatureStatus(existingPost.feature_status ?? "none");
     }
   }, [existingPost]);
 
   useEffect(() => {
     if (existingTags) setSelectedTags(existingTags);
   }, [existingTags]);
+
+  useEffect(() => {
+  if (!tags) return;
+
+  setSelectedTags((prev) =>
+    prev.filter((id) => tags.some((t) => t.id === id))
+  );
+}, [tags]);
 
   const readingTime = calculateReadingTime(content);
   const wordCount = countWords(content);
@@ -168,10 +432,10 @@ const PostEditor = () => {
         geo_city: geoCity || null,
         geo_keywords: geoKeywords || null,
         reading_time_minutes: readingTime,
+       feature_status: featureStatus,
         word_count: wordCount,
         json_ld: jsonLd,
-      };
-
+      }
       if (isEdit) {
         const { error } = await supabase.from("posts").update(postData).eq("id", id!);
         if (error) throw error;
@@ -198,7 +462,10 @@ const PostEditor = () => {
         );
       }
     },
-    onSuccess: () => {
+    onSuccess: (_, targetStatus) => {
+      if (targetStatus === "published") {
+        localStorage.removeItem(LOCAL_DRAFT_KEY);
+      }
       queryClient.invalidateQueries({ queryKey: ["admin-posts"] });
       queryClient.invalidateQueries({ queryKey: ["admin-stats"] });
       toast.success(isEdit ? "Post updated" : "Post created");
@@ -207,6 +474,7 @@ const PostEditor = () => {
     onError: (e: any) => toast.error(e.message || "Failed to save"),
   });
 
+  
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -260,7 +528,7 @@ const PostEditor = () => {
             excerpt={excerpt}
             content={content}
             coverImage={coverImage}
-            categoryName={categories?.find((c) => c.id === categoryId)?.name}
+            categoryName={categories?.find((c) => c.id === categoryId)?.name || "Deleted"}
             authorName={user?.user_metadata?.full_name || user?.email || ""}
             authorAvatar={user?.user_metadata?.avatar_url}
             readingTime={readingTime}
@@ -284,6 +552,7 @@ const PostEditor = () => {
             </Button>
           </div>
 
+
           <div className="space-y-2">
             <Label>Excerpt</Label>
             <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="Brief summary..." rows={2} />
@@ -298,45 +567,136 @@ const PostEditor = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Category</Label>
-              <select
-                value={categoryId}
-                onChange={(e) => setCategoryId(e.target.value)}
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-              >
-                <option value="">No category</option>
-                {categories?.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-              </select>
-            </div>
+            <div className="space-y-3">
+  <Label>Category</Label>
+
+  {/* Select */}
+   <select
+    value={categoryId || ""}
+    onChange={(e) => setCategoryId(e.target.value)}
+    className="w-full rounded-md border px-3 py-2"
+  >
+    <option value="">No category</option>
+    {categories?.map((c) => (
+      <option key={c.id} value={c.id}>{c.name}</option>
+    ))}
+  </select>
+
+  {/* Create */}
+ {/* Inline create + edit list */}
+  <div className="bg-card border border-border rounded-lg divide-y divide-border">
+    <div className="flex items-center gap-2 px-3 py-2">
+      <Input
+        value={newCategory}
+        onChange={(e) => setNewCategory(e.target.value)}
+        placeholder="New category"
+        className="h-7 text-sm"
+        onKeyDown={(e) => e.key === "Enter" && newCategory.trim() && createCategory.mutate()}
+      />
+      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createCategory.mutate()} disabled={!newCategory.trim()}>
+        +
+      </Button>
+    </div>
+    {categories?.map((c) => (
+      <div key={c.id} className="flex items-center gap-2 px-3 py-2">
+        <Input
+          value={editCategoryName && editCategoryId === c.id ? editCategoryName : c.name}
+          onFocus={() => { setEditCategoryId(c.id); setEditCategoryName(c.name); }}
+          onChange={(e) => setEditCategoryName(e.target.value)}
+          className="h-7 text-sm flex-1"
+        />
+        <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-green-600"
+          onClick={() => updateCategory.mutate()}
+          disabled={updateCategory.isPending}
+        >✔</Button>
+        <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-destructive"
+          onClick={() => deleteCategory.mutate(c.id)}
+          disabled={deleteCategory.isPending}
+        >🗑</Button>
+      </div>
+    ))}
+  </div>
+</div>
             <div className="space-y-2">
               <Label>Schedule</Label>
               <Input type="datetime-local" value={scheduledAt} onChange={(e) => setScheduledAt(e.target.value)} />
             </div>
           </div>
+<div className="space-y-2 mt-4">
+  <Label>Feature Status</Label>
+  <select
+    value={featureStatus}
+    onChange={(e) =>
+      setFeatureStatus(e.target.value as "none" | "featured" | "upcoming")
+    }
+    className="w-full rounded-md border px-3 py-2"
+  >
+    <option value="none">Normal</option>
+    <option value="featured">Featured (1 allowed)</option>
+    <option value="upcoming">Upcoming (max 3)</option>
+  </select>
+</div>
+    
 
-          <div className="space-y-2">
-            <Label>Tags</Label>
-            <div className="flex flex-wrap gap-2">
-              {tags?.map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  onClick={() => setSelectedTags((prev) =>
-                    prev.includes(t.id) ? prev.filter((x) => x !== t.id) : [...prev, t.id]
-                  )}
-                  className={`text-xs px-3 py-1 rounded-full border transition-colors ${
-                    selectedTags.includes(t.id)
-                      ? "bg-accent/20 border-accent text-accent"
-                      : "border-border text-muted-foreground hover:border-foreground"
-                  }`}
-                >
-                  {t.name}
-                </button>
-              ))}
-              {tags?.length === 0 && <p className="text-xs text-muted-foreground">No tags yet. Create them in Tags management.</p>}
-            </div>
-          </div>
+          <div className="space-y-3">
+  <Label>Tags</Label>
+
+  {/* Select */}
+ {/* Tag toggle chips */}
+  <div className="flex flex-wrap gap-2">
+    {tags?.map((t) => (
+      <button
+        key={t.id}
+        type="button"
+        onClick={() => setSelectedTags((prev) =>
+          prev.includes(t.id) ? prev.filter((id) => id !== t.id) : [...prev, t.id]
+        )}
+        className={`px-2.5 py-1 rounded-full text-xs border transition-colors ${
+          selectedTags.includes(t.id)
+            ? "bg-primary text-primary-foreground border-primary"
+            : "bg-muted text-muted-foreground border-border hover:border-primary"
+        }`}
+      >
+        {t.name}
+      </button>
+    ))}
+  </div>
+
+  {/* Inline create + edit list */}
+  <div className="bg-card border border-border rounded-lg divide-y divide-border">
+    <div className="flex items-center gap-2 px-3 py-2">
+      <Input
+        value={newTag}
+        onChange={(e) => setNewTag(e.target.value)}
+        placeholder="New tag"
+        className="h-7 text-sm"
+        onKeyDown={(e) => e.key === "Enter" && newTag.trim() && createTag.mutate()}
+      />
+      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createTag.mutate()} disabled={!newTag.trim()}>
+        +
+      </Button>
+    </div>
+    {tags?.map((t) => (
+      <div key={t.id} className="flex items-center gap-2 px-3 py-2">
+        <Input
+          value={editTagName && editTagId === t.id ? editTagName : t.name}
+          onFocus={() => { setEditTagId(t.id); setEditTagName(t.name); }}
+          onChange={(e) => setEditTagName(e.target.value)}
+          className="h-7 text-sm flex-1"
+        />
+        <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-green-600"
+          onClick={() => updateTag.mutate()}
+          disabled={updateTag.isPending}
+        >✔</Button>
+        <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-destructive"
+          onClick={() => deleteTag.mutate(t.id)}
+          disabled={deleteTag.isPending}
+        >🗑</Button>
+      </div>
+    ))}
+  </div>
+ 
+</div>
 
           <div className="space-y-2">
             <Label>Content</Label>

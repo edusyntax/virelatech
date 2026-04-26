@@ -22,6 +22,7 @@ export type Database = {
           name: string
           parent_id: string | null
           slug: string
+          is_deleted: boolean 
         }
         Insert: {
           created_at?: string
@@ -30,6 +31,7 @@ export type Database = {
           name: string
           parent_id?: string | null
           slug: string
+          is_deleted?: boolean
         }
         Update: {
           created_at?: string
@@ -38,6 +40,7 @@ export type Database = {
           name?: string
           parent_id?: string | null
           slug?: string
+          is_deleted?: boolean
         }
         Relationships: [
           {
@@ -201,6 +204,7 @@ export type Database = {
           updated_at: string
           view_count: number | null
           word_count: number | null
+         feature_status?: "none" | "featured" | "upcoming";
         }
         Insert: {
           author_id?: string | null
@@ -233,6 +237,7 @@ export type Database = {
           updated_at?: string
           view_count?: number | null
           word_count?: number | null
+          feature_status?: "none" | "featured" | "upcoming";
         }
         Update: {
           author_id?: string | null
@@ -265,6 +270,7 @@ export type Database = {
           updated_at?: string
           view_count?: number | null
           word_count?: number | null
+          feature_status?: "none" | "featured" | "upcoming";
         }
         Relationships: [
           {
@@ -321,18 +327,21 @@ export type Database = {
           id: string
           name: string
           slug: string
+          is_deleted: boolean
         }
         Insert: {
           created_at?: string
           id?: string
           name: string
           slug: string
+          is_deleted?: boolean
         }
         Update: {
           created_at?: string
           id?: string
           name?: string
           slug?: string
+          is_deleted?: boolean
         }
         Relationships: []
       }

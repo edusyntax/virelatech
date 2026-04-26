@@ -1,3 +1,5 @@
+import { lazy, Suspense } from "react";
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,40 +7,73 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ThemeProvider from "@/components/ThemeProvider";
 import { AuthProvider } from "@/contexts/AuthContext";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import ServicesPage from "./pages/Services";
-import WebsiteDesign from "./pages/services/WebsiteDesign";
-import SEOServices from "./pages/services/SEOServices";
-import GoogleAds from "./pages/services/GoogleAds"; 
-import LeadGeneration from "./pages/services/LeadGeneration";
-import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
-import PPCServices from "./pages/services/PPCServices";
-import AIAutomation from "./pages/services/AIAutomation";
-import Aboutus from "./pages/Aboutpage";
-import BlogPage from "./pages/Blogpage";
-import BlogArticle from "./pages/BlogArticle";
-import ContactPage from "./pages/Contact";
-
-// Admin
-import AdminLogin from "./pages/admin/Login";
-import ForgotPassword from "./pages/admin/ForgotPassword";
-import ResetPassword from "./pages/admin/ResetPassword";
-import AdminLayout from "./components/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import Posts from "./pages/admin/Posts";
-import PostEditor from "./pages/admin/PostEditor";
-import Categories from "./pages/admin/Categories";
-import TagsPage from "./pages/admin/Tags";
-import MediaLibrary from "./pages/admin/MediaLibrary";
-import Authors from "./pages/admin/Authors";
-import Leads from "./pages/admin/Leads";
-import LeadDetail from "./pages/admin/LeadDetail";
 import { LeadModalProvider } from "./contexts/LeadModalContext";
 
-import TestimonialsPage from "./pages/TestimonialsPage";
-import EmailMarketing from "./pages/services/Emailmarketing";
-import ContentMarketing from "./pages/services/ContentMarketing";
+import Index from "./pages/Index";
+// import NotFound from "./pages/NotFound";
+// import ServicesPage from "./pages/Services";
+// import WebsiteDesign from "./pages/services/WebsiteDesign";
+// import SEOServices from "./pages/services/SEOServices";
+// import GoogleAds from "./pages/services/GoogleAds"; 
+// import LeadGeneration from "./pages/services/LeadGeneration";
+// import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
+// import PPCServices from "./pages/services/PPCServices";
+// import AIAutomation from "./pages/services/AIAutomation";
+// import Aboutus from "./pages/Aboutpage";
+// import BlogPage from "./pages/Blogpage";
+// import BlogArticle from "./pages/BlogArticle";
+// import ContactPage from "./pages/Contact";
+
+// const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ServicesPage = lazy(() => import("./pages/Services"));
+const WebsiteDesign = lazy(() => import("./pages/services/WebsiteDesign"));
+const SEOServices = lazy(() => import("./pages/services/SEOServices"));
+const GoogleAds = lazy(() => import("./pages/services/GoogleAds"));
+const LeadGeneration = lazy(() => import("./pages/services/LeadGeneration"));
+const SocialMediaMarketing = lazy(() => import("./pages/services/SocialMediaMarketing"));
+const PPCServices = lazy(() => import("./pages/services/PPCServices"));
+const AIAutomation = lazy(() => import("./pages/services/AIAutomation"));
+const Aboutus = lazy(() => import("./pages/Aboutpage"));
+const BlogPage = lazy(() => import("./pages/Blogpage"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const ContactPage = lazy(() => import("./pages/Contact"));
+
+// Admin
+// import AdminLogin from "./pages/admin/Login";
+// import ForgotPassword from "./pages/admin/ForgotPassword";
+// import ResetPassword from "./pages/admin/ResetPassword";
+// import AdminLayout from "./components/admin/AdminLayout";
+// import Dashboard from "./pages/admin/Dashboard";
+// import Posts from "./pages/admin/Posts";
+// import PostEditor from "./pages/admin/PostEditor";
+// import Categories from "./pages/admin/Categories";
+// import TagsPage from "./pages/admin/Tags";
+// import MediaLibrary from "./pages/admin/MediaLibrary";
+// import Authors from "./pages/admin/Authors";
+// import Leads from "./pages/admin/Leads";
+// import LeadDetail from "./pages/admin/LeadDetail";
+// import TestimonialsPage from "./pages/TestimonialsPage";
+// import EmailMarketing from "./pages/services/Emailmarketing";
+// import ContentMarketing from "./pages/services/ContentMarketing";
+
+const AdminLogin = lazy(() => import("./pages/admin/Login"));
+const ForgotPassword = lazy(() => import("./pages/admin/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/admin/ResetPassword"));
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const Posts = lazy(() => import("./pages/admin/Posts"));
+const PostEditor = lazy(() => import("./pages/admin/PostEditor"));
+const Categories = lazy(() => import("./pages/admin/Categories"));
+const TagsPage = lazy(() => import("./pages/admin/Tags"));
+const MediaLibrary = lazy(() => import("./pages/admin/MediaLibrary"));
+const Authors = lazy(() => import("./pages/admin/Authors"));
+const Leads = lazy(() => import("./pages/admin/Leads"));
+const LeadDetail = lazy(() => import("./pages/admin/LeadDetail"));
+
+const TestimonialsPage = lazy(() => import("./pages/TestimonialsPage"));
+const EmailMarketing = lazy(() => import("./pages/services/Emailmarketing"));
+const ContentMarketing = lazy(() => import("./pages/services/ContentMarketing"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,58 +87,64 @@ const queryClient = new QueryClient({
 });
 
 const App = () => (
-  <ThemeProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <LeadModalProvider>
+<ThemeProvider>
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <LeadModalProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/about" element={<Aboutus />} />
-              <Route path="/services/website-development-services" element={<WebsiteDesign />} />
-              <Route path="/services/seo-services" element={<SEOServices />} />
-              <Route path="/services/google-ads-services" element={<GoogleAds />} />
-              <Route path="/services/lead-generation-campaigns-services" element={<LeadGeneration />} />
-              <Route path="/services/social-media-marketing-services" element={<SocialMediaMarketing />} />
-              <Route path="/services/meta-ads-services" element={<PPCServices />} />
-              <Route path="/services/content-marketing-services" element={<ContentMarketing />} />
-              <Route path="/services/email-marketing-services" element={<EmailMarketing />} />
-              <Route path="/services/ai-automation-services" element={<AIAutomation />} />
-              <Route path="/testimonials" element={<TestimonialsPage />} />
-              <Route path="/blog" element={<BlogPage/>} />
-              <Route path="/blog/:slug" element={<BlogArticle />} />
-              <Route path="/contact" element={<ContactPage />} />
+            <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
+              
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/about" element={<Aboutus />} />
+                <Route path="/services/website-development-services" element={<WebsiteDesign />} />
+                <Route path="/services/seo-services" element={<SEOServices />} />
+                <Route path="/services/google-ads-services" element={<GoogleAds />} />
+                <Route path="/services/lead-generation-campaigns-services" element={<LeadGeneration />} />
+                <Route path="/services/social-media-marketing-services" element={<SocialMediaMarketing />} />
+                <Route path="/services/meta-ads-services" element={<PPCServices />} />
+                <Route path="/services/content-marketing-services" element={<ContentMarketing />} />
+                <Route path="/services/email-marketing-services" element={<EmailMarketing />} />
+                <Route path="/services/ai-automation-services" element={<AIAutomation />} />
+                <Route path="/testimonials" element={<TestimonialsPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/preview/:slug" element={<BlogArticle />} />
+                <Route path="/blog/:slug" element={<BlogArticle />} />
+                <Route path="/contact" element={<ContactPage />} />
 
-              {/* Admin routes */}
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin/forgot-password" element={<ForgotPassword />} />
-              <Route path="/admin/reset-password" element={<ResetPassword />} />
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="posts" element={<Posts />} />
-                <Route path="posts/create" element={<PostEditor />} />
-                <Route path="posts/edit/:id" element={<PostEditor />} />
-                <Route path="categories" element={<Categories />} />
-                <Route path="tags" element={<TagsPage />} />
-                <Route path="media" element={<MediaLibrary />} />
-                <Route path="authors" element={<Authors />} />
-                <Route path="leads" element={<Leads />} />
-                <Route path="leads/:id" element={<LeadDetail />} />
-              </Route>
+                {/* Admin routes */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+                <Route path="/admin/reset-password" element={<ResetPassword />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="posts" element={<Posts />} />
+                  <Route path="posts/create" element={<PostEditor />} />
+                  <Route path="posts/edit/:id" element={<PostEditor />} />
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="tags" element={<TagsPage />} />
+                  <Route path="media" element={<MediaLibrary />} />
+                  <Route path="authors" element={<Authors />} />
+                  <Route path="leads" element={<Leads />} />
+                  <Route path="leads/:id" element={<LeadDetail />} />
+                </Route>
 
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+
+            </Suspense>
+            
+
           </AuthProvider>
         </BrowserRouter>
-        </LeadModalProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ThemeProvider>
+      </LeadModalProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
+</ThemeProvider>
 );
 
 export default App;

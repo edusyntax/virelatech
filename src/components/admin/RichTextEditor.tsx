@@ -94,6 +94,26 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
   if (!editor) return null;
 
+const addButton = useCallback(() => {
+  if (!editor) return;
+
+  const url = window.prompt("Enter button URL:");
+  if (!url) return;
+
+  const text = window.prompt("Enter button text:");
+  if (!text) return;
+
+
+const buttonHTML = `<a href="${url}" target="_blank" class="custom-btn">${text}</a>`;
+
+editor
+  .chain()
+  .focus()
+  .insertContent(buttonHTML)
+  .run();
+
+}, [editor]);
+
   return (
     <div className="border border-border rounded-xl overflow-hidden bg-card">
       {/* Toolbar */}
@@ -139,6 +159,9 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
         </MenuButton>
         <MenuButton onClick={addLink} active={editor.isActive("link")} title="Insert Link">
           <LinkIcon className="h-3.5 w-3.5" />
+        </MenuButton>
+        <MenuButton onClick={addButton} title="Insert Button">
+          <span className="text-xs font-bold">BTN</span>
         </MenuButton>
         <div className="w-px h-6 bg-border self-center mx-1" />
         <MenuButton onClick={() => editor.chain().focus().undo().run()} title="Undo">
