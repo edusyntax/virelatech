@@ -10,8 +10,10 @@ import {
   FaInstagram,
   FaPinterest ,
   FaWhatsapp,
+  
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter,FaThreads } from "react-icons/fa6";
+import { BiSolidPhoneCall } from "react-icons/bi";
 
 const serviceLinks = [
   { label: "Web Development", href: "/services/website-development-services" },
@@ -67,9 +69,21 @@ export const socialLinks = [
   },
   {
     label: "Pinterest",
-    href: "https://in.pinterest.com/virelat/", 
+    href: "https://in.pinterest.com/virelatech/", 
     icon: FaPinterest ,
     color: "text-[#E60023]",
+  },
+   {
+    label: "Threads",
+    href: "https://www.threads.com/@virelatech ", 
+    icon: FaThreads  ,
+    color: "text-[#fff]",
+  },
+  {
+    label: "+919753456333",
+    href: "tel:+919753456333", 
+    icon: BiSolidPhoneCall  ,
+    color: "text-[#1877F2]",
   },
 ];
 const Footer = () => {
