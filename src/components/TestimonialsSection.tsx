@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal";
 const testimonials = [
   {
     quote:
-      "We had tried a couple of agencies before, but things always felt unclear. With Zendigitals, the approach was simple and transparent. Within a few weeks, we started getting consistent enquiries, which made a real difference for our business.",
+      "We had tried a couple of agencies before, but things always felt unclear. With VirelaTech, the approach was simple and transparent. Within a few weeks, we started getting consistent enquiries, which made a real difference for our business.",
     name: "Ravi Kumar",
     role: "Local Business Owner",
   },
