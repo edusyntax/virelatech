@@ -18,52 +18,90 @@ const BlogPage = () => {
   viewer: "Viewer",
 };
 
- const { data: posts = [], isLoading } = useQuery<any>({
-    queryKey: ["public-posts"],
-    queryFn: async () => {
-  const { data: posts, error } = await supabase
-    .from("posts")
-    .select(`
-      id,
-      title,
-      slug,
-      excerpt,
-      cover_image,
-      reading_time_minutes,
-      published_at,
-      feature_status,
-      author_id
-    `)
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
+//  const { data: posts = [], isLoading } = useQuery<any>({
+//     queryKey: ["public-posts"],
+//     queryFn: async () => {
+//   const { data: posts, error } = await supabase
+//     .from("posts")
+//     .select(`
+//       id,
+//       title,
+//       slug,
+//       excerpt,
+//       cover_image,
+//       reading_time_minutes,
+//       published_at,
+//       feature_status,
+//       author_id
+//     `)
+//     .eq("status", "published")
+//     .order("published_at", { ascending: false });
 
-  if (error) throw error;
+//   if (error) throw error;
 
-  // 👉 fetch profiles
-  const { data: profiles } = await supabase
-    .from("profiles")
-    .select("id, display_name, avatar_url");
+//   // 👉 fetch profiles
+//   const { data: profiles } = await supabase
+//     .from("profiles")
+//     .select("id, display_name, avatar_url");
 
-  // 👉 fetch roles
-  const { data: roles } = await supabase
-    .from("user_roles")
-    .select("user_id, role");
+//   // 👉 fetch roles
+//   const { data: roles } = await supabase
+//     .from("user_roles")
+//     .select("user_id, role");
 
-  // 👉 merge
-  const mergedPosts = posts.map((post: any) => {
-    const profile = profiles?.find((p) => p.id === post.author_id);
-    const role = roles?.find((r) => r.user_id === post.author_id);
+//   // 👉 merge
+//   const mergedPosts = posts.map((post: any) => {
+//     const profile = profiles?.find((p) => p.id === post.author_id);
+//     const role = roles?.find((r) => r.user_id === post.author_id);
 
-    return {
-      ...post,
-      author: profile,
-      role: role?.role || "editor",
-    };
-  });
+//     return {
+//       ...post,
+//       author: profile,
+//       role: role?.role || "editor",
+//     };
+//   });
 
-  return mergedPosts ?? [];
-}
-  });
+//   return mergedPosts ?? [];
+// }
+//   });
+
+const { data: posts = [], isLoading } = useQuery<any>({
+  queryKey: ["public-posts"],
+  queryFn: async () => {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(`
+        id,
+        title,
+        slug,
+        excerpt,
+        cover_image,
+        reading_time_minutes,
+        published_at,
+        feature_status,
+        author_id,
+        profiles:author_id (
+          display_name,
+          avatar_url
+        )
+      `)
+      .eq("status", "published")
+      .order("published_at", { ascending: false })
+      .limit(20);
+
+    if (error) throw error;
+
+    return (
+      data?.map((post: any) => ({
+        ...post,
+        author: post.profiles,
+      })) ?? []
+    );
+  },
+
+  staleTime: 1000 * 60 * 5,
+  gcTime: 1000 * 60 * 10,
+});
 
   // Featured logic
 const featuredPost = posts.find((p: any) => p.feature_status === "featured");
@@ -120,6 +158,8 @@ const normalPosts = posts.filter(
     {/* LEFT IMAGE */}
     <div className="relative h-[260px] md:h-full">
       <img
+        loading="lazy"
+        decoding="async"
         src={featuredPost.cover_image || "https://picsum.photos/800/600"}
         className="w-full h-full object-cover"
       />
@@ -145,6 +185,8 @@ const normalPosts = posts.filter(
       {/* Author + Meta */}
       <div className="flex items-center gap-3">
         <img
+        loading="lazy"
+decoding="async"
           src={featuredPost.author?.avatar_url || vlogo ||"https://i.pravatar.cc/40"}
           className="w-8 h-8 rounded-full"
         />
@@ -185,6 +227,8 @@ const normalPosts = posts.filter(
             {/* Image */}
            <div className="relative aspect-video overflow-hidden">
   <img
+  loading="lazy"
+decoding="async"
     src={post.cover_image ||"https://picsum.photos/800/600"}
     className="w-full h-full object-cover group-hover:scale-105 transition"
   />
@@ -213,6 +257,8 @@ const normalPosts = posts.filter(
   {/* Author */}
   <div className="flex items-center gap-2">
     <img
+    loading="lazy"
+decoding="async"
       src={post.author?.avatar_url || vlogo ||"https://i.pravatar.cc/40"}
       className="w-7 h-7 rounded-full"
     />
@@ -281,6 +327,8 @@ const normalPosts = posts.filter(
           {/* Image */}
           <div className="relative aspect-video overflow-hidden">
             <img
+            loading="lazy"
+decoding="async"
               src={post.cover_image || "https://picsum.photos/800/600"}
               className="w-full h-full object-cover"
             />
@@ -311,6 +359,8 @@ const normalPosts = posts.filter(
             {/* Footer */}
             <div className="mt-6 flex items-center gap-2">
               <img
+              loading="lazy"
+decoding="async"
                 src={post.author?.avatar_url || vlogo || "https://i.pravatar.cc/40"}
                 className="w-7 h-7 rounded-full"
               />
