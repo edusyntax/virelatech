@@ -10,21 +10,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LeadModalProvider } from "./contexts/LeadModalContext";
 
 import Index from "./pages/Index";
-// import NotFound from "./pages/NotFound";
-// import ServicesPage from "./pages/Services";
-// import WebsiteDesign from "./pages/services/WebsiteDesign";
-// import SEOServices from "./pages/services/SEOServices";
-// import GoogleAds from "./pages/services/GoogleAds"; 
-// import LeadGeneration from "./pages/services/LeadGeneration";
-// import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
-// import PPCServices from "./pages/services/PPCServices";
-// import AIAutomation from "./pages/services/AIAutomation";
-// import Aboutus from "./pages/Aboutpage";
-// import BlogPage from "./pages/Blogpage";
-// import BlogArticle from "./pages/BlogArticle";
-// import ContactPage from "./pages/Contact";
-
-// const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ServicesPage = lazy(() => import("./pages/Services"));
 const WebsiteDesign = lazy(() => import("./pages/services/WebsiteDesign"));
@@ -38,25 +23,6 @@ const Aboutus = lazy(() => import("./pages/Aboutpage"));
 const BlogPage = lazy(() => import("./pages/Blogpage"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const ContactPage = lazy(() => import("./pages/Contact"));
-
-// Admin
-// import AdminLogin from "./pages/admin/Login";
-// import ForgotPassword from "./pages/admin/ForgotPassword";
-// import ResetPassword from "./pages/admin/ResetPassword";
-// import AdminLayout from "./components/admin/AdminLayout";
-// import Dashboard from "./pages/admin/Dashboard";
-// import Posts from "./pages/admin/Posts";
-// import PostEditor from "./pages/admin/PostEditor";
-// import Categories from "./pages/admin/Categories";
-// import TagsPage from "./pages/admin/Tags";
-// import MediaLibrary from "./pages/admin/MediaLibrary";
-// import Authors from "./pages/admin/Authors";
-// import Leads from "./pages/admin/Leads";
-// import LeadDetail from "./pages/admin/LeadDetail";
-// import TestimonialsPage from "./pages/TestimonialsPage";
-// import EmailMarketing from "./pages/services/Emailmarketing";
-// import ContentMarketing from "./pages/services/ContentMarketing";
-
 const AdminLogin = lazy(() => import("./pages/admin/Login"));
 const ForgotPassword = lazy(() => import("./pages/admin/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/admin/ResetPassword"));
