@@ -10,6 +10,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LeadModalProvider } from "./contexts/LeadModalContext";
 
 import Index from "./pages/Index";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ServicesPage = lazy(() => import("./pages/Services"));
 const WebsiteDesign = lazy(() => import("./pages/services/WebsiteDesign"));
@@ -67,6 +68,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/about" element={<Aboutus />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/services/website-development-services" element={<WebsiteDesign />} />
                 <Route path="/services/seo-services" element={<SEOServices />} />
                 <Route path="/services/google-ads-services" element={<GoogleAds />} />
