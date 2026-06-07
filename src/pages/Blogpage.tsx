@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import SEOHead from "../components/SEOHead";
@@ -103,12 +103,18 @@ const { data: posts = [], isLoading } = useQuery<any>({
   gcTime: 1000 * 60 * 10,
 });
 
-  // Featured logic
-const featuredPost = posts.find((p: any) => p.feature_status === "featured");
-const upcomingPosts = posts.filter((p: any) => p.feature_status === "upcoming");
-const normalPosts = posts.filter(
-  (p: any) => !p.feature_status || p.feature_status === "none"
-);  
+  const featuredPost = useMemo(
+    () => posts.find((p: { feature_status?: string }) => p.feature_status === "featured"),
+    [posts]
+  );
+  const upcomingPosts = useMemo(
+    () => posts.filter((p: { feature_status?: string }) => p.feature_status === "upcoming"),
+    [posts]
+  );
+  const normalPosts = useMemo(
+    () => posts.filter((p: { feature_status?: string }) => !p.feature_status || p.feature_status === "none"),
+    [posts]
+  );
 
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
