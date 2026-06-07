@@ -77,7 +77,9 @@ const BlogPostPreview = ({
         <div className="border-t border-border pt-8">
           {content ? (
             <div
-              className="prose prose-sm sm:prose dark:prose-invert max-w-none prose-headings:font-grotesk prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-accent"
+              className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none leading-relaxed
+                         prose-headings:font-grotesk prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground
+                         prose-p:text-foreground/90 prose-p:leading-8 prose-a:text-accent"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           ) : (

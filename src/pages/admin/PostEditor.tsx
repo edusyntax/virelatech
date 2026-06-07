@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import { generateSlug, calculateReadingTime, countWords, generateArticleJsonLd } from "@/lib/blog-utils";
+import { invalidateBlogCaches } from "@/lib/blog-cache";
 import { ArrowLeft, Save, Send, Clock, Eye } from "lucide-react";
 import BlogPostPreview from "@/components/admin/BlogPostPreview";
 import type { Database } from "@/integrations/supabase/types";
@@ -60,232 +61,248 @@ const [editTagName, setEditTagName] = useState("");
   const [geoCity, setGeoCity] = useState("");
   const [geoKeywords, setGeoKeywords] = useState("");
 
-  const LOCAL_DRAFT_KEY = "post-editor-draft";
+  const LOCAL_DRAFT_KEY = isEdit ? `post-editor-draft-${id}` : "post-editor-draft";
+  const [activeTab, setActiveTab] = useState("content");
+  const formInitializedRef = useRef(false);
+  const tagsInitializedRef = useRef(false);
+  const draftReadyRef = useRef(isEdit);
 
   useEffect(() => {
-    if (isEdit) return;
+    formInitializedRef.current = false;
+    tagsInitializedRef.current = false;
+  }, [id]);
+  const isDirtyRef = useRef(false);
+  const lastSavedSnapshotRef = useRef<string>("");
 
-    const saved = localStorage.getItem(LOCAL_DRAFT_KEY);
-    if (!saved) return;
-
-    try {
-      const d = JSON.parse(saved);
-
-      setTitle(d.title || "");
-      setSlug(d.slug || "");
-      setExcerpt(d.excerpt || "");
-      setContent(d.content || "");
-      setCoverImage(d.coverImage || "");
-      setCategoryId(d.categoryId || "");
-      setSelectedTags(d.selectedTags || []);
-
-      setSeoTitle(d.seoTitle || "");
-      setSeoDescription(d.seoDescription || "");
-      setFocusKeyword(d.focusKeyword || "");
-      setCanonicalUrl(d.canonicalUrl || "");
-
-      setOgTitle(d.ogTitle || "");
-      setOgDescription(d.ogDescription || "");
-      setOgImage(d.ogImage || "");
-
-      setTwitterTitle(d.twitterTitle || "");
-      setTwitterDescription(d.twitterDescription || "");
-      setTwitterImage(d.twitterImage || "");
-
-      setGeoRegion(d.geoRegion || "");
-      setGeoCity(d.geoCity || "");
-      setGeoKeywords(d.geoKeywords || "");
-      setScheduledAt(d.scheduledAt || "");
-    } catch { }
-  }, [isEdit]);
-
+  // Restore local draft on create (runs once before autosave)
   useEffect(() => {
-    if (isEdit) return;
-
-    const draft = {
-      title,
-      slug,
-      excerpt,
-      content,
-      coverImage,
-      categoryId,
-      selectedTags,
-      seoTitle,
-      seoDescription,
-      focusKeyword,
-      canonicalUrl,
-      ogTitle,
-      ogDescription,
-      ogImage,
-      twitterTitle,
-      twitterDescription,
-      twitterImage,
-      geoRegion,
-      geoCity,
-      geoKeywords,
-      scheduledAt,
-    };
-
-    localStorage.setItem("post-editor-draft", JSON.stringify(draft));
-  }, [
-    title,
-    slug,
-    excerpt,
-    content,
-    coverImage,
-    categoryId,
-    selectedTags,
-    seoTitle,
-    seoDescription,
-    focusKeyword,
-    canonicalUrl,
-    ogTitle,
-    ogDescription,
-    ogImage,
-    twitterTitle,
-    twitterDescription,
-    twitterImage,
-    geoRegion,
-    geoCity,
-    geoKeywords,
-    scheduledAt,
-    isEdit,
-  ]);
-
-const createCategory = useMutation({
-  mutationFn: async () => {
-    const slug = generateSlug(newCategory);
-
-    const { data: existing } = await supabase
-      .from("categories")
-      .select("*")
-      .eq("slug", slug)
-      .maybeSingle();
-
-    if (existing) {
-      await supabase
-        .from("categories")
-        .update({ is_deleted: false })
-        .eq("id", existing.id);
+    if (isEdit) {
+      draftReadyRef.current = true;
       return;
     }
 
-    const { error } = await supabase.from("categories").insert({
-      name: newCategory,
-      slug,
-    });
+    const saved = localStorage.getItem(LOCAL_DRAFT_KEY);
+    if (saved) {
+      try {
+        const d = JSON.parse(saved);
+        setTitle(d.title || "");
+        setSlug(d.slug || "");
+        setExcerpt(d.excerpt || "");
+        setContent(d.content || "");
+        setCoverImage(d.coverImage || "");
+        setCategoryId(d.categoryId || "");
+        setSelectedTags(d.selectedTags || []);
+        setSeoTitle(d.seoTitle || "");
+        setSeoDescription(d.seoDescription || "");
+        setFocusKeyword(d.focusKeyword || "");
+        setCanonicalUrl(d.canonicalUrl || "");
+        setOgTitle(d.ogTitle || "");
+        setOgDescription(d.ogDescription || "");
+        setOgImage(d.ogImage || "");
+        setTwitterTitle(d.twitterTitle || "");
+        setTwitterDescription(d.twitterDescription || "");
+        setTwitterImage(d.twitterImage || "");
+        setGeoRegion(d.geoRegion || "");
+        setGeoCity(d.geoCity || "");
+        setGeoKeywords(d.geoKeywords || "");
+        setScheduledAt(d.scheduledAt || "");
+        setFeatureStatus(d.featureStatus || "none");
+        toast.info("Restored unsaved draft");
+      } catch { /* ignore corrupt draft */ }
+    }
+
+    draftReadyRef.current = true;
+  }, [isEdit]);
+
+  const buildFormSnapshot = useCallback(() => JSON.stringify({
+    title, slug, excerpt, content, coverImage, categoryId, selectedTags,
+    scheduledAt, featureStatus, seoTitle, seoDescription, focusKeyword,
+    canonicalUrl, ogTitle, ogDescription, ogImage,
+    twitterTitle, twitterDescription, twitterImage,
+    geoRegion, geoCity, geoKeywords,
+  }), [
+    title, slug, excerpt, content, coverImage, categoryId, selectedTags,
+    scheduledAt, featureStatus, seoTitle, seoDescription, focusKeyword,
+    canonicalUrl, ogTitle, ogDescription, ogImage,
+    twitterTitle, twitterDescription, twitterImage,
+    geoRegion, geoCity, geoKeywords,
+  ]);
+
+  // Debounced local autosave (create + edit backup)
+  useEffect(() => {
+    if (!draftReadyRef.current) return;
+    if (isEdit && !formInitializedRef.current) return;
+
+    const draft = {
+      title, slug, excerpt, content, coverImage, categoryId, selectedTags,
+      seoTitle, seoDescription, focusKeyword, canonicalUrl,
+      ogTitle, ogDescription, ogImage,
+      twitterTitle, twitterDescription, twitterImage,
+      geoRegion, geoCity, geoKeywords, scheduledAt, featureStatus,
+      savedAt: Date.now(),
+    };
+
+    const timer = setTimeout(() => {
+      localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify(draft));
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [
+    LOCAL_DRAFT_KEY, title, slug, excerpt, content, coverImage, categoryId, selectedTags,
+    seoTitle, seoDescription, focusKeyword, canonicalUrl,
+    ogTitle, ogDescription, ogImage,
+    twitterTitle, twitterDescription, twitterImage,
+    geoRegion, geoCity, geoKeywords, scheduledAt, featureStatus, isEdit,
+  ]);
+
+  const markDirty = useCallback(() => {
+    isDirtyRef.current = true;
+  }, []);
+
+const createCategory = useMutation({
+  mutationFn: async (name: string) => {
+    const catSlug = generateSlug(name);
+
+    const { data: existing } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("slug", catSlug)
+      .maybeSingle();
+
+    if (existing) {
+      const { error } = await supabase
+        .from("categories")
+        .update({ is_deleted: false, name })
+        .eq("id", existing.id);
+      if (error) throw error;
+      return existing.id;
+    }
+
+    const { data, error } = await supabase
+      .from("categories")
+      .insert({ name, slug: catSlug })
+      .select("id")
+      .single();
 
     if (error) throw error;
+    return data.id;
   },
-
- 
-  onSuccess: () => {
+  onSuccess: (categoryId) => {
+    markDirty();
     setNewCategory("");
+    setCategoryId(categoryId);
     queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
-    toast.success("Category added/restored");
+    toast.success("Category added");
   },
+  onError: (e: Error) => toast.error(e.message || "Failed to create category"),
 });
 
 const updateCategory = useMutation({
-  mutationFn: async () => {
+  mutationFn: async ({ id, name }: { id: string; name: string }) => {
     const { error } = await supabase
       .from("categories")
-      .update({
-        name: editCategoryName,
-        slug: generateSlug(editCategoryName),
-      })
-      .eq("id", editCategoryId!);
-
-    if (error) throw error;
-  },
-  onSuccess: () => {
-    setEditCategoryId(null);
-    queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
-    toast.success("Category updated");
-  },
-});
-
-const deleteCategory = useMutation({
-  mutationFn: async (id: string) => {
-    const { error } = await supabase
-      .from("categories")
-      .update({ is_deleted: true })
+      .update({ name, slug: generateSlug(name) })
       .eq("id", id);
 
     if (error) throw error;
   },
-  onSuccess: () => {
+  onSuccess: (_, { id }) => {
+    setEditCategoryId((prev) => (prev === id ? null : prev));
+    queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
+    toast.success("Category updated");
+  },
+  onError: (e: Error) => toast.error(e.message || "Failed to update category"),
+});
+
+const deleteCategory = useMutation({
+  mutationFn: async (catId: string) => {
+    const { error } = await supabase
+      .from("categories")
+      .update({ is_deleted: true })
+      .eq("id", catId);
+
+    if (error) throw error;
+  },
+  onSuccess: (_, catId) => {
+    setCategoryId((prev) => (prev === catId ? "" : prev));
     queryClient.invalidateQueries({ queryKey: ["admin-categories"] });
     toast.success("Category deleted");
   },
+  onError: (e: Error) => toast.error(e.message || "Failed to delete category"),
 });
 
 
 
 const createTag = useMutation({
-  mutationFn: async () => {
-    const slug = generateSlug(newTag);
+  mutationFn: async (name: string) => {
+    const tagSlug = generateSlug(name);
 
     const { data: existing } = await supabase
       .from("tags")
-      .select("*")
-      .eq("slug", slug)
+      .select("id")
+      .eq("slug", tagSlug)
       .maybeSingle();
 
     if (existing) {
-      await supabase
+      const { error } = await supabase
         .from("tags")
-        .update({ is_deleted: false })
+        .update({ is_deleted: false, name })
         .eq("id", existing.id);
-      return;
+      if (error) throw error;
+      return existing.id;
     }
 
-    const { error } = await supabase.from("tags").insert({
-      name: newTag,
-      slug,
-    });
+    const { data, error } = await supabase
+      .from("tags")
+      .insert({ name, slug: tagSlug })
+      .select("id")
+      .single();
 
     if (error) throw error;
+    return data.id;
   },
-  onSuccess: () => {
+  onSuccess: (tagId) => {
+    markDirty();
     setNewTag("");
+    setSelectedTags((prev) => (prev.includes(tagId) ? prev : [...prev, tagId]));
     queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
     toast.success("Tag added");
   },
+  onError: (e: Error) => toast.error(e.message || "Failed to create tag"),
 });
 
 const updateTag = useMutation({
-  mutationFn: async () => {
+  mutationFn: async ({ id, name }: { id: string; name: string }) => {
     const { error } = await supabase
       .from("tags")
-      .update({
-        name: editTagName,
-        slug: generateSlug(editTagName),
-      })
-      .eq("id", editTagId!);
-
-    if (error) throw error;
-  },
-  onSuccess: () => {
-    setEditTagId(null);
-    queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
-    toast.success("Tag updated");
-  },
-});
-
-const deleteTag = useMutation({
-  mutationFn: async (id: string) => {
-    const { error } = await supabase
-      .from("tags")
-      .update({ is_deleted: true })
+      .update({ name, slug: generateSlug(name) })
       .eq("id", id);
 
     if (error) throw error;
   },
-  onSuccess: () => {
+  onSuccess: (_, { id }) => {
+    setEditTagId((prev) => (prev === id ? null : prev));
+    queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
+    toast.success("Tag updated");
+  },
+  onError: (e: Error) => toast.error(e.message || "Failed to update tag"),
+});
+
+const deleteTag = useMutation({
+  mutationFn: async (tagId: string) => {
+    const { error } = await supabase
+      .from("tags")
+      .update({ is_deleted: true })
+      .eq("id", tagId);
+
+    if (error) throw error;
+  },
+  onSuccess: (_, tagId) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tagId));
     queryClient.invalidateQueries({ queryKey: ["admin-tags"] });
     toast.success("Tag deleted");
   },
+  onError: (e: Error) => toast.error(e.message || "Failed to delete tag"),
 });
 
 
@@ -301,28 +318,28 @@ const deleteTag = useMutation({
 
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
-      // Only warn if user has typed something
-      if (!title && !content) return;
+      const hasContent = Boolean(title.trim() || content.replace(/<[^>]*>/g, "").trim());
+      if (!hasContent) return;
+      if (isEdit && !isDirtyRef.current) return;
 
       e.preventDefault();
-      e.returnValue = ""; // required for browser to show warning
+      e.returnValue = "";
     };
 
     window.addEventListener("beforeunload", handler);
-
-    return () => {
-      window.removeEventListener("beforeunload", handler);
-    };
-  }, [title, content]);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [title, content, isEdit]);
 
   // Fetch existing post
-  const { data: existingPost } = useQuery({
+  const { data: existingPost, isLoading: isLoadingPost } = useQuery({
     queryKey: ["admin-post", id],
     enabled: isEdit,
     queryFn: async () => {
-      const { data } = await supabase.from("posts").select("*").eq("id", id!).single();
+      const { data, error } = await supabase.from("posts").select("*").eq("id", id!).single();
+      if (error) throw error;
       return data;
     },
+    staleTime: 30_000,
   });
 
   // Fetch categories & tags
@@ -332,6 +349,7 @@ const deleteTag = useMutation({
       const { data } = await supabase.from("categories").select("*").or("is_deleted.is.null,is_deleted.eq.false").order("name");
       return data ?? [];
     },
+    staleTime: 60_000,
   });
 
   const { data: tags } = useQuery({
@@ -340,6 +358,7 @@ const deleteTag = useMutation({
       const { data } = await supabase.from("tags").select("*").or("is_deleted.is.null,is_deleted.eq.false").order("name");
       return data ?? [];
     },
+    staleTime: 60_000,
   });
 
   // Fetch post tags
@@ -352,129 +371,301 @@ const deleteTag = useMutation({
     },
   });
 
-  // Populate form for edit
+  // Populate form for edit (once per post load)
   useEffect(() => {
-    if (existingPost) {
-      setTitle(existingPost.title);
-      setSlug(existingPost.slug);
-      setSlugManual(true);
-      setExcerpt(existingPost.excerpt ?? "");
-      setContent(existingPost.content ?? "");
-      setCoverImage(existingPost.cover_image ?? "");
-      setCategoryId(existingPost.category_id ?? "");
-      setStatus(existingPost.status);
-      setScheduledAt(existingPost.scheduled_at ?? "");
-      setSeoTitle(existingPost.seo_title ?? "");
-      setSeoDescription(existingPost.seo_description ?? "");
-      setFocusKeyword(existingPost.focus_keyword ?? "");
-      setCanonicalUrl(existingPost.canonical_url ?? "");
-      setOgTitle(existingPost.og_title ?? "");
-      setOgDescription(existingPost.og_description ?? "");
-      setOgImage(existingPost.og_image ?? "");
-      setTwitterTitle(existingPost.twitter_title ?? "");
-      setTwitterDescription(existingPost.twitter_description ?? "");
-      setTwitterImage(existingPost.twitter_image ?? "");
-      setGeoRegion(existingPost.geo_region ?? "");
-      setGeoCity(existingPost.geo_city ?? "");
-      setGeoKeywords(existingPost.geo_keywords ?? "");
-      setFeatureStatus(existingPost.feature_status ?? "none");
+    if (!existingPost || formInitializedRef.current) return;
+
+    formInitializedRef.current = true;
+    setTitle(existingPost.title);
+    setSlug(existingPost.slug);
+    setSlugManual(true);
+    setExcerpt(existingPost.excerpt ?? "");
+    setContent(existingPost.content ?? "");
+    setCoverImage(existingPost.cover_image ?? "");
+    setCategoryId(existingPost.category_id ?? "");
+    setStatus(existingPost.status);
+    setScheduledAt(existingPost.scheduled_at ? existingPost.scheduled_at.slice(0, 16) : "");
+    setSeoTitle(existingPost.seo_title ?? "");
+    setSeoDescription(existingPost.seo_description ?? "");
+    setFocusKeyword(existingPost.focus_keyword ?? "");
+    setCanonicalUrl(existingPost.canonical_url ?? "");
+    setOgTitle(existingPost.og_title ?? "");
+    setOgDescription(existingPost.og_description ?? "");
+    setOgImage(existingPost.og_image ?? "");
+    setTwitterTitle(existingPost.twitter_title ?? "");
+    setTwitterDescription(existingPost.twitter_description ?? "");
+    setTwitterImage(existingPost.twitter_image ?? "");
+    setGeoRegion(existingPost.geo_region ?? "");
+    setGeoCity(existingPost.geo_city ?? "");
+    setGeoKeywords(existingPost.geo_keywords ?? "");
+    setFeatureStatus(existingPost.feature_status ?? "none");
+
+    const serverSnapshot = JSON.stringify({
+      title: existingPost.title,
+      slug: existingPost.slug,
+      excerpt: existingPost.excerpt ?? "",
+      content: existingPost.content ?? "",
+      coverImage: existingPost.cover_image ?? "",
+      categoryId: existingPost.category_id ?? "",
+      selectedTags: [],
+      scheduledAt: existingPost.scheduled_at ? existingPost.scheduled_at.slice(0, 16) : "",
+      featureStatus: existingPost.feature_status ?? "none",
+      seoTitle: existingPost.seo_title ?? "",
+      seoDescription: existingPost.seo_description ?? "",
+      focusKeyword: existingPost.focus_keyword ?? "",
+      canonicalUrl: existingPost.canonical_url ?? "",
+      ogTitle: existingPost.og_title ?? "",
+      ogDescription: existingPost.og_description ?? "",
+      ogImage: existingPost.og_image ?? "",
+      twitterTitle: existingPost.twitter_title ?? "",
+      twitterDescription: existingPost.twitter_description ?? "",
+      twitterImage: existingPost.twitter_image ?? "",
+      geoRegion: existingPost.geo_region ?? "",
+      geoCity: existingPost.geo_city ?? "",
+      geoKeywords: existingPost.geo_keywords ?? "",
+    });
+    lastSavedSnapshotRef.current = serverSnapshot;
+
+    const localDraft = localStorage.getItem(LOCAL_DRAFT_KEY);
+    if (localDraft) {
+      try {
+        const d = JSON.parse(localDraft);
+        const draftContent = d.content ?? "";
+        const serverContent = existingPost.content ?? "";
+        if (draftContent && draftContent !== serverContent && (d.savedAt ?? 0) > Date.parse(existingPost.updated_at ?? existingPost.created_at)) {
+          toast.info("Restored unsaved local changes", {
+            action: {
+              label: "Discard",
+              onClick: () => {
+                localStorage.removeItem(LOCAL_DRAFT_KEY);
+                setContent(serverContent);
+              },
+            },
+          });
+          setTitle(d.title ?? existingPost.title);
+          setSlug(d.slug ?? existingPost.slug);
+          setExcerpt(d.excerpt ?? existingPost.excerpt ?? "");
+          setContent(draftContent);
+          setCoverImage(d.coverImage ?? existingPost.cover_image ?? "");
+          setCategoryId(d.categoryId ?? existingPost.category_id ?? "");
+          setSeoTitle(d.seoTitle ?? existingPost.seo_title ?? "");
+          setSeoDescription(d.seoDescription ?? existingPost.seo_description ?? "");
+          setFocusKeyword(d.focusKeyword ?? existingPost.focus_keyword ?? "");
+          setCanonicalUrl(d.canonicalUrl ?? existingPost.canonical_url ?? "");
+          setOgTitle(d.ogTitle ?? existingPost.og_title ?? "");
+          setOgDescription(d.ogDescription ?? existingPost.og_description ?? "");
+          setOgImage(d.ogImage ?? existingPost.og_image ?? "");
+          setTwitterTitle(d.twitterTitle ?? existingPost.twitter_title ?? "");
+          setTwitterDescription(d.twitterDescription ?? existingPost.twitter_description ?? "");
+          setTwitterImage(d.twitterImage ?? existingPost.twitter_image ?? "");
+          setGeoRegion(d.geoRegion ?? existingPost.geo_region ?? "");
+          setGeoCity(d.geoCity ?? existingPost.geo_city ?? "");
+          setGeoKeywords(d.geoKeywords ?? existingPost.geo_keywords ?? "");
+          setScheduledAt(d.scheduledAt ?? (existingPost.scheduled_at ? existingPost.scheduled_at.slice(0, 16) : ""));
+          setFeatureStatus(d.featureStatus ?? existingPost.feature_status ?? "none");
+        }
+      } catch { /* ignore corrupt draft */ }
     }
-  }, [existingPost]);
+  }, [existingPost, LOCAL_DRAFT_KEY]);
 
   useEffect(() => {
-    if (existingTags) setSelectedTags(existingTags);
-  }, [existingTags]);
+    if (!isEdit || existingTags === undefined || tagsInitializedRef.current) return;
+    tagsInitializedRef.current = true;
+    setSelectedTags(existingTags);
+    if (formInitializedRef.current && lastSavedSnapshotRef.current) {
+      try {
+        const snapshot = JSON.parse(lastSavedSnapshotRef.current);
+        snapshot.selectedTags = existingTags;
+        lastSavedSnapshotRef.current = JSON.stringify(snapshot);
+      } catch { /* ignore */ }
+    }
+  }, [existingTags, isEdit]);
 
   useEffect(() => {
-  if (!tags) return;
+    if (!tags) return;
+    setSelectedTags((prev) => prev.filter((tagId) => tags.some((t) => t.id === tagId)));
+  }, [tags]);
 
-  setSelectedTags((prev) =>
-    prev.filter((id) => tags.some((t) => t.id === id))
-  );
-}, [tags]);
+  const isContentEmpty = (html: string) => !html.replace(/<[^>]*>/g, "").trim();
 
-  const readingTime = calculateReadingTime(content);
-  const wordCount = countWords(content);
+  // Track unsaved changes for edit mode (debounced to avoid per-keystroke JSON.stringify)
+  useEffect(() => {
+    if (!isEdit || !formInitializedRef.current) return;
+    const timer = setTimeout(() => {
+      isDirtyRef.current = buildFormSnapshot() !== lastSavedSnapshotRef.current;
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [isEdit, buildFormSnapshot]);
 
-  const jsonLd = generateArticleJsonLd({
+  const readingTime = useMemo(() => calculateReadingTime(content), [content]);
+  const wordCount = useMemo(() => countWords(content), [content]);
+
+  const jsonLd = useMemo(() => generateArticleJsonLd({
     title: seoTitle || title,
     seo_description: seoDescription || excerpt,
     cover_image: ogImage || coverImage,
     published_at: existingPost?.published_at ?? undefined,
     updated_at: existingPost?.updated_at ?? undefined,
     slug,
-  });
+  }), [seoTitle, title, seoDescription, excerpt, ogImage, coverImage, existingPost?.published_at, existingPost?.updated_at, slug]);
 
   const saveMutation = useMutation({
     mutationFn: async (targetStatus: PostStatus) => {
+      if (!title.trim()) throw new Error("Title is required");
+      if (!slug.trim()) throw new Error("Slug is required");
+      if (isContentEmpty(content)) throw new Error("Content is required");
+      if (targetStatus === "scheduled") {
+        if (!scheduledAt) throw new Error("Please set a schedule date and time");
+        if (new Date(scheduledAt) <= new Date()) throw new Error("Schedule date must be in the future");
+      }
+
+      if (featureStatus === "featured") {
+        let query = supabase
+          .from("posts")
+          .select("id", { count: "exact", head: true })
+          .eq("feature_status", "featured");
+        if (isEdit) query = query.neq("id", id!);
+        const { count } = await query;
+        if ((count ?? 0) > 0) throw new Error("Only one post can be featured at a time");
+      }
+
+      if (featureStatus === "upcoming") {
+        let query = supabase
+          .from("posts")
+          .select("id", { count: "exact", head: true })
+          .eq("feature_status", "upcoming");
+        if (isEdit) query = query.neq("id", id!);
+        const { count } = await query;
+        if ((count ?? 0) >= 3) throw new Error("Maximum of 3 upcoming posts allowed");
+      }
+
+      const publishedAt =
+        targetStatus === "published"
+          ? existingPost?.published_at ?? new Date().toISOString()
+          : existingPost?.published_at ?? null;
+
       const postData = {
-        title,
-        slug,
-        excerpt,
+        title: title.trim(),
+        slug: slug.trim(),
+        excerpt: excerpt.trim() || null,
         content,
         cover_image: coverImage || null,
         author_id: user?.id,
         status: targetStatus,
-        published_at: targetStatus === "published" ? new Date().toISOString() : existingPost?.published_at,
-        scheduled_at: targetStatus === "scheduled" ? scheduledAt : null,
+        published_at: publishedAt,
+        scheduled_at: targetStatus === "scheduled" ? new Date(scheduledAt).toISOString() : null,
         category_id: categoryId || null,
-        seo_title: seoTitle || null,
-        seo_description: seoDescription || null,
-        focus_keyword: focusKeyword || null,
-        canonical_url: canonicalUrl || null,
-        og_title: ogTitle || null,
-        og_description: ogDescription || null,
-        og_image: ogImage || null,
-        twitter_title: twitterTitle || null,
-        twitter_description: twitterDescription || null,
-        twitter_image: twitterImage || null,
-        geo_region: geoRegion || null,
-        geo_city: geoCity || null,
-        geo_keywords: geoKeywords || null,
+        seo_title: seoTitle.trim() || null,
+        seo_description: seoDescription.trim() || null,
+        focus_keyword: focusKeyword.trim() || null,
+        canonical_url: canonicalUrl.trim() || null,
+        og_title: ogTitle.trim() || null,
+        og_description: ogDescription.trim() || null,
+        og_image: ogImage.trim() || null,
+        twitter_title: twitterTitle.trim() || null,
+        twitter_description: twitterDescription.trim() || null,
+        twitter_image: twitterImage.trim() || null,
+        geo_region: geoRegion.trim() || null,
+        geo_city: geoCity.trim() || null,
+        geo_keywords: geoKeywords.trim() || null,
         reading_time_minutes: readingTime,
-       feature_status: featureStatus,
+        feature_status: featureStatus,
         word_count: wordCount,
         json_ld: jsonLd,
-      }
+      };
+
+      let postId = id!;
+
       if (isEdit) {
         const { error } = await supabase.from("posts").update(postData).eq("id", id!);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("posts").insert(postData);
+        const { data: newPost, error } = await supabase
+          .from("posts")
+          .insert(postData)
+          .select("id")
+          .single();
         if (error) throw error;
+        postId = newPost.id;
       }
 
-      // Sync tags
-      if (isEdit) {
-        await supabase.from("post_tags").delete().eq("post_id", id!);
-      }
-      // For new posts we need the id
-      if (!isEdit) {
-        const { data: newPost } = await supabase.from("posts").select("id").eq("slug", slug).single();
-        if (newPost && selectedTags.length > 0) {
-          await supabase.from("post_tags").insert(
-            selectedTags.map((tagId) => ({ post_id: newPost.id, tag_id: tagId }))
-          );
-        }
-      } else if (selectedTags.length > 0) {
-        await supabase.from("post_tags").insert(
-          selectedTags.map((tagId) => ({ post_id: id!, tag_id: tagId }))
+      await supabase.from("post_tags").delete().eq("post_id", postId);
+      if (selectedTags.length > 0) {
+        const { error: tagError } = await supabase.from("post_tags").insert(
+          selectedTags.map((tagId) => ({ post_id: postId, tag_id: tagId }))
         );
+        if (tagError) throw tagError;
+      }
+
+      return { postId, targetStatus, publishedAt };
+    },
+    onSuccess: async ({ postId, targetStatus, publishedAt }) => {
+      isDirtyRef.current = false;
+      localStorage.removeItem(LOCAL_DRAFT_KEY);
+      lastSavedSnapshotRef.current = buildFormSnapshot();
+      setStatus(targetStatus);
+
+      const trimmedSlug = slug.trim();
+      const listRow = {
+        id: postId,
+        title: title.trim(),
+        slug: trimmedSlug,
+        status: targetStatus,
+        published_at: publishedAt,
+        created_at: existingPost?.created_at ?? new Date().toISOString(),
+        view_count: existingPost?.view_count ?? 0,
+        reading_time_minutes: readingTime,
+        author_id: user?.id ?? existingPost?.author_id ?? null,
+        profiles: existingPost ? { display_name: (existingPost as { profiles?: { display_name?: string } }).profiles?.display_name } : undefined,
+      };
+
+      queryClient.setQueriesData(
+        { queryKey: ["admin-posts"] },
+        (old: typeof listRow[] | undefined) => {
+          if (!old) return [listRow];
+          const idx = old.findIndex((p) => p.id === postId);
+          if (idx >= 0) {
+            const next = [...old];
+            next[idx] = { ...old[idx], ...listRow };
+            return next;
+          }
+          return [listRow, ...old];
+        }
+      );
+
+      void invalidateBlogCaches(queryClient, { postId, slug: trimmedSlug });
+
+      const messages: Record<PostStatus, string> = {
+        draft: "Draft saved",
+        published: isEdit ? "Post updated and published" : "Post published",
+        scheduled: "Post scheduled",
+        archived: "Post archived",
+      };
+      toast.success(messages[targetStatus]);
+
+      if (targetStatus === "published" || targetStatus === "scheduled") {
+        navigate("/admin/posts");
+      } else if (!isEdit) {
+        navigate(`/admin/posts/edit/${postId}`);
       }
     },
-    onSuccess: (_, targetStatus) => {
-      if (targetStatus === "published") {
-        localStorage.removeItem(LOCAL_DRAFT_KEY);
-      }
-      queryClient.invalidateQueries({ queryKey: ["admin-posts"] });
-      queryClient.invalidateQueries({ queryKey: ["admin-stats"] });
-      toast.success(isEdit ? "Post updated" : "Post created");
-      navigate("/admin/posts");
-    },
-    onError: (e: any) => toast.error(e.message || "Failed to save"),
+    onError: (e: Error) => toast.error(e.message || "Failed to save"),
   });
 
+  const handleSave = useCallback((targetStatus: PostStatus) => {
+    if (saveMutation.isPending) return;
+    saveMutation.mutate(targetStatus);
+  }, [saveMutation]);
+
   
+  if (isEdit && isLoadingPost) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <p className="text-muted-foreground text-sm">Loading post…</p>
+      </div>
+    );
+  }
+
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -495,24 +686,38 @@ const deleteTag = useMutation({
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-foreground">{isEdit ? "Edit Post" : "Create Post"}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold text-foreground">{isEdit ? "Edit Post" : "Create Post"}</h1>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium uppercase tracking-wider ${
+                status === "published" ? "bg-green-500/10 text-green-500"
+                : status === "scheduled" ? "bg-blue-500/10 text-blue-500"
+                : status === "draft" ? "bg-yellow-500/10 text-yellow-500"
+                : "bg-muted text-muted-foreground"
+              }`}>
+                {status}
+              </span>
+            </div>
             <p className="text-xs text-muted-foreground">{wordCount} words · {readingTime} min read</p>
           </div>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => saveMutation.mutate("draft")} disabled={saveMutation.isPending}>
+        <div className="flex items-center gap-2">
+          {saveMutation.isPending && (
+            <span className="text-xs text-muted-foreground">Saving…</span>
+          )}
+          <Button variant="outline" size="sm" onClick={() => handleSave("draft")} disabled={saveMutation.isPending}>
             <Save className="h-3.5 w-3.5 mr-1" /> Save Draft
           </Button>
-          <Button variant="outline" size="sm" onClick={() => saveMutation.mutate("scheduled")} disabled={saveMutation.isPending || !scheduledAt}>
+          <Button variant="outline" size="sm" onClick={() => handleSave("scheduled")} disabled={saveMutation.isPending || !scheduledAt}>
             <Clock className="h-3.5 w-3.5 mr-1" /> Schedule
           </Button>
-          <Button size="sm" onClick={() => saveMutation.mutate("published")} disabled={saveMutation.isPending}>
-            <Send className="h-3.5 w-3.5 mr-1" /> Publish
+          <Button size="sm" onClick={() => handleSave("published")} disabled={saveMutation.isPending}>
+            <Send className="h-3.5 w-3.5 mr-1" />
+            {isEdit && status === "published" ? "Update" : "Publish"}
           </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="content" className="space-y-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList>
           <TabsTrigger value="content">Content</TabsTrigger>
           <TabsTrigger value="preview"><Eye className="h-3.5 w-3.5 mr-1" />Preview</TabsTrigger>
@@ -523,29 +728,31 @@ const deleteTag = useMutation({
         </TabsList>
 
         <TabsContent value="preview">
-          <BlogPostPreview
-            title={title}
-            excerpt={excerpt}
-            content={content}
-            coverImage={coverImage}
-            categoryName={categories?.find((c) => c.id === categoryId)?.name || "Deleted"}
-            authorName={user?.user_metadata?.full_name || user?.email || ""}
-            authorAvatar={user?.user_metadata?.avatar_url}
-            readingTime={readingTime}
-            publishedAt={existingPost?.published_at ?? undefined}
-          />
+          {activeTab === "preview" && (
+            <BlogPostPreview
+              title={title}
+              excerpt={excerpt}
+              content={content}
+              coverImage={coverImage}
+              categoryName={categories?.find((c) => c.id === categoryId)?.name || "Uncategorized"}
+              authorName={user?.user_metadata?.full_name || user?.email || ""}
+              authorAvatar={user?.user_metadata?.avatar_url}
+              readingTime={readingTime}
+              publishedAt={existingPost?.published_at ?? undefined}
+            />
+          )}
         </TabsContent>
 
         <TabsContent value="content" className="space-y-4">
           <div className="space-y-2">
             <Label>Title</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Post title" className="text-lg font-semibold" />
+            <Input value={title} onChange={(e) => { markDirty(); setTitle(e.target.value); }} placeholder="Post title" className="text-lg font-semibold" />
           </div>
 
           <div className="flex gap-2 items-end">
             <div className="flex-1 space-y-2">
               <Label>Slug</Label>
-              <Input value={slug} onChange={(e) => { setSlug(e.target.value); setSlugManual(true); }} />
+              <Input value={slug} onChange={(e) => { markDirty(); setSlug(e.target.value); setSlugManual(true); }} />
             </div>
             <Button variant="ghost" size="sm" onClick={() => { setSlugManual(false); setSlug(generateSlug(title)); }}>
               Auto
@@ -555,7 +762,7 @@ const deleteTag = useMutation({
 
           <div className="space-y-2">
             <Label>Excerpt</Label>
-            <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="Brief summary..." rows={2} />
+            <Textarea value={excerpt} onChange={(e) => { markDirty(); setExcerpt(e.target.value); }} placeholder="Brief summary..." rows={2} />
           </div>
 
           <div className="space-y-2">
@@ -573,7 +780,7 @@ const deleteTag = useMutation({
   {/* Select */}
    <select
     value={categoryId || ""}
-    onChange={(e) => setCategoryId(e.target.value)}
+    onChange={(e) => { markDirty(); setCategoryId(e.target.value); }}
     className="w-full rounded-md border px-3 py-2"
   >
     <option value="">No category</option>
@@ -591,9 +798,9 @@ const deleteTag = useMutation({
         onChange={(e) => setNewCategory(e.target.value)}
         placeholder="New category"
         className="h-7 text-sm"
-        onKeyDown={(e) => e.key === "Enter" && newCategory.trim() && createCategory.mutate()}
+        onKeyDown={(e) => e.key === "Enter" && newCategory.trim() && createCategory.mutate(newCategory.trim())}
       />
-      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createCategory.mutate()} disabled={!newCategory.trim()}>
+      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createCategory.mutate(newCategory.trim())} disabled={!newCategory.trim() || createCategory.isPending}>
         +
       </Button>
     </div>
@@ -606,7 +813,7 @@ const deleteTag = useMutation({
           className="h-7 text-sm flex-1"
         />
         <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-green-600"
-          onClick={() => updateCategory.mutate()}
+          onClick={() => updateCategory.mutate({ id: c.id, name: editCategoryId === c.id ? editCategoryName : c.name })}
           disabled={updateCategory.isPending}
         >✔</Button>
         <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-destructive"
@@ -670,9 +877,9 @@ const deleteTag = useMutation({
         onChange={(e) => setNewTag(e.target.value)}
         placeholder="New tag"
         className="h-7 text-sm"
-        onKeyDown={(e) => e.key === "Enter" && newTag.trim() && createTag.mutate()}
+        onKeyDown={(e) => e.key === "Enter" && newTag.trim() && createTag.mutate(newTag.trim())}
       />
-      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createTag.mutate()} disabled={!newTag.trim()}>
+      <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" onClick={() => createTag.mutate(newTag.trim())} disabled={!newTag.trim() || createTag.isPending}>
         +
       </Button>
     </div>
@@ -685,7 +892,7 @@ const deleteTag = useMutation({
           className="h-7 text-sm flex-1"
         />
         <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-green-600"
-          onClick={() => updateTag.mutate()}
+          onClick={() => updateTag.mutate({ id: t.id, name: editTagId === t.id ? editTagName : t.name })}
           disabled={updateTag.isPending}
         >✔</Button>
         <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0 text-destructive"
@@ -700,7 +907,11 @@ const deleteTag = useMutation({
 
           <div className="space-y-2">
             <Label>Content</Label>
-            <RichTextEditor content={content} onChange={setContent} />
+            <RichTextEditor
+              key={isEdit ? id : "new"}
+              content={content}
+              onChange={(html) => { markDirty(); setContent(html); }}
+            />
           </div>
         </TabsContent>
 

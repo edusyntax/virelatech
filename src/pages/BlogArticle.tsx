@@ -138,9 +138,13 @@ const BlogArticle = () => {
           </span>
         </div>
 
-        <h1 className="text-3xl font-bold mb-6 leading-tight">
+        <h1 className="text-3xl font-bold mb-4 leading-tight">
           {post.title}
         </h1>
+
+        {post.excerpt && (
+          <p className="text-muted-foreground text-lg leading-relaxed mb-6">{post.excerpt}</p>
+        )}
 
         {/* Author (fixed for your DB) */}
         <div className="flex items-center gap-3">
@@ -174,8 +178,8 @@ const BlogArticle = () => {
         <section className="pb-20 max-w-6xl mx-auto px-2">
           <div
             className="prose dark:prose-invert max-w-none prose-lg leading-relaxed
-                       prose-headings:font-semibold prose-headings:tracking-tight
-                       prose-p:leading-8 prose-p:text-[17px]"
+                       prose-headings:font-grotesk prose-headings:font-semibold prose-headings:tracking-tight
+                       prose-p:leading-8 prose-p:text-[17px] prose-a:text-accent"
             dangerouslySetInnerHTML={{ __html: post.content || "" }}
           />
         </section>
